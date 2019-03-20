@@ -84,17 +84,6 @@
             <img src="/imgs/bookmarked.png" alt>
           </div>
         </div>
-        <div class="post-feedback">
-          <p>coment1</p>
-          <p>coment1</p>
-          <p>coment1</p>
-        </div>
-
-        <div class="post-comment">
-          <div class="post-comment-input">
-            <p>Add comment...</p>
-          </div>
-        </div>
       </div>
     </li>
   </ul>
