@@ -6,7 +6,7 @@ const session = require('express-session')
 
 const addPostRoute = require('./routes/post.route')
 const addUserRoute = require('./routes/user.route')
-const addCommentRoute = require('./routes/comment.route')
+// const addCommentRoute = require('./routes/comment.route')
 
 const app = express()
 app.use(express.static('public'));

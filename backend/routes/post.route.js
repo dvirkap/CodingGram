@@ -9,7 +9,6 @@ function addPostRoute(app) {
             console.log('post.route.js REQ.QUERY:', req.query)
             var posts = await postService.query()
             console.log(posts);
-            
             res.json(posts)
             // var x = await sendtoAsyncFunc(posts)
             // var y = await sendtosecFunc(x)
