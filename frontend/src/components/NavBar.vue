@@ -11,6 +11,7 @@
       <div class="navbar-search-cont">
 
 		  <input type="text" placeholder="What are you looking for?...">
+      
 	  </div>
       <div class="navbar-routers-cont">
         <router-link to="/"><img class="navbar-routers" src="../images/like.png" alt></router-link>
@@ -22,10 +23,15 @@
 </template>
 
 <script>
+import PostService from '@/services/PostService.js'
 export default {
   name: "NavBar",
-  props: {}
+  props: {},
+  components: {
+    // PostService
+  },
 };
+
 </script>
 
 
