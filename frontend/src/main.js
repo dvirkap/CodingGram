@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 // import VueCodemirror from 'vue-codemirror'
 // import 'codemirror/lib/codemirror.css'
+import VueCodemirror from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
 
 
 // import  '../node_modules/uikit/dist/js/uikit-icons.js'
@@ -15,7 +17,10 @@ import  './css/style.css'
 
 
 Vue.config.productionTip = false
-
+Vue.use(VueCodemirror, /* { 
+  options: { theme: 'base16-dark', ... },
+  events: ['scroll', ...]
+} */)
 new Vue({
   router,
   store,

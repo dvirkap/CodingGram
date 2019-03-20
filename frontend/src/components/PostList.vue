@@ -9,6 +9,7 @@
             <!-- <p>{{post.creator.userName}}</p> -->
           </div>
           <div class="post-title-tag">
+           
             <p>ALERT BUTTON</p>
             <!-- <p>{{post.title}}</p> -->
             <p>
@@ -19,55 +20,56 @@
         <div class="post-img">
           <div class="post-editor-title">
             <div
-              @click="previewMode"
-              :class="{ 'active-editor-title': isPREVIEW, 'post-editor-title-preview': true }"
+             
+              class='post-editor-title-preview'
             >
               <i class="fa fa-eye">
                 <span>&nbsp; Result</span>
               </i>
             </div>
             <div
-              v-if="toggleBtns"
-              @click="htmlMode"
-              :class="{ 'active-editor-title-html': isHTML, 'post-editor-title-html': true }"
+            
+              
+              class='post-editor-title-html'
             >
               <i class="fab fa-html5"></i>
             </div>
             <div
-              v-if="toggleBtns"
-              @click="cssMode"
-              :class="{ 'active-editor-title-css': isCSS, 'post-editor-title-css': true }"
+             
+             
+              class='post-editor-title-css'
             >
               <i class="fab fa-css3-alt"></i>
             </div>
             <div
-              v-if="toggleBtns"
-              @click="jsMode"
-              :class="{ 'active-editor-title-js': isJS, 'post-editor-title-js': true }"
+             
+              
+              class='post-editor-title-js'
             >
               <i class="fab fa-js"></i>
             </div>
-            <div @click="toggleBtns =!toggleBtns" class="post-editor-title-run">
+            <div class="post-editor-title-run">
               <i class="fa fa-code">
-                <span>&nbsp;{{(toggleBtns)? 'Close Code' : 'Show Code'}}</span>
+                <span>{{'Show Code'}}</span>
               </i>
             </div>
           </div>
           <div class="post-editor-body">
-
-            <div v-show="isJS" class="sec-html">
+            <codemirror v-model="code" :options="cmOptions"></codemirror>
+            <div class="sec-html">
+               
               <textarea id="editorHtml"></textarea>
             </div>
 
-            <div v-show="isJS" class="sec-css">
+            <div class="sec-css">
               <textarea id="editorCss"></textarea>
             </div>
 
-            <div v-show="isJS" class="sec-js">
+            <div class="sec-js">
               <textarea id="editorJs"></textarea>
             </div>
 
-            <div v-show="isPREVIEW" class="post-runner">
+            <div  class="post-runner">
               <iframe class="prepre"></iframe>
             </div>
           </div>
@@ -100,49 +102,85 @@
 
 <script>
 // import MonacoEditor from 'monaco-editor-vue';
+// language js
+import "codemirror/mode/javascript/javascript.js";
+// theme css
+import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "PostList",
   props: {},
   data() {
     return {
-      isPREVIEW: true,
-      isHTML: true,
-      isCSS: true,
-      isJS: true,
-      toggleBtns: false
+      code: "const a = 10",
+      cmOptions: {
+        // codemirror options
+        tabSize: 4,
+        mode: "text/javascript",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        
+
+
+        // isPREVIEW: true,
+        // isHTML: true,
+        // isCSS: true,
+        // isJS: true,
+        // toggleBtns: false
+      }
     };
   },
   methods: {
-    previewMode() {
-      this.isPREVIEW = true;
-      this.isHTML = false;
-      this.isCSS = false;
-      this.isJS = false;
+    // previewMode() {
+    //   this.isPREVIEW = true;
+    //   this.isHTML = false;
+    //   this.isCSS = false;
+    //   this.isJS = false;
+    // },
+    // htmlMode() {
+    //   this.isPREVIEW = false;
+    //   this.isHTML = true;
+    //   this.isCSS = false;
+    //   this.isJS = false;
+    // },
+    // cssMode() {
+    //   this.isPREVIEW = false;
+    //   this.isHTML = false;
+    //   this.isCSS = true;
+    //   this.isJS = false;
+    // },
+    // jsMode() {
+    //   this.isPREVIEW = false;
+    //   this.isHTML = false;
+    //   this.isCSS = false;
+    //   this.isJS = true;
+    // },
+
+    // ---Vue code mirror methods
+    onCmReady(cm) {
+      console.log("the editor is readied!", cm);
     },
-    htmlMode() {
-      this.isPREVIEW = false;
-      this.isHTML = true;
-      this.isCSS = false;
-      this.isJS = false;
+    onCmFocus(cm) {
+      console.log("the editor is focus!", cm);
     },
-    cssMode() {
-      this.isPREVIEW = false;
-      this.isHTML = false;
-      this.isCSS = true;
-      this.isJS = false;
-    },
-    jsMode() {
-      this.isPREVIEW = false;
-      this.isHTML = false;
-      this.isCSS = false;
-      this.isJS = true;
+    onCmCodeChange(newCode) {
+      console.log("this is new code", newCode);
+      this.code = newCode;
+    }
+  },
+  computed: {
+    codemirror() {
+      return this.$refs.myCm.codemirror;
     }
   },
   components: {
     // MonacoEditor,
   },
-  created() {}
+  mounted() {
+    // console.log("this is current codemirror object", this.codemirror);
+    // you can use this.codemirror to do something...
+  }
 };
 </script>
 
