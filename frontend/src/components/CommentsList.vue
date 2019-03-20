@@ -20,17 +20,11 @@ import Comment from "./Comment.vue";
 
 export default {
   name: "CommentsList",
-  data() {
-      return {
-        userName: '',
-
-      }
-  },
   components: {
       Comment,
   },
   created() {
-    	this.$store.dispatch({ type: "getPosts"});
+    	// this.$store.dispatch({ type: "getPosts"});
   }
 };
 </script>
