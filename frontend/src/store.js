@@ -10,10 +10,10 @@ export default new Vuex.Store({
     posts: []
   },
   mutations: {
-    setPosts(state, payload) {
-      console.log('set posts (payload)', payload)
-      state.posts = payload.posts;
+    postsFiltered(state) {
+      return state.posts
     }
+    
   },
     
   getters: {
