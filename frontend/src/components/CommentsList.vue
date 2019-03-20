@@ -2,7 +2,7 @@
   <section>
     <div class="post-feedback">
       <Comment></Comment>
-      <p>coment1</p>
+      <!-- <p>{{this.}}</p> -->
       <p>coment1</p>
       <p>coment1</p>
     </div>
@@ -20,8 +20,17 @@ import Comment from "./Comment.vue";
 
 export default {
   name: "CommentsList",
+  data() {
+      return {
+        userName: '',
+
+      }
+  },
   components: {
-      Comment
+      Comment,
+  },
+  created() {
+    	this.$store.dispatch({ type: "getPosts"});
   }
 };
 </script>

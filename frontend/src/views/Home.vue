@@ -1,41 +1,36 @@
 <template>
-
   <div class="home">
-		<div class="main-cont wrapper">
-			<post-list class="posts-cont"></post-list>
+    <div class="main-cont wrapper">
+      <post-list class="posts-cont"></post-list>
 
-
-		<UserBar></UserBar>
-
-	</div>
-
-
+      <UserBar></UserBar>
+    </div>
   </div>
 </template>
 
 
 
 <script>
-import PostList from '../components/PostList'
-import UserBar from '../components/UserBar.vue'
+import PostList from "../components/PostList";
+import UserBar from "../components/UserBar.vue";
 
 export default {
-  components:{
-PostList,
-UserBar
+  components: {
+    PostList,
+    UserBar
   },
   data() {
-	  return {
-		  name: "",
-
-	  }
+    return {
+      name: ""
+    };
   },
   methods: {
-	  getUser() {
-		  this.$store.dispatch({type: "getUser", user});
-	  }
-  }
-}
+    getUser() {}
+  },
+//   	created() {
+//     	this.$store.dispatch({ type: "getPosts"});
+//   }
+};
 </script>
 
 
