@@ -1,6 +1,6 @@
 <template>
 <section>
-    <img src="../assets/logo.png" alt="">
+    <h5>user image</h5>
     <h5>user name</h5>
     <h5>Comment h5</h5>
     </section>

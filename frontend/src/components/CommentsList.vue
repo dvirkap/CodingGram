@@ -19,7 +19,10 @@
 import Comment from "./Comment.vue";
 
 export default {
-  name: "CommentsList"
+  name: "CommentsList",
+  components: {
+      Comment
+  }
 };
 </script>
 
