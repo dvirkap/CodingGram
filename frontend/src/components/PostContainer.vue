@@ -1,9 +1,9 @@
 <template>
   <section>
     <h1>PostContainer.vue</h1>
-    <post/>
-    <post-bar/>
-    <comments-list/>
+    <post :post="post"/>
+    <post-bar />
+    <comments-list :comments="post.comments"/>
   </section>
 </template>
 
@@ -16,6 +16,9 @@ components: {
     Post,
     PostBar,
     CommentsList
+},
+props: {
+    post
 }
 
 };

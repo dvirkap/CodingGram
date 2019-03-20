@@ -79,7 +79,9 @@ import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "Post",
-  props: {},
+  props: {
+    post
+},
   data() {
     return {
       code: "const a = 10",
