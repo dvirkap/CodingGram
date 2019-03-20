@@ -1,95 +1,9 @@
 <template>
-<section>
-  <post-container/>
-  <ul>
-    <li>
-      <div class="post">
-        <div class="post-title">
-          <div class="post-title-info">
-            <img src="https://www.designskilz.com/random-users/images/imageM7.jpg" alt>
-            <p>User Name</p>
-            <!-- <p>{{post.creator.userName}}</p> -->
-          </div>
-          <div class="post-title-tag">
-           
-            <p>ALERT BUTTON</p>
-            <!-- <p>{{post.title}}</p> -->
-            <p>
-              <span class="hashtag">BUTTON/ALERT</span>
-            </p>
-          </div>
-        </div>
-        <div class="post-img">
-          <div class="post-editor-title">
-            <div
-             
-              class='post-editor-title-preview'
-            >
-              <i class="fa fa-eye">
-                <span>&nbsp; Result</span>
-              </i>
-            </div>
-            <div
-            
-              
-              class='post-editor-title-html'
-            >
-              <i class="fab fa-html5"></i>
-            </div>
-            <div
-             
-             
-              class='post-editor-title-css'
-            >
-              <i class="fab fa-css3-alt"></i>
-            </div>
-            <div
-             
-              
-              class='post-editor-title-js'
-            >
-              <i class="fab fa-js"></i>
-            </div>
-            <div class="post-editor-title-run">
-              <i class="fa fa-code">
-                <span>{{'Show Code'}}</span>
-              </i>
-            </div>
-          </div>
-          <div class="post-editor-body">
-            <codemirror v-model="code" :options="cmOptions"></codemirror>
-            <div class="sec-html">
-               
-              <textarea id="editorHtml"></textarea>
-            </div>
-
-            <div class="sec-css">
-              <textarea id="editorCss"></textarea>
-            </div>
-
-            <div class="sec-js">
-              <textarea id="editorJs"></textarea>
-            </div>
-
-            <div  class="post-runner">
-              <iframe class="prepre"></iframe>
-            </div>
-          </div>
-        </div>
-        <div class="post-like">
-          <div class="post-like-more">
-            <img src="/imgs/liked.png" alt>
-            <img src="/imgs/comment.png" alt>
-            <img src="/imgs/share.png" alt>
-          </div>
-          <div class="post-like-bookmark">
-            <img src="/imgs/bookmarked.png" alt>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-</section>
+  <section>
+    <ul>
+      <li v-for="post in posts" :key="post._id"><post-container/></li>
+    </ul>
+  </section>
 </template>
 
 <script>
@@ -98,11 +12,15 @@
 import "codemirror/mode/javascript/javascript.js";
 // theme css
 import "codemirror/theme/base16-dark.css";
-import PostContainer from '@/components/PostContainer.vue'
+import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
   props: {},
+  components: {
+    // MonacoEditor,
+    PostContainer
+  },
   data() {
     return {
       code: "const a = 10",
@@ -112,10 +30,7 @@ export default {
         mode: "text/javascript",
         theme: "base16-dark",
         lineNumbers: true,
-        line: true,
-        
-
-
+        line: true
         // isPREVIEW: true,
         // isHTML: true,
         // isCSS: true,
@@ -123,6 +38,9 @@ export default {
         // toggleBtns: false
       }
     };
+  },
+  created() {
+    this.$store.dispatch({ type: "loadPosts" });
   },
   methods: {
     // previewMode() {
@@ -165,12 +83,12 @@ export default {
   computed: {
     codemirror() {
       return this.$refs.myCm.codemirror;
+    },
+    posts() {
+      return this.$store.getters.postsFiltered
     }
   },
-  components: {
-    // MonacoEditor,
-    PostContainer
-  },
+
   mounted() {
     // console.log("this is current codemirror object", this.codemirror);
     // you can use this.codemirror to do something...

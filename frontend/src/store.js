@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    posts: []
   },
   mutations: {
     setPosts(state, payload) {
@@ -15,14 +15,31 @@ export default new Vuex.Store({
       state.posts = payload.posts;
     }
   },
-  actions: {
-    getPosts(context) {
-      return PostService.query()
-        .then(posts => {
-          context.commit({type: 'setPosts', posts})
-          console.log('load posts (store', posts)
-        })
-    },
     
-  }
+  getters: {
+    postsFiltered(state) {
+      return state.posts
+    }
+  },
+  actions: {
+    loadUser(context) {
+      return userService.get
+    },
+    async loadPosts(context, payload){
+     let posts = await PostService.query()
+      context.commit('postsFiltered', posts)
+    },
+    postsFiltered(state, posts) {
+      state.posts = posts
+    }
+    // getPosts(context) {
+      //   return PostService.query()
+      //     .then(posts => {
+      //       context.commit({type: 'setPosts', posts})
+      //       console.log('load posts (store', posts)
+      //     })
+      // },
+  },
+
+  
 })
