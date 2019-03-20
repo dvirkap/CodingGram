@@ -1,0 +1,13 @@
+components:
+NavBar (global component)
+
+
+Home  (news feed container)
+--  NewsFeed (contians posts list & sidebar)
+         -- PostList
+                --Post
+                    --Comments
+         --UserBar
+
+
+
