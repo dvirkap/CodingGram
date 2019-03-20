@@ -120,20 +120,7 @@
 		</div> -->
 			<!-- <posts-aside class="aside-cont"></posts-aside> -->
 
-		<div class="aside-cont">
-			<div class="aside-cont-title">
-
-				<img src="https://www.designskilz.com/random-users/images/imageM7.jpg" alt="">
-				<div class="aside-cont-title-ps">
-					<p class="aside-cont-title-ps-username">User_Name</p>
-					<p class="aside-cont-title-ps-displayname">User Name full</p>
-				</div>
-
-			</div>
-			<div class="aside-cont-activitis">
-
-			</div>
-		</div> 
+		<UserBar></UserBar>
 
 	</div>
 
@@ -145,10 +132,23 @@
 
 <script>
 import PostList from '../components/PostList'
+import UserBar from '../components/UserBar.vue'
 
 export default {
   components:{
-PostList
+PostList,
+UserBar
+  },
+  data() {
+	  return {
+		  name: "",
+
+	  }
+  },
+  methods: {
+	  getUser() {
+		  this.$store.dispatch({type: "getUser", user});
+	  }
   }
 }
 </script>
