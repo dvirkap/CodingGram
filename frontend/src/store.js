@@ -34,7 +34,7 @@ export default new Vuex.Store({
     //       .then(posts => {
     //         context.commit({type: 'setPosts', posts})
     //       })
-      },
+      
   },
 
   
