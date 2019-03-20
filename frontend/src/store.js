@@ -13,7 +13,10 @@ export default new Vuex.Store({
     setPosts(state, payload) {
       console.log('set posts (payload)', payload)
       state.posts = payload.posts;
-    }
+    },
+    postsFiltered(state, posts) {
+      state.posts = posts
+    },
   },
     
   getters: {
@@ -29,16 +32,13 @@ export default new Vuex.Store({
      let posts = await PostService.query()
       context.commit('postsFiltered', posts)
     },
-    postsFiltered(state, posts) {
-      state.posts = posts
-    }
-    // getPosts(context) {
-      //   return PostService.query()
-      //     .then(posts => {
-      //       context.commit({type: 'setPosts', posts})
-      //       console.log('load posts (store', posts)
-      //     })
-      // },
+    getPosts(context) {
+        return PostService.query()
+          .then(posts => {
+            context.commit({type: 'setPosts', posts})
+            console.log('load posts (store', posts)
+          })
+      },
   },
 
   
