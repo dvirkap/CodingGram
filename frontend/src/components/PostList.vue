@@ -1,4 +1,6 @@
 <template>
+<section>
+  <post-container/>
   <ul>
     <li>
       <div class="post">
@@ -98,6 +100,7 @@
       </div>
     </li>
   </ul>
+</section>
 </template>
 
 <script>
@@ -106,6 +109,7 @@
 import "codemirror/mode/javascript/javascript.js";
 // theme css
 import "codemirror/theme/base16-dark.css";
+import PostContainer from '@/components/PostContainer.vue'
 
 export default {
   name: "PostList",
@@ -176,6 +180,7 @@ export default {
   },
   components: {
     // MonacoEditor,
+    PostContainer
   },
   mounted() {
     // console.log("this is current codemirror object", this.codemirror);

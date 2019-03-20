@@ -1,5 +1,3 @@
-import NavBar from '
-
 <template>
   <div id="app">
     <NavBar/>
