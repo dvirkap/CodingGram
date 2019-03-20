@@ -1,10 +1,10 @@
 <template>
   <section>
     <div class="post-feedback">
-      <Comment></Comment>
-      <!-- <p>{{this.}}</p> -->
-      <p>coment1</p>
-      <p>coment1</p>
+      <ul>
+        <li v-for="comment in comments" :key="comment._id"><Comment :comment="comment"></Comment></li>
+      </ul>
+    
     </div>
 
     <div class="post-comment">
@@ -20,11 +20,19 @@ import Comment from "./Comment.vue";
 
 export default {
   name: "CommentsList",
+  props: ['comments'],
+  data() {
+      return {
+        userName: '',
+
+      }
+  },
+  
   components: {
       Comment,
   },
   created() {
-    	// this.$store.dispatch({ type: "getPosts"});
+    	this.$store.dispatch({ type: "loadPosts"});
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul>
-      <li v-for="post in posts" :key="post._id"><post-container/></li>
+      <li v-for="post in posts" :key="post._id"><post-container :post="post" /></li>
     </ul>
   </section>
 </template>

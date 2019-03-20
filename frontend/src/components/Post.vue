@@ -5,6 +5,7 @@
         <div class="post-title-info">
           <img src="https://www.designskilz.com/random-users/images/imageM7.jpg" alt>
           <p>User Name</p>
+          
           <!-- <p>{{post.creator.userName}}</p> -->
         </div>
         <div class="post-title-tag">
@@ -79,7 +80,7 @@ import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "Post",
-  props: {},
+  props: ['post'],
   data() {
     return {
       code: "const a = 10",
@@ -144,6 +145,7 @@ export default {
   },
   components: {
     // MonacoEditor,
+    
   },
   mounted() {
     // console.log("this is current codemirror object", this.codemirror);
