@@ -9,7 +9,8 @@
 
     <div class="post-comment">
       <div class="post-comment-input">
-        <p>Add comment...</p>
+        <input type="text" placeholder="Enter comment" v-model="txt">
+        <button type="submit" @click.stop.prevent="addComment()">Add comment</button>
       </div>
     </div>
   </section>
@@ -17,14 +18,18 @@
 
 <script>
 import Comment from "./Comment.vue";
+import UtilService from '@/services/UtilService.js';
 
 export default {
   name: "CommentsList",
-  props: ['comments'],
+  props: ['comments', 'post'],
   data() {
       return {
-        userName: '',
-
+        txt: '',
+        createdAt: '',
+        creator: {
+          userName: '',
+        }
       }
   },
   
@@ -32,7 +37,23 @@ export default {
       Comment,
   },
   created() {
-    	this.$store.dispatch({ type: "loadPosts"});
+    	// this.$store.dispatch({ type: "loadPosts"});
+  },
+  methods: {
+    addComment() {
+      let comment = {
+        txt: this.txt,
+        creator: {
+          userName: 'Ploni',
+          _id: UtilService.makeId(8)
+        }
+      };
+      this.post.comments.push(comment)
+      console.log('comments:', this.post._id);
+      this.$store.dispatch({type: 'addComment', post: this.post});
+      // console.log('comment added', comment);
+      console.log('comments:', this.post.comments);
+    }
   }
 };
 </script>

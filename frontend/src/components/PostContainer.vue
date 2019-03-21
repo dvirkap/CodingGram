@@ -5,7 +5,7 @@
     <post :post="post"/>
     <post-bar />
     <!-- {{post}} -->
-    <comments-list :comments="post.comments"/>
+    <comments-list :comments="post.comments" :post="post"/>
   </section>
 </template>
 
