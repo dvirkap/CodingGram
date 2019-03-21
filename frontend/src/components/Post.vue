@@ -43,12 +43,12 @@
           </div>
         </div>
         <div class="post-editor-body">
-          <div class="sec-html">
+          <div class="sec-html display">
           <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
             <!-- <textarea id="editorHtml"></textarea> -->
           </div>
 
-          <div class="sec-css display">
+          <div class="sec-css" :class="{display: cmOptions.isCSS}">
           <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
             <!-- <textarea id="editorCss"></textarea> -->
           </div>
@@ -102,7 +102,7 @@ export default {
 
         isPREVIEW: true,
         isHTML: true,
-        isCSS: true,
+        isCSS: false,
         isJS: true,
         toggleBtns: false
       }

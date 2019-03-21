@@ -32,7 +32,7 @@ export default {
       Comment,
   },
   created() {
-    	this.$store.dispatch({ type: "loadPosts"});
+    	// this.$store.dispatch({ type: "loadPosts"});
   }
 };
 </script>
