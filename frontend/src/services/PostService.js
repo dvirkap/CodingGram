@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    query
+    query,
 }
 
 const _URL = (process.env.NODE_ENV !== 'development')
@@ -12,5 +12,4 @@ const _URL = (process.env.NODE_ENV !== 'development')
      let query= '';
      var res = await axios.get(`${_URL}${query}`);
     return res.data
-
  }

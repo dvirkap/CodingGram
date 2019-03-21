@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import PostService from './services/PostService';
+import PostService from './services/PostService.js';
+import CommentsService from './services/CommentsService.js';
 
 
 Vue.use(Vuex)
@@ -16,6 +17,18 @@ export default new Vuex.Store({
     postsFiltered(state, posts) {
       state.posts = posts
     },
+    createComment(state, payload) {
+      console.log('set comment', this.state.currComment);
+      state.currComment = payload.comment
+    },
+    deleteComment(state , payload) {
+      let comments = [];
+      for (let i = 0; i < state.cpmments.length; i++) {
+        if (state.comments[i].creator._id !== payload.commentId) {
+          comments.push(state.comments[i])
+        }
+      }
+    }
   },
     
   getters: {
@@ -34,7 +47,22 @@ export default new Vuex.Store({
     //       .then(posts => {
     //         context.commit({type: 'setPosts', posts})
     //       })
+
+    addComment(context, {post}) {
+      console.log('post from store', post);
       
+      return CommentsService.addComment(post)
+        .then(res => {
+          console.log('res.data', res)
+          context.commit({type: 'createComment', post: res.data})
+        });
+    },
+    deleteComment(context, {commentId}) {
+      return CommentsService.deleteComment(commentId)
+        .then(res => {
+          context.commit({type: 'deleteComment', commentId})
+        })
+    }
   },
 
   
