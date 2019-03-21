@@ -3,21 +3,25 @@
     <div class="post">
       <div class="post-title">
         <div class="post-title-info">
-          <img src="https://www.designskilz.com/random-users/images/imageM7.jpg" alt>
-          <p>User Name</p>
+          <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg" alt>
+          <!-- <img src="https://www.designskilz.com/random-users/images/imageM9.jpg" alt> -->
+          <p>{{post.creator.userName}}</p>
           
           <!-- <p>{{post.creator.userName}}</p> -->
         </div>
         <div class="post-title-tag">
-          <p>ALERT BUTTON</p>
+          <span uk-icon="plus-circle"></span>
+          <!-- <p>ALERT BUTTON</p> -->
           <!-- <p>{{post.title}}</p> -->
-          <p>
+          <!-- <p>
             <span class="hashtag">BUTTON/ALERT</span>
-          </p>
+          </p> -->
         </div>
       </div>
       <div class="post-img">
+      
         <div class="post-editor-title">
+          
           <div class="post-editor-title-preview">
             <i class="fa fa-eye">
               <span>&nbsp; Result</span>
@@ -39,20 +43,22 @@
           </div>
         </div>
         <div class="post-editor-body">
-          <codemirror v-model="code" :options="cmOptions"></codemirror>
           <div class="sec-html">
-            <textarea id="editorHtml"></textarea>
+          <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
+            <!-- <textarea id="editorHtml"></textarea> -->
           </div>
 
-          <div class="sec-css">
-            <textarea id="editorCss"></textarea>
+          <div class="sec-css display">
+          <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
+            <!-- <textarea id="editorCss"></textarea> -->
           </div>
 
-          <div class="sec-js">
+          <div class="sec-js display">
+          <codemirror v-model="JScode" :options="cmOptions"></codemirror>
             <textarea id="editorJs"></textarea>
           </div>
 
-          <div class="post-runner">
+          <div class="post-runner display">
             <iframe class="prepre"></iframe>
           </div>
         </div>
@@ -83,30 +89,32 @@ export default {
   props: ['post'],
   data() {
     return {
-      code: "const a = 10",
+      HTMLcode: this.post.snippet.html,
+      CSScode: this.post.snippet.css,
+      JScode: this.post.snippet.js,
       cmOptions: {
         // codemirror options
         tabSize: 4,
         mode: "text/javascript",
         theme: "base16-dark",
         lineNumbers: true,
-        line: true
+        line: true,
 
-        // isPREVIEW: true,
-        // isHTML: true,
-        // isCSS: true,
-        // isJS: true,
-        // toggleBtns: false
+        isPREVIEW: true,
+        isHTML: true,
+        isCSS: true,
+        isJS: true,
+        toggleBtns: false
       }
     };
   },
   methods: {
-    // previewMode() {
-    //   this.isPREVIEW = true;
-    //   this.isHTML = false;
-    //   this.isCSS = false;
-    //   this.isJS = false;
-    // },
+    previewMode() {
+      this.isPREVIEW = true;
+      // this.isHTML = false;
+      // this.isCSS = false;
+      // this.isJS = false;
+    },
     // htmlMode() {
     //   this.isPREVIEW = false;
     //   this.isHTML = true;
@@ -154,7 +162,15 @@ export default {
 };
 </script>
 
+<style>
+.uk-tab {
+  display: flex;
+}
 
+.display {
+  display: none;
+}
+</style>
 
 
 
