@@ -547,28 +547,28 @@ background-color: #ed4956; */
 .span {
     color: green;
 }
-
+/* Main editor css classes */
 .post-editor-body {
-    display: flex;
+    /* display: flex; */
     width: 100%;
     height: 400px;
 }
 
 .sec-html {
     background-color: #edf038;
-    width: 33%;
+    width: 100%;
     height: 100%;
 }
 
 .sec-css {
     background-color: #f03850; 
-    width: 33%;
+    width: 100%;
    height: 100%;
 }
 
 .sec-js {
     background-color: #4438f0;
-    width: 33%;
+    width: 100%;
     height: 100%;
 }
 
