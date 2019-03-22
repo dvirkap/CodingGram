@@ -18,10 +18,7 @@ function addPostRoute(app) {
     // create comment 
     app.post('/post', (req, res) => {
         const post = req.body;
-        post.createdAt = new Date();
-        // post.creator._id = 
         console.log('post from route',post);
-        // post.create = new Date();
         postService.addPost(post)
             .then(post => {
                 res.json(post)
@@ -31,9 +28,10 @@ function addPostRoute(app) {
     //delete
     app.delete('/post/:commentId', (req, res) => {
         // console.log('delete:  req ',req, 'res ', res)
-        console.log(req.params.commentId)
+        console.log('req.params.commentId', req.params.commentId)
         const commentId = req.params.commentId
-        // comment
+        postService.remove(commentId)
+            .then(() => res.end(`comment ${commentId} deleted!`))
         // console.log(commentId)
     })
 

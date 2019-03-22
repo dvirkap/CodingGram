@@ -2,9 +2,10 @@
   <section>
     <div class="post-feedback">
       <ul>
-        <li v-for="comment in comments" :key="comment._id"><Comment :comment="comment"></Comment></li>
+        <li v-for="comment in comments" :key="comment._id">
+          <Comment :comment="comment"></Comment>
+        </li>
       </ul>
-    
     </div>
 
     <div class="post-comment">
@@ -22,7 +23,11 @@ import UtilService from '@/services/UtilService.js';
 
 export default {
   name: "CommentsList",
-  props: ['comments', 'post'],
+  // props: ['comments', 'post'],
+  props: {
+    comments: Array, 
+    post: Object
+  },
   data() {
       return {
         txt: '',
@@ -37,15 +42,15 @@ export default {
       Comment,
   },
   created() {
-    	// this.$store.dispatch({ type: "loadPosts"});
   },
   methods: {
     addComment() {
       let comment = {
         txt: this.txt,
+        _id: UtilService.makeId(8),
+        createdAt: new Date(),
         creator: {
           userName: 'Ploni',
-          _id: UtilService.makeId(8)
         }
       };
       this.post.comments.push(comment)

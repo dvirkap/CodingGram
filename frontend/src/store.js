@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    posts: []
+    posts: [],
+    comments: []
   },
   mutations: {
     setPosts(state, payload) {
@@ -23,8 +24,8 @@ export default new Vuex.Store({
     },
     deleteComment(state , payload) {
       let comments = [];
-      for (let i = 0; i < state.cpmments.length; i++) {
-        if (state.comments[i].creator._id !== payload.commentId) {
+      for (let i = 0; i < state.comments.length; i++) {
+        if (state.comments[i]._id !== payload.commentId) {
           comments.push(state.comments[i])
         }
       }
@@ -38,19 +39,26 @@ export default new Vuex.Store({
   },
   actions: {
     
-    async loadPosts(context, payload){
-     let posts = await PostService.query()
-      context.commit('postsFiltered', posts)
-    },
+    // async loadPosts(context, payload){
+    //  let posts = await PostService.query()
+    //   context.commit('postsFiltered', posts)
+    // },
+
     // getPosts(context) {
     //     return PostService.query()
     //       .then(posts => {
     //         context.commit({type: 'setPosts', posts})
     //       })
 
+    loadPosts(context, payload) {
+      return PostService.query()
+        .then(posts => {
+          context.commit({type: 'setPosts', posts})
+        })
+    },
+
     addComment(context, {post}) {
       console.log('post from store', post);
-      
       return CommentsService.addComment(post)
         .then(res => {
           console.log('res.data', res)
@@ -58,6 +66,7 @@ export default new Vuex.Store({
         });
     },
     deleteComment(context, {commentId}) {
+      console.log('commentId from store',commentId)
       return CommentsService.deleteComment(commentId)
         .then(res => {
           context.commit({type: 'deleteComment', commentId})
