@@ -15,6 +15,18 @@ function addPostRoute(app) {
         })
     }
 
+
+    //One Post BY ID
+    app.get('/post/:postId', async (req, res)=> {
+        var postId = req.params.postId
+        console.log('post.route postId:', postId);
+        const post = await postService.getPostById(postId)
+        console.log('post is---------',post);
+        res.json(post);
+         
+    })
+
+
     // create comment 
     app.post('/post', (req, res) => {
         const post = req.body;
@@ -28,23 +40,23 @@ function addPostRoute(app) {
             })
     })
 
-    //delete
-    app.delete('/post/:commentId', (req, res) => {
-        // console.log('delete:  req ',req, 'res ', res)
-        console.log(req.params.commentId)
-        const commentId = req.params.commentId
-        // comment
-        // console.log(commentId)
-    })
-
+    
     //update
     // app.put('/post', (req, res) => {
-    //     console.log(req, res)
-    //     const comment = req.vody;
-    //     commentsService.update(comment)
-    //         .then(comment => res.json(comment))
-    // })
-
+        //     console.log(req, res)
+        //     const comment = req.vody;
+        //     commentsService.update(comment)
+        //         .then(comment => res.json(comment))
+        // })
+        
+        //delete comment
+        app.delete('/post/:commentId', (req, res) => {
+            // console.log('delete:  req ',req, 'res ', res)
+            console.log(req.params.commentId)
+            const commentId = req.params.commentId
+            // comment
+            // console.log(commentId)
+        })
 }
 
 module.exports = addPostRoute;

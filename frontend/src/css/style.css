@@ -362,6 +362,10 @@ background-color: #ed4956; */
     border: 1px solid #dbdbdb;
 }
 
+.CodeMirror {
+    height: 100%;
+}
+
 .posts-cont {
     width: 60%;
     height: auto;
@@ -690,9 +694,6 @@ select {
     padding: 5px;
 }
 
-.CodeMirror {
-    height: 100%;
-}
 
 input {
     width: 100%;

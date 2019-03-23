@@ -1,0 +1,65 @@
+{ 
+    "_id" : ObjectId("5c8e97334330fca0bb034d54"), 
+    "title" : "Stopwatch", 
+    "desc" : "Designed stopwatch", 
+    "snippet" : {
+        "lang" : "js", 
+        "html" : "<nav class=\"controls\">\r\n\t\t\t<a href=\"#\" class=\"button\" onClick=\"stopwatch.start();\">Start</a>\r\n\t\t\t<a href=\"#\" class=\"button\" onClick=\"stopwatch.lap();\">Lap</a>\r\n\t\t\t<a href=\"#\" class=\"button\" onClick=\"stopwatch.stop();\">Stop</a>\r\n\t\t\t<a href=\"#\" class=\"button\" onClick=\"stopwatch.restart();\">Restart</a>\r\n\t\t\t<a href=\"#\" class=\"button\" onClick=\"stopwatch.clear();\">Clear Laps</a>\r\n\t\t</nav>\r\n\t\t<div class=\"stopwatch\"></div>\r\n\t\t<ul class=\"results\"></ul>", 
+        "css" : "* {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nhtml {\r\n  background: #333;\r\n  color: #bbb;\r\n  font-family: Menlo;\r\n}\r\n\r\n.controls {\r\n  position: fixed;\r\n  text-align: center;\r\n  top: 1em;\r\n  width: 100%;\r\n}\r\n\r\n.button {\r\n  color: #bbb;\r\n  font-size: 4vw;\r\n  margin: 0 0.5em;\r\n  text-decoration: none;\r\n}\r\n\r\n.button:first-child {\r\n    margin-left: 0;\r\n}\r\n\r\n.button:last-child {\r\n    margin-right: 0;\r\n}\r\n\r\n.button:hover {\r\n  color: white;\r\n}\r\n\r\n.stopwatch {\r\n  font-size: 20vw;\r\n  height: 100%;\r\n  line-height: 100vh;\r\n  text-align: center;\r\n}\r\n\r\n.results {\r\n  border-color: lime;\r\n  list-style: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n}", 
+        "code" : "class Stopwatch {\r\n    constructor(display, results) {\r\n        this.running = false;\r\n        this.display = display;\r\n        this.results = results;\r\n        this.laps = [];\r\n        this.reset();\r\n        this.print(this.times);\r\n    }\r\n    \r\n    reset() {\r\n        this.times = [ 0, 0, 0 ];\r\n    }\r\n    \r\n    start() {\r\n        if (!this.time) this.time = performance.now();\r\n        if (!this.running) {\r\n            this.running = true;\r\n            requestAnimationFrame(this.step.bind(this));\r\n        }\r\n    }\r\n    \r\n    lap() {\r\n        let times = this.times;\r\n        let li = document.createElement('li');\r\n        li.innerText = this.format(times);\r\n        this.results.appendChild(li);\r\n    }\r\n    \r\n    stop() {\r\n        this.running = false;\r\n        this.time = null;\r\n    }\r\n\r\n    restart() {\r\n        if (!this.time) this.time = performance.now();\r\n        if (!this.running) {\r\n            this.running = true;\r\n            requestAnimationFrame(this.step.bind(this));\r\n        }\r\n        this.reset();\r\n    }\r\n    \r\n    clear() {\r\n        clearChildren(this.results);\r\n    }\r\n    \r\n    step(timestamp) {\r\n        if (!this.running) return;\r\n        this.calculate(timestamp);\r\n        this.time = timestamp;\r\n        this.print();\r\n        requestAnimationFrame(this.step.bind(this));\r\n    }\r\n    \r\n    calculate(timestamp) {\r\n        var diff = timestamp - this.time;\r\n        // Hundredths of a second are 100 ms\r\n        this.times[2] += diff / 10;\r\n        // Seconds are 100 hundredths of a second\r\n        if (this.times[2] >= 100) {\r\n            this.times[1] += 1;\r\n            this.times[2] -= 100;\r\n        }\r\n        // Minutes are 60 seconds\r\n        if (this.times[1] >= 60) {\r\n            this.times[0] += 1;\r\n            this.times[1] -= 60;\r\n        }\r\n    }\r\n    \r\n    print() {\r\n        this.display.innerText = this.format(this.times);\r\n    }\r\n    \r\n    format(times) {\r\n        return `\\\r\n${pad0(times[0], 2)}:\\\r\n${pad0(times[1], 2)}:\\\r\n${pad0(Math.floor(times[2]), 2)}`;\r\n    }\r\n}\r\n\r\nfunction pad0(value, count) {\r\n    var result = value.toString();\r\n    for (; result.length < count; --count)\r\n        result = '0' + result;\r\n    return result;\r\n}\r\n\r\nfunction clearChildren(node) {\r\n    while (node.lastChild)\r\n        node.removeChild(node.lastChild);\r\n}\r\n\r\nlet stopwatch = new Stopwatch(\r\n    document.querySelector('.stopwatch'),\r\n    document.querySelector('.results'));"
+    }, 
+    "hashtags" : [
+        "javascript"
+    ], 
+    "createdAt" : ISODate("2019-03-21T14:34:04.200+0000"), 
+    "creator" : {
+        "userName" : "Kenny Goddard", 
+        "_id" : "5c8e97334330fca0bb034d82", 
+        "userImg" : "45.jpg"
+    }, 
+    "copiedCount" : NumberInt(1), 
+    "isApproved" : false, 
+    "likeBy" : [
+        {
+            "userName" : "Elijah_Fowler", 
+            "_id" : "5c8e97334330fca0bb034d82"
+        }
+    ], 
+    "comments" : [
+        {
+            "txt" : "good job", 
+            "createdAt" : NumberInt(155301989), 
+            "creator" : {
+                "userName" : "Elijah_Fowler", 
+                "_id" : "5c8e97334330fca0bb034d82"
+            }, 
+            "snippet" : {
+                "lang" : "js", 
+                "html" : "<div></div>", 
+                "css" : "<style></style>", 
+                "code" : "<script>Add script</script>"
+            }
+        }, 
+        {
+            "txt" : "Not a good job", 
+            "createdAt" : NumberInt(155301121), 
+            "creator" : {
+                "userName" : "Elijah_Fowler", 
+                "_id" : "5c8e97334330fca0bb034d82"
+            }, 
+            "snippet" : {
+                "lang" : "js", 
+                "html" : "<div></div>", 
+                "css" : "<style></style>", 
+                "code" : "<script>Add script</script>"
+            }
+        }, 
+        {
+            "txt" : "fgfgfgfg", 
+            "creator" : {
+                "userName" : "Ploni", 
+                "_id" : "N3zmQNyD"
+            }
+        }
+    ]
+}

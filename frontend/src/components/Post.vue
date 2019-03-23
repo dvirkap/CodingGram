@@ -6,7 +6,7 @@
           <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg" alt>
           <!-- <img src="https://www.designskilz.com/random-users/images/imageM9.jpg" alt> -->
           <p>{{post.creator.userName}}</p>
-          
+
           <!-- <p>{{post.creator.userName}}</p> -->
         </div>
         <div class="post-title-tag">
@@ -15,25 +15,23 @@
           <!-- <p>{{post.title}}</p> -->
           <!-- <p>
             <span class="hashtag">BUTTON/ALERT</span>
-          </p> -->
+          </p>-->
         </div>
       </div>
       <div class="post-img">
-      
         <div class="post-editor-title">
-          
-          <div class="post-editor-title-preview">
+          <div class="post-editor-title-preview" @click="previewMode">
             <i class="fa fa-eye">
               <span>&nbsp; Result</span>
             </i>
           </div>
-          <div class="post-editor-title-html">
+          <div class="post-editor-title-html" @click="htmlMode">
             <i class="fab fa-html5"></i>
           </div>
-          <div class="post-editor-title-css">
+          <div class="post-editor-title-css" @click="cssMode">
             <i class="fab fa-css3-alt"></i>
           </div>
-          <div class="post-editor-title-js">
+          <div class="post-editor-title-js" @click="jsMode">
             <i class="fab fa-js"></i>
           </div>
           <div class="post-editor-title-run">
@@ -43,23 +41,23 @@
           </div>
         </div>
         <div class="post-editor-body">
-          <div class="sec-html display">
-          <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
+          <div class="sec-html" :class="{display: !cmOptions.isHTML}">
+            <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
             <!-- <textarea id="editorHtml"></textarea> -->
           </div>
 
-          <div class="sec-css" :class="{display: cmOptions.isCSS}">
-          <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
+          <div class="sec-css" :class="{display: !cmOptions.isCSS}">
+            <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
             <!-- <textarea id="editorCss"></textarea> -->
           </div>
 
-          <div class="sec-js display">
-          <codemirror v-model="JScode" :options="cmOptions"></codemirror>
-            <textarea id="editorJs"></textarea>
+          <div class="sec-js" :class="{display: !cmOptions.isJS}">
+            <codemirror v-model="JScode" :options="cmOptions"></codemirror>
+            <!-- <textarea id="editorJs"></textarea> -->
           </div>
 
-          <div class="post-runner display">
-            <iframe class="prepre"></iframe>
+          <div class="post-runner" :class="{display: !cmOptions.isPREVIEW}">
+            <iframe class="prepre">{{ codeForPreview() }}</iframe>
           </div>
         </div>
       </div>
@@ -91,48 +89,66 @@ export default {
     return {
       HTMLcode: this.post.snippet.html,
       CSScode: this.post.snippet.css,
-      JScode: this.post.snippet.js,
+      JScode: this.post.snippet.code,
+      
       cmOptions: {
         // codemirror options
-        tabSize: 4,
+        tabSize: 1,
         mode: "text/javascript",
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
 
-        isPREVIEW: true,
-        isHTML: true,
+        isPREVIEW: false,
+        isHTML: false,
         isCSS: false,
-        isJS: true,
+        isJS: false,
         toggleBtns: false
       }
     };
   },
   methods: {
     previewMode() {
-      this.isPREVIEW = true;
-      // this.isHTML = false;
-      // this.isCSS = false;
-      // this.isJS = false;
+      this.cmOptions.isPREVIEW = true;
+      this.cmOptions.isHTML = false;
+      this.cmOptions.isCSS = false;
+      this.cmOptions.isJS = false;
     },
-    // htmlMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = true;
-    //   this.isCSS = false;
-    //   this.isJS = false;
-    // },
-    // cssMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = false;
-    //   this.isCSS = true;
-    //   this.isJS = false;
-    // },
-    // jsMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = false;
-    //   this.isCSS = false;
-    //   this.isJS = true;
-    // },
+    htmlMode() {
+      this.cmOptions.isPREVIEW = false;
+      this.cmOptions.isHTML = true;
+      this.cmOptions.isCSS = false;
+      this.cmOptions.isJS = false;
+    },
+    cssMode() {
+      this.cmOptions.isPREVIEW = false;
+      this.cmOptions.isHTML = false;
+      this.cmOptions.isCSS = true;
+      this.cmOptions.isJS = false;
+    },
+    jsMode() {
+      this.cmOptions.isPREVIEW = false;
+      this.cmOptions.isHTML = false;
+      this.cmOptions.isCSS = false;
+      this.cmOptions.isJS = true;
+    },
+
+    //The code Preview main function
+  codeForPreview(){
+     `<html>
+    <head>
+    <style>
+    ${this.HTMLcode}
+    </style>
+    </head>
+    <body>
+   ${this.CSScode}
+    <script>${this.JScode}<\/script>
+    </body>
+    </html>`
+
+  },
+   
 
     // ---Vue code mirror methods
     onCmReady(cm) {
@@ -155,6 +171,7 @@ export default {
     // MonacoEditor,
     
   },
+  
   mounted() {
     // console.log("this is current codemirror object", this.codemirror);
     // you can use this.codemirror to do something...
@@ -175,7 +192,3 @@ export default {
 
 
 
- 
-
-
-  
