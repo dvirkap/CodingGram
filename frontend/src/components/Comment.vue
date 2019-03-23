@@ -12,8 +12,8 @@ export default {
   props: ["comment"],
   methods: {
     removeComment() {
-      console.log('start removing', this.comment.txt ,this.comment.creator._id);  
-      this.$store.dispatch('deleteComment', {commentId: this.comment.creator._id});
+      console.log('start removing', this.comment.txt ,this.comment._id);  
+      this.$store.dispatch('deleteComment', {commentId: this.comment._id});
     }
   }
 };
