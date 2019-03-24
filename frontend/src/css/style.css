@@ -587,6 +587,26 @@ background-color: #ed4956; */
     color: #494949;
     letter-spacing: 0px;
     display: flex;
+
+}
+.add-post{
+    color: #262626;
+    font-size: 40px;
+
+
+}
+.userbar-addpost{
+    align-self: center;
+    margin-right: 30px;
+    font-family: 'Proxima';
+    letter-spacing: 0px;
+    display: flex;
+
+
+}
+.add-comment{
+    font-size: 30px;
+    color: #494949;
 }
 
 .post-title-tag p {

@@ -36,49 +36,35 @@
         <div class="post-editor-body">
           <div class="sec-html" :class="{display: !cmOptions.isHTML}">
             <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
-            <!-- <textarea id="editorHtml"></textarea> -->
           </div>
 
           <div class="sec-css" :class="{display: !cmOptions.isCSS}">
             <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
-            <!-- <textarea id="editorCss"></textarea> -->
           </div>
 
           <div class="sec-js" :class="{display: !cmOptions.isJS}">
             <codemirror v-model="JScode" :options="cmOptions"></codemirror>
-            <!-- <textarea id="editorJs"></textarea> -->
           </div>
 
           <div class="post-runner" :class="{display: !cmOptions.isPREVIEW}">
-
-            <!-- <div v-html="try" ></div> -->
-            <!-- <iframe :srcdoc="codeForPreview1()" ></iframe> -->
             <iframe :srcdoc="codeForPreview()" class="prepre"></iframe>
-
-            <!-- <iframe class="prepre">{{ codeForPreview() }}</iframe> -->
           </div>
         </div>
       </div>
-      <!-- <div class="post-like">
-        <div class="post-like-more">
-          <img src="/imgs/liked.png" alt>
-          <img src="/imgs/comment.png" alt>
-          <img src="/imgs/share.png" alt>
-        </div>
-        <div class="post-like-bookmark">
-          <img src="/imgs/bookmarked.png" alt>
-        </div>
-      </div> -->
+
     </div>
   </section>
 </template>
 
 <script>
 // import MonacoEditor from 'monaco-editor-vue';
-// language js
 import "codemirror/mode/javascript/javascript.js";
+import "codemirror/mode/xml/xml.js";
+import "codemirror/mode/css/css.js";
+
 // theme css
 import "codemirror/theme/base16-dark.css";
+
 
 export default {
   name: "Post",
@@ -90,14 +76,26 @@ export default {
       JScode: this.post.snippet.code,
       
       cmOptions: {
-        // codemirror options
         tabSize: 1,
         mode: "text/javascript",
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
 
-        isPREVIEW: false,
+        isPREVIEW: true,
+        isHTML: false,
+        isCSS: false,
+        isJS: false,
+        toggleBtns: false,
+      },
+      cmOptionsHTML: {
+        tabSize: 1,
+        mode: "xml",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+
+        isPREVIEW: true,
         isHTML: false,
         isCSS: false,
         isJS: false,
@@ -144,7 +142,6 @@ export default {
     <script>${this.JScode}<\/script>
     </body>
     </html>`
-
   },
 
 
