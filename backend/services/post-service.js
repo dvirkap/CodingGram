@@ -22,13 +22,25 @@ function getPostById(postId) {
 }
 
 // ADD POST
-function addPost(post) {
+function add(post) {
     return mongoService.connect()
-    .then(db => db.collection('posts').insertOne(post))
-    .then(res => {
-        post._id = res.insertedId
-        return post
-    })
+        .then(db => db.collection('posts').insertOne(post))
+        .then(res => {
+            post._id = res.insertedId
+            return post
+        })
+}
+
+//EDIT POST
+function update(post) {
+    const strId = post._id
+    const postId = strId
+    return mongoService.connect()
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
+        .then(res => {
+            post._id = strId;
+            return post;
+        })
 }
 
 // DELETE POST 
@@ -36,13 +48,13 @@ function removePost(postId) {
     const _id = new ObjectId(postId)
     console.log('POST TO DELETE ID:', _id);
     return mongoService.connect()
-    .then(db=> db.collection('posts').deleteOne({_id}))
+        .then(db => db.collection('posts').deleteOne({ _id }))
 }
 // --------------------- COMMENTS ----------------------------------------
 
 
 // ADD NEW COMMENT
-function update(post) {
+function updateComment(post) {
     const strId = post._id
     const postId = strId
     return mongoService.connect()
@@ -54,7 +66,7 @@ function update(post) {
 }
 
 // DELETE COMMENT
-function remove(commentId) {
+function removeComment(commentId) {
     const commentId = new ObjectId(commentId);
     // console.log('commentId::::::::', commentId);
     return mongoService.connect()
@@ -68,8 +80,9 @@ function remove(commentId) {
 module.exports = {
     query,
     update,
-    addPost,
+    add,
     removePost,
     getPostById,
-    remove
+    removeComment,
+    updateComment
 }
