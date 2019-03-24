@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import PostService from '@/services/PostService.js'
 
 export default {
     addComment,
@@ -10,9 +11,12 @@ const _URL = (process.env.NODE_ENV !== 'development')
     : 'http://localhost:3000/post/';
 
 
-function addComment(post) {
+async function addComment(post) {
       console.log('post from front service', post);
-    return axios.post(`${_URL}`, post)
+      const postId = post._id
+      console.log(postId);
+      const updatedPost = await axios.put(`${_URL}${postId}`, post)
+    return updatedPost.data
 }
 
 function deleteComment(commentId) {
