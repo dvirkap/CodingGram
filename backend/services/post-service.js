@@ -1,5 +1,6 @@
 const mongoService = require('./mongo-service')
 
+// const objectId = require('mongodb').ObjectID;
 const ObjectId = require('mongodb').ObjectId;
 
 function query() {
@@ -19,6 +20,20 @@ function addPost(post) {
                     post.comments._id = result.insertedId;
                     return comment;
                 })
+        })
+}
+
+function getPostById(postId) {
+    // const id = new objectId(postId)
+    // console.log('postId from back service', postId);
+    return mongoService.connect()
+        .then(db => db.collection('posts').findOne({ _id : new ObjectId (postId)  }))
+        .then(post => {
+            
+            console.log('---------------------------')
+            console.log(post)
+            console.log('---------------------------')
+            return post
         })
 }
 
@@ -52,5 +67,6 @@ module.exports = {
     query,
     update,
     addPost,
+    getPostById,
     remove
 }

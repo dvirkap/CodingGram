@@ -15,6 +15,18 @@ function addPostRoute(app) {
         })
     }
 
+
+    //One Post BY ID
+    app.get('/post/:postId', async (req, res)=> {
+        var postId = req.params.postId
+        // console.log('post.route postId:', postId);
+        const post = await postService.getPostById(postId)
+        console.log('post is---------',post);
+        res.json(post);
+         
+    })
+
+
     // create comment 
     app.post('/post', (req, res) => {
         const post = req.body;
@@ -37,12 +49,12 @@ function addPostRoute(app) {
 
     //update
     // app.put('/post', (req, res) => {
-    //     console.log(req, res)
-    //     const comment = req.vody;
-    //     commentsService.update(comment)
-    //         .then(comment => res.json(comment))
-    // })
-
+        //     console.log(req, res)
+        //     const comment = req.vody;
+        //     commentsService.update(comment)
+        //         .then(comment => res.json(comment))
+        // })
+        
 }
 
 module.exports = addPostRoute;
