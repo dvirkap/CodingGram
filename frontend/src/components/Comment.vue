@@ -9,11 +9,12 @@
 <script>
 export default {
   name: "Comment",
-  props: ["comment"],
+  props: ["comment", "post"],
   methods: {
     removeComment() {
-      console.log('start removing', this.comment.txt ,this.comment._id);  
-      this.$store.dispatch('deleteComment', {commentId: this.comment._id});
+      // console.log('CHECK', this.post)
+      console.log('start removing', 'comm', this.comment._id, 'post' ,this.post._id);  
+      this.$store.dispatch({type: 'deleteComment',commentId: this.comment._id, postId: this.post._id} );
     }
   }
 };

@@ -41,7 +41,7 @@ function update(post) {
         .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
         .then(res => {
             console.log('UPDATE POST BACK FROM POST-SERVICE:', post);
-            
+
             post._id = strId;
             return post;
         })
@@ -70,14 +70,15 @@ function updateComment(post) {
 }
 
 // DELETE COMMENT
-function removeComment(commentId) {
-    const commentId = new ObjectId(commentId);
-    // console.log('commentId::::::::', commentId);
+function removeComment(params) {
     return mongoService.connect()
         .then(db => {
+            console.log(params)
+            // var commentID = new ObjectId(params.commentId)
             const collection = db.collection('posts');
-            console.log('commentId from back service', commentId)
-            return collection.remove({ _id: commentId })
+            console.log('commentId from back service', params)
+            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: {comments: { _id: params.commentId } }})
+            // return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: commentID} })
         })
 }
 

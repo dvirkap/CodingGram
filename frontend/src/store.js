@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     posts: [],
     comments: []
+
   },
   mutations: {
     setPosts(state, payload) {
@@ -25,9 +26,10 @@ export default new Vuex.Store({
     },
     deleteComment(state , payload) {
       let comments = [];
+
       for (let i = 0; i < state.comments.length; i++) {
-        if (state.comments[i]._id !== payload.commentId) {
-          comments.push(state.comments[i])
+        if (state.comments[i]._id === payload.commentId) {
+          comments.splice(state.comments[i])
         }
       }
       state.comments = comments;
@@ -64,11 +66,12 @@ export default new Vuex.Store({
           context.commit({type: 'createComment', post: res})
         });
     },
-    deleteComment(context, {commentId}) {
-      console.log('commentId from store',commentId)
-      return CommentsService.deleteComment(commentId)
+    deleteComment(context, payload) {
+      console.log('commentId from store',payload.commentId)
+      console.log('postId from store',payload.postId)
+      return CommentsService.deleteComment(payload)
         .then(res => {
-          context.commit({type: 'deleteComment', commentId})
+          context.commit({type: 'deleteComment', payload})
         })
     }
   },

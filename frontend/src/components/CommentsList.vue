@@ -3,7 +3,7 @@
     <div class="post-feedback">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment :comment="comment"></Comment>
+          <Comment :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>

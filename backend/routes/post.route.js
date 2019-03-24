@@ -54,12 +54,13 @@ function addPostRoute(app) {
     // -------------------------- COMMENTS SECTION ---------------------------
 
     //DELETE COMMENT
-    app.delete('/post/:commentId', (req, res) => {
-        // console.log('delete:  req ',req, 'res ', res)
-        const commentId = req.params.commentId
-        console.log('req.params.commentId', commentId)
-        postService.removeComment(commentId)
-            .then(() => res.end(`comment ${commentId} deleted!`))
+    app.delete('/post/:postId/:commentId', async (req, res) => {
+        console.log(req.params);
+        const params= req.params
+        console.log(params);
+        
+        const deletedComment = await postService.removeComment(params)
+        res.end(`comment ${deletedComment} deleted!`)
         // console.log(commentId)
     })
 
