@@ -556,23 +556,32 @@ background-color: #ed4956; */
 .sec-html {
     /* background-color: #edf038; */
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: 400px;
+    max-height: 400px;
+
 }
 
 .sec-css {
     /* background-color: #f03850; */
     /* width: 100%; */
     /* height: 100%; */
+    height: 400px;
+
 }
 
 .sec-js {
     /* background-color: #4438f0; */
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: 400px;
+    max-height: 400px;
+
+
 }
 
 .post-runner {
-    background-color: #120d53;
+    /* background-color: #120d53; */
     width: 100%;
     height: 100%;
 }
@@ -623,6 +632,9 @@ background-color: #ed4956; */
 
 .prepre {
     width: 100%;
+    height: 400px;
+
+
 }
 
 .post-comment-input {
