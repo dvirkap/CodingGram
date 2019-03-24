@@ -8,9 +8,12 @@
           <p class="aside-cont-title-ps-displayname">User Name full</p>
         <!-- </div> -->
       </div>
-      <div class="post-title-tag">
+      <!-- <div class="post-title-tag"> -->
+      <div class="userbar-addpost">
+
       <router-link to="/edit">
-        <span uk-icon="plus-circle" title="Add Post"></span>
+      
+        <span class="add-post" title="Add Post"><i class="far fa-plus-square"></i></span>
       </router-link>
           <!-- <p>ALERT BUTTON</p> -->
           <!-- <p>{{post.title}}</p> -->

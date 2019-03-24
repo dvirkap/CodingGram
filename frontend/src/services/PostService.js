@@ -3,7 +3,8 @@ import axios from 'axios';
 export default {
     query,
     getPostById,
-    updatePost
+    updatePost,
+    addLike
 }
 
 const _URL = (process.env.NODE_ENV !== 'development')
@@ -32,4 +33,8 @@ async function updatePost(post) {
         var addedPost = await axios.post(`${_URL}`, post)
         return addedPost
     }
+}
+
+function addLike(post) {
+    return axios.post(`${_URL}`, post)
 }

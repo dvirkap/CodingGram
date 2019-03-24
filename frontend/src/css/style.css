@@ -534,7 +534,7 @@ background-color: #ed4956; */
     background-color: #ffffff;
     border: 1px solid #dbdbdb;
     width: 100%;
-    margin-bottom: 20px;
+    margin: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
 }
@@ -558,7 +558,8 @@ background-color: #ed4956; */
 
 .post-title p {
     margin: 0 auto;
-    font-size: 30px
+    font-size: 30px;
+    align-self: center;
 }
 
 .post-title-info img {
@@ -586,6 +587,26 @@ background-color: #ed4956; */
     color: #494949;
     letter-spacing: 0px;
     display: flex;
+
+}
+.add-post{
+    color: #262626;
+    font-size: 40px;
+
+
+}
+.userbar-addpost{
+    align-self: center;
+    margin-right: 30px;
+    font-family: 'Proxima';
+    letter-spacing: 0px;
+    display: flex;
+
+
+}
+.add-comment{
+    font-size: 30px;
+    color: #494949;
 }
 
 .post-title-tag p {
@@ -798,14 +819,26 @@ background-color: #ed4956; */
 }
 
 .post-comment-input {
+    display: flex;
     align-self: center;
     width: 90%;
     height: 100%;
     border-top: 1px solid #dbdbdb;
 }
 
+.post-comment-input input {
+    align-self: center;
+    margin: 20px;
+}
+
 .post-comment span {
     cursor: pointer;
+    margin: 10px;
+    align-self: center;
+}
+
+.comment-txt {
+    align-self: center;
 }
 
 .hashtag {
@@ -879,8 +912,40 @@ iframe {
     border: none;
 }
 
-.delelte-btn {}
+.delelte-btn {
+    margin: 15px;
+}
 
 .delelte-btn:hover {
     cursor: pointer;
+}
+
+.like-badge {
+    color: grey;
+    align-self: center;
+    margin: 5px;
+    /* background-color: #3897f0;
+    position: absolute;
+    margin-left: 25px;
+    font-size: 14px;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    padding: 2px;
+    text-align: center; */
+}
+
+.comment-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-bar-container {
+    display: flex;
+    margin: 10px;
+}
+
+.like-btn {
+    cursor: pointer;
+    margin: 5px;
 }

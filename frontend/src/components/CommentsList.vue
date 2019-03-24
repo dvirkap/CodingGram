@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="post-feedback">
+    <div class="post-feedback" style="overflow:hidden">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
           <Comment :comment="comment" :post="post"></Comment>
@@ -11,7 +11,8 @@
     <div class="post-comment">
       <div class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="txt">
-        <span type="submit" @click.stop.prevent="addComment()" uk-icon="plus-circle" title="Add Comment"></span>
+        
+        <span type="submit" @click.stop.prevent="addComment()" title="Add Comment"><i class="add-comment fas fa-comment-medical"></i></span>
       </div>
     </div>
   </section>

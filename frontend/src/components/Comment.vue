@@ -1,8 +1,12 @@
 <template>
-  <section>
-    {{comment.creator.userName}}:
-    {{comment.txt}}
-    <span @click="removeComment" class="delelte-btn" uk-icon="trash" title="Delete Comment"></span>
+  <section >
+    <div class="comment-container">
+      <div class="comment-txt">
+        {{comment.creator.userName}}:
+        {{comment.txt}}
+      </div>
+      <span @click="removeComment" class="delelte-btn" title="Delete Comment"><i class="far fa-trash-alt"></i></span>
+    </div>
   </section>
 </template>
 
