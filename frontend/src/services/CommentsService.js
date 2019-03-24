@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default {
     addComment,
-    deleteComment
+    deleteComment,
 }
 
 const _URL = (process.env.NODE_ENV !== 'development')

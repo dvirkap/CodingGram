@@ -11,7 +11,7 @@
     <div class="post-comment">
       <div class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="txt">
-        <button type="submit" @click.stop.prevent="addComment()">Add comment</button>
+        <span type="submit" @click.stop.prevent="addComment()" uk-icon="plus-circle" title="Add Comment"></span>
       </div>
     </div>
   </section>
