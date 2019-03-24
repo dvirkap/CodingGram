@@ -37,7 +37,6 @@ export default new Vuex.Store({
     },
     deleteComment(state, payload) {
       let comments = [];
-
       for (let i = 0; i < state.comments.length; i++) {
         if (state.comments[i]._id === payload.commentId) {
           comments.splice(state.comments[i])
