@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="post">
      <!-- {{postData}} -->
     <h1>PostContainer.vue</h1>
     <post :post="post"/>

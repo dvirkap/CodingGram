@@ -1,6 +1,7 @@
 <template>
   <section>
-    <div class="post">
+    <!-- <div class="post"> -->
+    <div>
       <div class="post-title">
         <div class="post-title-info">
           <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg">
@@ -59,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="post-like">
+      <!-- <div class="post-like">
         <div class="post-like-more">
           <img src="/imgs/liked.png" alt>
           <img src="/imgs/comment.png" alt>
@@ -68,7 +69,7 @@
         <div class="post-like-bookmark">
           <img src="/imgs/bookmarked.png" alt>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

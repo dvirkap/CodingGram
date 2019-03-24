@@ -648,6 +648,10 @@ background-color: #ed4956; */
     border-top: 1px solid #dbdbdb;
 }
 
+.post-comment span {
+    cursor: pointer;
+}
+
 .hashtag {
     background: rgb(48, 48, 48);
     border-radius: 10%;
@@ -721,7 +725,6 @@ iframe {
 }
 
 .delelte-btn {
-    border-radius: 50%;
 }
 
 .delelte-btn:hover {

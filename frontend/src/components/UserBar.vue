@@ -9,7 +9,9 @@
         <!-- </div> -->
       </div>
       <div class="post-title-tag">
-          <span uk-icon="plus-circle"></span>
+      <router-link to="/edit">
+        <span uk-icon="plus-circle" title="Add Post"></span>
+      </router-link>
           <!-- <p>ALERT BUTTON</p> -->
           <!-- <p>{{post.title}}</p> -->
           <!-- <p>
