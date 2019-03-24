@@ -3,20 +3,13 @@
     <div class="post">
       <div class="post-title">
         <div class="post-title-info">
-          <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg" alt>
+          <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg">
           <!-- <img src="https://www.designskilz.com/random-users/images/imageM9.jpg" alt> -->
           <p>{{post.creator.userName}}</p>
 
           <!-- <p>{{post.creator.userName}}</p> -->
         </div>
-        <div class="post-title-tag">
-          <span uk-icon="plus-circle"></span>
-          <!-- <p>ALERT BUTTON</p> -->
-          <!-- <p>{{post.title}}</p> -->
-          <!-- <p>
-            <span class="hashtag">BUTTON/ALERT</span>
-          </p>-->
-        </div>
+        <p>{{post.title}}</p>
       </div>
       <div class="post-img">
         <div class="post-editor-title">
