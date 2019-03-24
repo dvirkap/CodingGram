@@ -702,7 +702,9 @@ select {
 }
 
 .CodeMirror {
-    height: 100%;
+    /* height: 100%; */
+    height: 400px;
+    
 }
 
 input {

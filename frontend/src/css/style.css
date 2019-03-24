@@ -364,7 +364,9 @@ background-color: #ed4956; */
 }
 
 .CodeMirror {
-    height: 100%;
+    /* height: 100%; */
+    height: 400px;
+
 }
 
 .posts-cont {
