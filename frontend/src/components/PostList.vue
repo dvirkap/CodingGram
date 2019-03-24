@@ -85,7 +85,7 @@ export default {
       return this.$refs.myCm.codemirror;
     },
     posts() {
-      return this.$store.getters.postsFiltered
+      return this.$store.getters.postsFiltered;
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="post-feedback">
+    <div class="post-feedback" style="overflow:hidden">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
           <Comment :comment="comment"></Comment>

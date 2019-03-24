@@ -1,11 +1,7 @@
 <template>
   <section class="post">
-     <!-- {{postData}} -->
-    <h1>PostContainer.vue</h1>
     <post :post="post"/>
-    <post-bar />
-    <!-- {{post}} -->
-    <!-- <comments-list :post="post" :comments="getCommentsForDisplay"/> -->
+    <post-bar :post="post"/>
     <comments-list :comments="post.comments" :post="post"/>
   </section>
 </template>

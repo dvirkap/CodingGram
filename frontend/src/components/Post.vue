@@ -1,6 +1,5 @@
 <template>
   <section>
-    <!-- <div class="post"> -->
     <div>
       <div class="post-title">
         <div class="post-title-info">
