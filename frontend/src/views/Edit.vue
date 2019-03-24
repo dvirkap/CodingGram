@@ -138,7 +138,7 @@ export default {
     this.isCss = false;
   },
   savePost(){
-        	this.$store.dispatch('AddPost',this.newPost);
+        	this.$store.dispatch('addPost',this.newPost);
 
   }
   },

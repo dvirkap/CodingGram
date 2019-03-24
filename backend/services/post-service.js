@@ -23,9 +23,37 @@ function getPostById(postId) {
 
 // ADD POST
 function add(post) {
-    // console.log(post,'in SERVER')
+    console.log(post,'in SERVER')
+    var currPost = {
+            
+            title : post.title, 
+            desc : post.desc, 
+            snippet : {
+                lang : "js", 
+                html :post.snippet.html, 
+                css :post.snippet.csss, 
+                code :post.snippet.code, 
+            }, 
+            hashtags : [
+                "javascript"
+            ], 
+            createdAt : Date.now(), 
+            creator : {
+                "userName" : "Kenny Goddard", 
+                "_id" : ObjectId("5c8e97334330fca0bb034d54"), 
+                "userImg" : "51.jpg"
+            }, 
+            copiedCount : 1, 
+            isApproved : false, 
+            likeBy : [
+            ], 
+            comments : [
+        
+            ]
+        
+    }
     return mongoService.connect()
-        .then(db => db.collection('posts').insertOne(post))
+        .then(db => db.collection('posts').insertOne(currPost))
         .then(res => {
             post._id = res.insertedId
             return post

@@ -25,14 +25,11 @@ async function getPostById(postId) {
 async function updatePost(post) {
 
     const postId = post._id
-    if(postId) {
-
-
+    if (postId) {
         var editedPost = await axios.put(`${_URL}${postId}`, post)
         return res.data(editedPost)
     } else {
-
         var addedPost = await axios.post(`${_URL}`, post)
-        return res.data(addedPost)
+        return addedPost
     }
 }

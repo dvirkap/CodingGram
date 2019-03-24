@@ -34,6 +34,7 @@ export default {
         createdAt: '',
         creator: {
           userName: '',
+          commentsList: null
         }
       }
   },
@@ -42,6 +43,7 @@ export default {
       Comment,
   },
   created() {
+    this.commentsList = JSON.parse(JSON.stringify(this.comments))
   },
   methods: {
     addComment() {
@@ -59,7 +61,12 @@ export default {
       // console.log('comment added', comment);
       console.log('comments:', this.post.comments);
     }
-  }
+  },
+  computed: {
+    commentsLista(){
+      return this.$store.getters.getComments
+    }
+  },
 };
 </script>
 

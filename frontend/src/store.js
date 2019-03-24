@@ -9,10 +9,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     posts: [],
-    comments: []
+    comments: [],
+    currPost: null
 
   },
   mutations: {
+    updatePost(state, {post}) {
+      state.currPost = post;
+      let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
+      state.posts.splice(postIdx, 1, state.currPost)
+    },
+    addPost(state, {post}) {
+      console.log(post);
+      
+    },
     setPosts(state, payload) {
       state.posts = payload.posts;
     },
@@ -30,6 +40,7 @@ export default new Vuex.Store({
       for (let i = 0; i < state.comments.length; i++) {
         if (state.comments[i]._id === payload.commentId) {
           comments.splice(state.comments[i])
+          
         }
       }
       state.comments = comments;
@@ -45,10 +56,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    AddPost(context,payload){
-      console.log(payload,'paayy')
-      PostService.updatePost(payload).then(res=>{
-        // console.log('let see',res)
+    addPost(context,post){
+      console.log(post,'paayy')
+      PostService.updatePost(post).then(res=>{
+        if(post._id) {
+          context.commit({type:'updatePost', post})
+        } else {
+          context.commit({type:'addPost', post})
+
+        }
       })
       // console.log('in store!',payload)
     },
