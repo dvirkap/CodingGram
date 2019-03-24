@@ -26,6 +26,22 @@ function addPostRoute(app) {
          
     })
 
+    // CREATE POST
+    app.post('/post', async (req, res)=> {
+        const post = req.body;
+        const addedPost = await postService.addPost(post)
+        console.log('Post Created and back from DB:', addedPost);
+        res.json(addedPost)
+    })
+
+    // DELETE POST
+    app.delete('/post/:postId', async (req, res)=> {
+        const postId = req.params.postId;
+        console.log('postId::::::::', postId);
+        const deletedPost = await postService.removePost(postId)
+        res.end()
+    })
+
 
     // create comment 
     // app.post('/post', (req, res) => {
@@ -54,7 +70,7 @@ function addPostRoute(app) {
         //     commentsService.update(comment)
         //         .then(comment => res.json(comment))
         // })
-    // update
+    // UPADTE COMMENT
     app.put('/post/:postId', async (req, res) => {
             const post = req.body;
             console.log('post.route update, before post-service:',post);
