@@ -2,7 +2,7 @@
   <section>
     {{comment.creator.userName}}:
     {{comment.txt}}
-    <button @click="removeComment">delete</button>
+    <div @click="removeComment" class="delelte-btn" uk-icon="trash"></div>
   </section>
 </template>
 
