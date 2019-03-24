@@ -28,14 +28,14 @@ function addPostRoute(app) {
 
 
     // create comment 
-    app.post('/post', (req, res) => {
-        const post = req.body;
-        console.log('post from route',post);
-        postService.addPost(post)
-            .then(post => {
-                res.json(post)
-            })
-    })
+    // app.post('/post', (req, res) => {
+    //     const post = req.body;
+    //     console.log('post from route',post);
+    //     postService.addPost(post)
+    //         .then(post => {
+    //             res.json(post)
+    //         })
+    // })
 
     //delete
     app.delete('/post/:commentId', (req, res) => {
@@ -54,6 +54,17 @@ function addPostRoute(app) {
         //     commentsService.update(comment)
         //         .then(comment => res.json(comment))
         // })
+    // update
+    app.put('/post/:postId', async (req, res) => {
+            const post = req.body;
+            console.log('post.route update, before post-service:',post);
+            const updatedPost = await postService.update(post);
+            console.log('updatedPost', updatedPost);
+            
+            res.json(updatedPost);
+            
+            
+        })
         
 }
 

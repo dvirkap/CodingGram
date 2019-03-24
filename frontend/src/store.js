@@ -19,8 +19,9 @@ export default new Vuex.Store({
       state.posts = posts
     },
     createComment(state, payload) {
-      console.log('set comment', this.state.currComment);
-      state.currComment = payload.comment
+      const comment = payload.post.comments[payload.post.comments.length - 1];
+      
+      state.currComment = comment
     },
     deleteComment(state , payload) {
       let comments = [];
@@ -62,7 +63,7 @@ export default new Vuex.Store({
       return CommentsService.addComment(post)
         .then(res => {
           console.log('res.data', res)
-          context.commit({type: 'createComment', post: res.data})
+          context.commit({type: 'createComment', post: res})
         });
     },
     deleteComment(context, {commentId}) {
