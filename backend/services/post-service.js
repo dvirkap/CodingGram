@@ -25,14 +25,15 @@ function addPost(post) {
 
 function getPostById(postId) {
     // const id = new objectId(postId)
-    // console.log('postId from back service', id);
+    // console.log('postId from back service', postId);
     return mongoService.connect()
-        .then(db => db.collection('posts').findOne({ _id : postId  }))
+        .then(db => db.collection('posts').findOne({ _id : new ObjectId (postId)  }))
         .then(post => {
             
             console.log('---------------------------')
             console.log(post)
             console.log('---------------------------')
+            return post
         })
 }
 

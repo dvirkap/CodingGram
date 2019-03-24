@@ -19,7 +19,7 @@ function addPostRoute(app) {
     //One Post BY ID
     app.get('/post/:postId', async (req, res)=> {
         var postId = req.params.postId
-        console.log('post.route postId:', postId);
+        // console.log('post.route postId:', postId);
         const post = await postService.getPostById(postId)
         console.log('post is---------',post);
         res.json(post);

@@ -9,7 +9,7 @@ function connectToMongo() {
     //                 'mongodb://localhost:27017/toysDB' : 'mlab url'
     const url = `mongodb+srv://admin:iloveunicorn10@codinggram-cncic.mongodb.net/codinggramdb?retryWrites=true`
                     
-    return MongoClient.connect(url,  { useNewUrlParser: true })
+    return MongoClient.connect(url)
         .then(client => {
             console.log('Connected to MongoDB');
             // If we get disconnected (e.g. db is down)
