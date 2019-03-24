@@ -50,7 +50,12 @@
           </div>
 
           <div class="post-runner" :class="{display: !cmOptions.isPREVIEW}">
-            <iframe class="prepre">{{ codeForPreview() }}</iframe>
+
+            <!-- <div v-html="try" ></div> -->
+            <!-- <iframe :srcdoc="codeForPreview1()" ></iframe> -->
+            <iframe :srcdoc="codeForPreview()" class="prepre"></iframe>
+
+            <!-- <iframe class="prepre">{{ codeForPreview() }}</iframe> -->
           </div>
         </div>
       </div>
@@ -96,7 +101,7 @@ export default {
         isHTML: false,
         isCSS: false,
         isJS: false,
-        toggleBtns: false
+        toggleBtns: false,
       }
     };
   },
@@ -128,20 +133,20 @@ export default {
 
     //The code Preview main function
   codeForPreview(){
-     `<html>
+    return `<html>
     <head>
     <style>
-    ${this.HTMLcode}
+      ${this.CSScode}
     </style>
     </head>
     <body>
-   ${this.CSScode}
+    ${this.HTMLcode}
     <script>${this.JScode}<\/script>
     </body>
     </html>`
 
   },
-   
+
 
     // ---Vue code mirror methods
     onCmReady(cm) {
@@ -170,6 +175,10 @@ export default {
     // you can use this.codemirror to do something...
   }
 };
+
+
+
+
 </script>
 
 <style>
@@ -181,6 +190,8 @@ export default {
   display: none;
 }
 </style>
+
+
 
 
 
