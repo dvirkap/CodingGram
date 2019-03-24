@@ -28,7 +28,9 @@ function addPostRoute(app) {
 
     // CREATE POST
     app.post('/post', async (req, res) => {
+
         const post = req.body;
+        console.log(post,'postpostpost')
         const addedPost = await postService.add(post)
         console.log('Post Created and back from DB:', addedPost);
         res.json(addedPost)

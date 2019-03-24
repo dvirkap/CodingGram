@@ -23,6 +23,7 @@ function getPostById(postId) {
 
 // ADD POST
 function add(post) {
+    // console.log(post,'in SERVER')
     return mongoService.connect()
         .then(db => db.collection('posts').insertOne(post))
         .then(res => {
