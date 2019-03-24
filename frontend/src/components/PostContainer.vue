@@ -5,6 +5,7 @@
     <post :post="post"/>
     <post-bar />
     <!-- {{post}} -->
+    <!-- <comments-list :post="post" :comments="getCommentsForDisplay"/> -->
     <comments-list :comments="post.comments" :post="post"/>
   </section>
 </template>
@@ -21,7 +22,11 @@ components: {
     
 },
 props: ['post'],
-
+computed: {
+    getCommentsForDisplay() {
+      return this.$store.getters.getComments;
+    }
+  },
 };
 </script>
 

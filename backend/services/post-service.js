@@ -29,7 +29,7 @@ function update(post) {
     post._id = _id
     return mongoService.connect()
         .then(db => {
-            returndb.collection('posts')
+            return db.collection('posts')
                 .updateOne({_id}, {$set: comment})
         })
         .then(() => {
@@ -39,13 +39,12 @@ function update(post) {
 }
 
 function remove(commentId) {
-    console.log('commentId from back service', commentId)
     commentId = new ObjectId(commentId);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('posts');
             console.log('commentId from back service', commentId)
-            return collection.remove({_id: commentId})
+            return collection.deleteOne({_id: commentId})
         })
 }
 

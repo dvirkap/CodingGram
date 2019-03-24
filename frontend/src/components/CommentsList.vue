@@ -47,7 +47,7 @@ export default {
     addComment() {
       let comment = {
         txt: this.txt,
-        _id: UtilService.makeId(8),
+        _id: UtilService.makeId(12),
         createdAt: new Date(),
         creator: {
           userName: 'Ploni',

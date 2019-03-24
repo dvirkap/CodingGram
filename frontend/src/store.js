@@ -29,12 +29,16 @@ export default new Vuex.Store({
           comments.push(state.comments[i])
         }
       }
+      state.comments = comments;
     }
   },
     
   getters: {
     postsFiltered(state) {
       return state.posts
+    },
+    getComments(state) {
+      return state.comments
     }
   },
   actions: {
@@ -43,12 +47,6 @@ export default new Vuex.Store({
     //  let posts = await PostService.query()
     //   context.commit('postsFiltered', posts)
     // },
-
-    // getPosts(context) {
-    //     return PostService.query()
-    //       .then(posts => {
-    //         context.commit({type: 'setPosts', posts})
-    //       })
 
     loadPosts(context, payload) {
       return PostService.query()

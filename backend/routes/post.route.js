@@ -28,8 +28,8 @@ function addPostRoute(app) {
     //delete
     app.delete('/post/:commentId', (req, res) => {
         // console.log('delete:  req ',req, 'res ', res)
-        console.log('req.params.commentId', req.params.commentId)
         const commentId = req.params.commentId
+        console.log('req.params.commentId', commentId)
         postService.remove(commentId)
             .then(() => res.end(`comment ${commentId} deleted!`))
         // console.log(commentId)

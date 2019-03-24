@@ -17,6 +17,7 @@ function addComment(post) {
 
 function deleteComment(commentId) {
     console.log('commentId front service', commentId)
-    console.log(_URL + '' + commentId)
-    return axios.delete(`${_URL}${commentId}`, commentId)
+    console.log(_URL + commentId)
+    return axios.delete(_URL + commentId)
+    // return axios.delete(`${_URL}${commentId}`, commentId)
 }
