@@ -103,7 +103,7 @@ export default new Vuex.Store({
         });
     },
     deleteComment(context, payload) {
-      console.log('commentId from store',payload.commentId)
+      console.log('commentId from store',payload)
       console.log('postId from store',payload.postId)
       return CommentsService.deleteComment(payload)
         .then(res => {
