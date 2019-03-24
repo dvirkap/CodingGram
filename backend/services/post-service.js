@@ -23,6 +23,7 @@ function getPostById(postId) {
 
 // ADD POST
 function add(post) {
+    // console.log(post,'in SERVER')
     return mongoService.connect()
         .then(db => db.collection('posts').insertOne(post))
         .then(res => {
@@ -35,9 +36,13 @@ function add(post) {
 function update(post) {
     const strId = post._id
     const postId = strId
+    console.log('EDIT POST --- POSTID BEFORE MONGO:::::::', postId, post);
+    delete post._id
     return mongoService.connect()
         .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
         .then(res => {
+            console.log('UPDATE POST BACK FROM POST-SERVICE:', post);
+            
             post._id = strId;
             return post;
         })

@@ -58,7 +58,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
+    AddPost(context,payload){
+      console.log(payload,'paayy')
+      PostService.updatePost(payload).then(res=>{
+        // console.log('let see',res)
+      })
+      // console.log('in store!',payload)
+    },
+    
     // async loadPosts(context, payload){
     //  let posts = await PostService.query()
     //   context.commit('postsFiltered', posts)

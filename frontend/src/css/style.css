@@ -309,6 +309,167 @@ background-color: #ed4956; */
     /* overflow: scroll; */
 }
 
+.edit-cont {
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* overflow: scroll; */
+}
+
+.edit-add {
+    width: 100%;
+    height: 500px;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-editors {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+
+.html-editor {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.css-editor {
+    /* border: 5px white solid; */
+    /* background-color: #ebce4a73; */
+    /* width: 33%; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.js-editor {
+    /* border: 5px white solid; */
+    /* background-color: #7deb4a73; */
+    /* width: 33%; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.editor-runner {
+    box-sizing: border-box;
+    overflow: hidden;
+    border-top: 5px #818181 solid;
+    height: 50%;
+    width: 100%;
+}
+
+.editor-runner iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.editor-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-input {
+    /* width: 100%; */
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+
+}
+.edit-input-title input{
+    box-sizing: border-box;
+    font-size: 30px;
+    width: 20%;
+    border-bottom: 0.1px solid rgb(202, 202, 202);
+    text-align: start;
+    padding-left: 10px;
+}
+.edit-input-title button{
+    background: none;
+    border: none;
+    /* box-sizing: border-box; */
+    /* font-size: 30px; */
+    /* width: 20%; */
+    /* border-bottom: 0.1px solid rgb(202, 202, 202); */
+    /* text-align: start; */
+    /* padding-left: 10px; */
+}
+.edit-input-title{
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.edit-input-desc{
+    height: 50%;
+    width: 80%;
+}
+.edit-input-desc textarea{
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    /* background-color: #d8d8d8c2; */
+    text-align: start;
+    padding-left: 10px;
+}
+.html-btn {
+    padding: 10px;
+    border: none;
+    border-right: #b9b9b9 solid 0.2px;
+    /* background: #e6e6e6; */
+    background: #141414;
+
+
+
+    color: white;
+}
+
+.js-btnL {
+    color: #F0D54B;
+}
+
+.html-btnL {
+    color: rgb(255, 109, 65);
+}
+
+.css-btnL {
+    color: rgb(49, 165, 233);
+}
+
+.active-btnL {
+    background: white;
+    color: #7E7E7E;
+}
+
+.edit-add input {
+    /* width: max-content; */
+}
+
+.run {
+    color: greenyellow;
+}
+
+.btn-run {
+    background: #141414;
+    color: white;
+    border: none;
+    width: max-content;
+    /* justify-content: center; */
+    /* justify-self: center; */
+    /* justify-: flex-end; */
+}
+
 .aside-cont {
     position: sticky;
     top: 10px;
@@ -361,10 +522,6 @@ background-color: #ed4956; */
     height: 50%;
     background-color: #ffffff;
     border: 1px solid #dbdbdb;
-}
-
-.CodeMirror {
-    height: 100%;
 }
 
 .posts-cont {
@@ -561,7 +718,9 @@ background-color: #ed4956; */
 .span {
     color: green;
 }
+
 /* Main editor css classes */
+
 .post-editor-body {
     /* display: flex; */
     width: 100%;
@@ -575,9 +734,9 @@ background-color: #ed4956; */
 }
 
 .sec-css {
-    background-color: #f03850; 
+    background-color: #f03850;
     width: 100%;
-   height: 100%;
+    height: 100%;
 }
 
 .sec-js {
@@ -587,7 +746,6 @@ background-color: #ed4956; */
 }
 
 .post-runner {
-    /* background-color: #120d53; */
     width: 100%;
     height: 100%;
 }
@@ -720,12 +878,11 @@ select {
     padding: 5px;
 }
 
-
 input {
     width: 100%;
     height: 100%;
-    background: none;
-    border: none;
+    /* background: none; */
+    /* border: none; */
     font-size: 13px;
     font-family: 'Proxima';
     text-align: center;
