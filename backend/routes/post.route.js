@@ -4,16 +4,18 @@ function addPostRoute(app) {
     //Post rest:
 
     //GET LIST OF POSTS
-    {
+    // {
         app.get('/post', async (req, res) => {
+            // console.log('0000',req.query.filter)
+
+
             // console.log('post.route.js REQ.QUERY:', req.query)
-            var posts = await postService.query()
-            // console.log(posts);
+            var posts = await postService.query(req.query.filter)
             res.json(posts)
             // var x = await sendtoAsyncFunc(posts)
             // var y = await sendtosecFunc(x)
         })
-    }
+    // }
 
 
     //GET POST BY ID

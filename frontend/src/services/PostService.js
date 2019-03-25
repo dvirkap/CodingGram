@@ -11,10 +11,14 @@ const _URL = (process.env.NODE_ENV !== 'development')
     ? '/post/'
     : 'http://localhost:3000/post/';
 // get posts
-async function query() {
-    let query = '';
-    var res = await axios.get(`${_URL}${query}`);
-    return res.data
+async function query(filter) {
+
+        let query
+        if(filter) query = '?filter=' + filter
+        else query = ''
+        var res = await axios.get(`${_URL}${query}`);
+        return res.data
+
 }
 // get post by id
 async function getPostById(postId) {

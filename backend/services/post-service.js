@@ -4,10 +4,30 @@ const ObjectId = require('mongodb').ObjectId;
 
 //GET ALL POSTS
 
-function query() {
-    return mongoService.connect()
-        .then(db => db.collection('posts').find({})
-            .toArray())
+function query(filter) {
+    console.log(filter,'in server')
+
+
+    if (filter) {
+        var keyWord = new RegExp(filter, 'i')
+        var filterObj = {
+            $or: [{ title: { $regex: keyWord } },
+                  {desc: { $regex: keyWord } },
+                  {'snippet.html': { $regex: keyWord }},
+                  {'snippet.lang': { $regex: keyWord }},
+                  {'snippet.css': { $regex: keyWord }},
+                  {'snippet.code': { $regex: keyWord }},
+                  {'creator.userName': { $regex: keyWord }},
+        ]
+        }
+        return mongoService.connect()
+            .then(db => db.collection('posts').find(filterObj)
+                .toArray())
+    } else {
+        return mongoService.connect()
+            .then(db => db.collection('posts').find({})
+                .toArray())
+    }
 }
 
 
@@ -23,34 +43,34 @@ function getPostById(postId) {
 
 // ADD POST
 function add(post) {
-    console.log(post,'in SERVER')
+    console.log(post, 'in SERVER')
     var currPost = {
-            
-            title : post.title, 
-            desc : post.desc, 
-            snippet : {
-                lang : "js", 
-                html :post.snippet.html, 
-                css :post.snippet.css, 
-                code :post.snippet.code, 
-            }, 
-            hashtags : [
-                "javascript"
-            ], 
-            createdAt : Date.now(), 
-            creator : {
-                "userName" : "Kenny Goddard", 
-                "_id" : ObjectId("5c8e97334330fca0bb034d54"), 
-                "userImg" : "51.jpg"
-            }, 
-            copiedCount : 1, 
-            isApproved : false, 
-            likeBy : [
-            ], 
-            comments : [
-        
-            ]
-        
+
+        title: post.title,
+        desc: post.desc,
+        snippet: {
+            lang: "js",
+            html: post.snippet.html,
+            css: post.snippet.css,
+            code: post.snippet.code,
+        },
+        hashtags: [
+            "javascript"
+        ],
+        createdAt: Date.now(),
+        creator: {
+            "userName": "Kenny Goddard",
+            "_id": ObjectId("5c8e97334330fca0bb034d54"),
+            "userImg": "51.jpg"
+        },
+        copiedCount: 1,
+        isApproved: false,
+        likeBy: [
+        ],
+        comments: [
+
+        ]
+
     }
     return mongoService.connect()
         .then(db => db.collection('posts').insertOne(currPost))
@@ -106,7 +126,7 @@ function removeComment(params) {
             // var commentID = new ObjectId(params.commentId)
             const collection = db.collection('posts');
             console.log('commentId from back service', params)
-            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: {comments: { _id: params.commentId } }})
+            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: params.commentId } } })
             // return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: commentID} })
         })
 }

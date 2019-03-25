@@ -33,7 +33,7 @@ export default {
     getUser() {}
   },
   	created() {
-    this.$store.dispatch({ type: "loadPosts" });
+    this.$store.dispatch("loadPosts");
   }
 };
 </script>

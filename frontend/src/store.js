@@ -98,8 +98,8 @@ export default new Vuex.Store({
       return PostService.getPostById(postId).then(res=>res)
     },
 
-    loadPosts(context, payload) {
-      return PostService.query()
+    loadPosts(context, filter) {
+      return PostService.query(filter)
         .then(posts => {
           context.commit({ type: 'setPosts', posts })
         })
