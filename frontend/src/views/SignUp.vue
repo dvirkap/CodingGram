@@ -6,22 +6,21 @@
           <div class="header">
             <img src="../images/loginLogi.png" alt>
           </div>
-            <form action="">
+            <form @submit.prevent="signup">
 
                 <div class="l-part">
                       <div class="overlap-text">
-                      <input type="text" placeholder="Username" class="input-1" required/>
+                      <input v-model="newUser.userName" type="text" placeholder="Username" class="input-1" required/>
                         <span uk-icon="user"></span>
                         </div>
                         <div class="overlap-text">
-                          <input type="password" placeholder="Password" class="input-2" required/>
+                          <input v-model="newUser.password" type="password" placeholder="Password" class="input-2" required/>
                           <span uk-icon="lock"></span>
                         </div>
                         <div class="overlap-text">
-                          <input type="email" placeholder="Email" class="input-2" required/>
+                          <input v-model="newUser.email" type="email" placeholder="Email" class="input-2" required/>
                           <span uk-icon="mail"></span>
                         </div>
-
                       <button class="btn-login">Sign Up</button>
                 </div>
                 </form>
@@ -43,9 +42,22 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      newUser: {
+        userName: '',
+        password: '',
+        email: ''
+      }
+    };
   },
-  methods: {},
+  methods: {
+    signup(){
+        this.$store.dispatch('signUp', this.newUser )
+           .then(() => {
+                // this.$router.push('/');
+            })
+    }
+  },
 
   created() {}
 };

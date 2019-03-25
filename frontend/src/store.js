@@ -119,26 +119,24 @@ export default new Vuex.Store({
     },
     addLike(context, post) {
       let likeBy = post.likeBy
-      console.log('post', post)
       return PostService.addLike(post)
         .then(res => {
           context.commit({ type: 'addLike', likeBy })
         })
     },
     checkLoggedInUser(context){
-      console.log('hello');
       UserService.checkLoggedInUser().then(res=> {
-        console.log('i`m the USERRRRRRRRRRRRRRRRR',res);
-        
       })
       
     },
     login(context, userCredentials) {
-      console.log('userCredentials from store::::', userCredentials);
       UserService.login(userCredentials).then(res=> {
-        console.log('ressssssss::::::::', res);
-        
         context.commit('setLoggedInUser',res)
+      })
+    },
+    signUp(context,newUser){
+      UserService.signup(newUser).then(user=>{
+        console.log(user,)
       })
     }
 
