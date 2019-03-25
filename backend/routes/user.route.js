@@ -1,5 +1,7 @@
 const userService = require('../services/user-service.js')
 
+
+
 function addUserRoute(app) {
 
     app.post('/login', (req, res) => {
@@ -12,6 +14,8 @@ function addUserRoute(app) {
             userService.checkLogin(userCredentials)
                 .then(user => {
                     req.session.loggedInUser = user;
+                    console.log('req.session.loggedInUser::::::::::!!!!', req.session.loggedInUser);
+                    
                     res.json(user)
                 })
                 .catch(err => {

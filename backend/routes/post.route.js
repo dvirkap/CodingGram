@@ -1,5 +1,16 @@
 const postService = require('../services/post-service');
 
+function checkLoggedInUser(req, res, next) {
+    console.log('INSIDE MIDDLEWARE: ', req.session.userName);
+    console.log('INSIDE MIDDLEWARE: ', req.session.user.isAdmin);
+
+    if (!req.session.user || !req.session.user.isAdmin) {
+        console.log('INSIDE');
+       return  res.status(401).end('Unauthorized');
+        }
+    next();
+}
+
 function addPostRoute(app) {
     //Post rest:
 
@@ -58,14 +69,24 @@ function addPostRoute(app) {
     // -------------------------- COMMENTS SECTION ---------------------------
 
     //DELETE COMMENT
-    app.delete('/post/:postId/:commentId', async (req, res) => {
-        console.log(req.params);
-        const params = req.params
-        console.log(params);
+    app.delete('/post/:postId/:commentId',  async (req, res) => {
+        if(req.session.loggedInUser.userName) {
+            const params = req.params
 
-        const deletedComment = await postService.removeComment(params)
-        res.end(`comment ${deletedComment} deleted!`)
-        // console.log(commentId)
+            var post = await postService.getPostById(params.postId)
+            // console.log(post.creator.userName,'post.creator.userName')
+            
+            // console.log(req.session.loggedInUser.userName,'req.session.loggedInUser.userName')
+    
+            
+            if(post.creator.userName === req.session.loggedInUser.userName){
+                // console.log(params,'sdfsdfsdf');
+                
+                const deletedComment = await postService.removeComment(params)
+                res.end(`comment ${deletedComment} deleted!`)
+            }
+        }
+      
     })
 
     // UPADTE COMMENT

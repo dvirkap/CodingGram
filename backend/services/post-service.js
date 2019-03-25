@@ -5,8 +5,6 @@ const ObjectId = require('mongodb').ObjectId;
 //GET ALL POSTS
 
 function query(filter) {
-    console.log(filter,'in server')
-
 
     if (filter) {
         var keyWord = new RegExp(filter, 'i')
@@ -43,7 +41,6 @@ function getPostById(postId) {
 
 // ADD POST
 function add(post) {
-    console.log(post, 'in SERVER')
     var currPost = {
 
         title: post.title,

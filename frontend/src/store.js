@@ -112,7 +112,7 @@ export default new Vuex.Store({
         });
     },
     deleteComment(context, payload) {
-      return CommentsService.deleteComment(payload)
+      return CommentsService.deleteComment(payload,)
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
         })
