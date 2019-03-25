@@ -16,12 +16,29 @@ function getById(userId) {
 }
 
 
-// function checkLogin(userCredentials) {
-
-// }
+function checkLogin(userCredentials) {
+console.log(userCredentials);
+var username = userCredentials.userName
+var pass = userCredentials.password
+console.log(username, pass);
+return mongoService.connect()
+        .then(db => db.collection('users').findOne({ $and: [{ userName: username },
+        { password: pass }]}))
+        .then(user => {
+            console.log('USER FROM DB:::::::', user);
+            if (user) {
+                var userToreturn = { ...user };
+                return Promise.resolve(userToreturn);
+            }
+            else {
+                console.log('about to send an error')
+                return Promise.reject(new Error("bad usernameor password"))
+            }
+        })
+}
 
 module.exports = {
-    // checkLogin,
+    checkLogin,
     getUsers,
     getById
 }

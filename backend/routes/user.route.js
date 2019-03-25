@@ -3,8 +3,6 @@ const userService = require('../services/user-service.js')
 function addUserRoute(app) {
     app.post('/login', (req, res) => {
         const userCredentials = req.body;
-
-        // in mongo i extract the user the it truthy by username
         
         userService.checkLogin(userCredentials)
             .then(user => {
@@ -12,7 +10,6 @@ function addUserRoute(app) {
                 res.json(user)
             })
             .catch(err => {
-                console.log('BACKEND service ERROR', err);
                 res.status(500).send('Wrong Credentials')
             })
     })
