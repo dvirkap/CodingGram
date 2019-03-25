@@ -4,9 +4,9 @@
       <div class="navbar-logo-cont">
 		  
         <router-link to="/"><img class="navbar-logo" src="../images/logoIcon.png" alt></router-link>
-        <div class="navbar-logo-txt">
-          <span>CodingGram</span>
-        </div>
+          <div class="navbar-logo-txt">
+            <router-link to="/"><span>CodingGram</span></router-link>
+          </div>
       </div>
       <div class="navbar-search-cont">
 
@@ -14,9 +14,16 @@
       
 	  </div>
       <div class="navbar-routers-cont">
-        <router-link to="/"><img class="navbar-routers" src="../images/clap.svg" alt></router-link>
-        <router-link to="/"><img class="navbar-routers" src="../images/profile.png" alt></router-link>
-        <router-link to="/"><img class="navbar-routers" src="../images/logout.png" alt></router-link>
+        
+        <!-- <router-link to="/"><img class="navbar-routers" src="../images/clap.svg" alt></router-link> -->
+        <!-- <router-link to="/"><i class="fas fa-user">Hello Guest</i></router-link> -->
+        <router-link to="/login"> <span uk-icon="user"></span> Login</router-link>
+        <router-link to="/signup"> <span uk-icon="sign-in"></span> Sign In</router-link>
+
+
+         
+        <!-- <router-link to="/">signup </router-link> -->
+        <!-- <router-link to="/">login</router-link> -->
       </div>
     </div>
   </div>
@@ -36,5 +43,9 @@ export default {
 
 
 <style scoped>
+a{
+
+  text-decoration: none;
+}
 
 </style>

@@ -16,7 +16,7 @@ import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
-  props: {},
+  props: ['posts'],
   components: {
     // MonacoEditor,
     PostContainer
@@ -40,33 +40,9 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch({ type: "loadPosts" });
+    // this.$store.dispatch({ type: "loadPosts" });
   },
   methods: {
-    // previewMode() {
-    //   this.isPREVIEW = true;
-    //   this.isHTML = false;
-    //   this.isCSS = false;
-    //   this.isJS = false;
-    // },
-    // htmlMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = true;
-    //   this.isCSS = false;
-    //   this.isJS = false;
-    // },
-    // cssMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = false;
-    //   this.isCSS = true;
-    //   this.isJS = false;
-    // },
-    // jsMode() {
-    //   this.isPREVIEW = false;
-    //   this.isHTML = false;
-    //   this.isCSS = false;
-    //   this.isJS = true;
-    // },
 
     // ---Vue code mirror methods
     onCmReady(cm) {
@@ -84,9 +60,9 @@ export default {
     codemirror() {
       return this.$refs.myCm.codemirror;
     },
-    posts() {
-      return this.$store.getters.postsFiltered;
-    }
+    // posts() {
+    //   return this.$store.getters.postsFiltered;
+    // }
   },
 
   mounted() {

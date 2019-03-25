@@ -9,7 +9,7 @@ import 'codemirror/lib/codemirror.css'
 
 
 // import  '../node_modules/uikit/dist/js/uikit-icons.js'
-// import  '../node_modules/uikit/dist/css/uikit.min.css'
+
 
 // uikit/dist/js/uikit-icons.min.js
 import  './css/reset.css'
