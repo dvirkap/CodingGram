@@ -10,7 +10,7 @@
 import Post from '@/components/Post.vue'
 import PostBar from '@/components/PostBar.vue'
 import CommentsList from '@/components/CommentsList.vue'
-import UserService from '@/services/UserService.js'
+// import UserService from '@/services/UserService.js'
 export default {
 components: {
     Post,
@@ -24,7 +24,7 @@ data() {
  }
 },
 created() {
-  this.user = UserService.getById('5c8e97334330fca0bb034d54')   
+  // this.user = UserService.getById('5c8e97334330fca0bb034d54')   
     // console.log(this.user);
 },
 
