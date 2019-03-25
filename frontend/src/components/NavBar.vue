@@ -14,7 +14,7 @@
       
 	  </div>
       <div class="navbar-routers-cont">
-        <router-link to="/"><img class="navbar-routers" src="../images/like.png" alt></router-link>
+        <router-link to="/"><img class="navbar-routers" src="../images/clap.svg" alt></router-link>
         <router-link to="/"><img class="navbar-routers" src="../images/profile.png" alt></router-link>
         <router-link to="/"><img class="navbar-routers" src="../images/logout.png" alt></router-link>
       </div>
