@@ -31,7 +31,7 @@ function add(post) {
             snippet : {
                 lang : "js", 
                 html :post.snippet.html, 
-                css :post.snippet.csss, 
+                css :post.snippet.css, 
                 code :post.snippet.code, 
             }, 
             hashtags : [
