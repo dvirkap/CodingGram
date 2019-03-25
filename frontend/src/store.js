@@ -15,7 +15,10 @@ export default new Vuex.Store({
     likes: []
   },
   mutations: {
-    updatePost(state, { post }) {
+    setPost(state,post){
+      state.currPost = post
+    },
+    updatePost(state, {post}) {
       state.currPost = post;
       let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
       state.posts.splice(postIdx, 1, state.currPost)
@@ -53,6 +56,9 @@ export default new Vuex.Store({
   },
 
   getters: {
+    post(state){
+      return state.currPost;
+    },
     postsFiltered(state) {
       return state.posts;
     },
@@ -75,7 +81,9 @@ export default new Vuex.Store({
         }
       })
     },
-
+    LoadPost(context, postId){
+      return PostService.getPostById(postId).then(res=>res)
+    },
 
     loadPosts(context, payload) {
       return PostService.query()
