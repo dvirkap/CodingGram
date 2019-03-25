@@ -19,12 +19,11 @@ async function query() {
 // get post by id
 async function getPostById(postId) {
     var post = await axios.get(`${_URL}${postId}`);
-    return res.data(post)
+    return post.data
 }
 
 // add/edit post
 async function updatePost(post) {
-
     const postId = post._id
     if (postId) {
         var editedPost = await axios.put(`${_URL}${postId}`, post)

@@ -10,6 +10,7 @@
           <!-- <p>{{post.creator.userName}}</p> -->
         </div>
         <p>{{post.title}}</p>
+
       </div>
       <div class="post-img">
         <div class="post-editor-title">
@@ -28,9 +29,7 @@
             <i class="fab fa-js"></i>
           </div>
           <div class="post-editor-title-run">
-            <i class="fa fa-code">
-              <span>{{'Show Code'}}</span>
-            </i>
+            <router-link :to="'/edit/'+post._id"><i class="far fa-edit"></i></router-link>
           </div>
         </div>
         <div class="post-editor-body">
@@ -81,6 +80,8 @@ export default {
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
+        readOnly: true,
+
 
         isPREVIEW: true,
         isHTML: false,
@@ -90,10 +91,11 @@ export default {
       },
       cmOptionsHTML: {
         tabSize: 1,
-        mode: "xml",
+        mode: "text/html",
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
+        readOnly: true,
 
         isPREVIEW: true,
         isHTML: false,

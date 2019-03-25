@@ -15,6 +15,9 @@ export default new Vuex.Store({
     likes: []
   },
   mutations: {
+    setPost(state,post){
+      state.currPost = post
+    },
     updatePost(state, {post}) {
       state.currPost = post;
       let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
@@ -58,6 +61,9 @@ export default new Vuex.Store({
   },
 
   getters: {
+    post(state){
+      return state.currPost;
+    },
     postsFiltered(state) {
       return state.posts;
     },
@@ -81,11 +87,9 @@ export default new Vuex.Store({
       })
       // console.log('in store!',payload)
     },
-    
-    // async loadPosts(context, payload){
-    //  let posts = await PostService.query()
-    //   context.commit('postsFiltered', posts)
-    // },
+    LoadPost(context, postId){
+      return PostService.getPostById(postId).then(res=>res)
+    },
 
     loadPosts(context, payload) {
       return PostService.query()
