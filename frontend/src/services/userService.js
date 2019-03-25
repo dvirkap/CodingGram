@@ -1,4 +1,4 @@
-import axios from "axios";
+import Axios from "axios";
 
 export default {
 query,
@@ -7,13 +7,24 @@ signup,
 logout,
 getLoggedInUser,
 getById,
-remove
+remove,
+checkLoggedInUser
 }
+
+const axios = Axios.create({
+    withCredentials: true
+})
+
 const _URL = (process.env.NODE_ENV !== 'development')
     ? ''
     : 'http://localhost:3000';
 var users = [];
 var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+
+async function checkLoggedInUser() {
+    var user = await axios.post(`${_URL}/login`)
+    return user
+}
 
 async function query() {
 var loadedUsers = await axios.get(`${_URL}/user`)
@@ -22,12 +33,10 @@ return users
 }   
 
 async function login(userCredentials) {
-    console.log(userCredentials);
-    
     var loggedInUser = await axios.post(`${_URL}/login`, userCredentials)
     console.log('loggedInUser::::::', loggedInUser.data);
-    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
-    return loggedInUser
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser.data))
+    return loggedInUser.data
 }
 
 async function signup(newUserCredentials) {

@@ -49,7 +49,7 @@ export default {
     },
       methods: {
         signin() {
-          UserService.login(this.userCredentials)
+          this.$store.dispatch('login', this.userCredentials )
            .then(() => {
                 this.$router.push('/');
             })

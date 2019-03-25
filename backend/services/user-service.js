@@ -17,13 +17,12 @@ function getById(userId) {
 
 
 function checkLogin(userCredentials) {
-console.log(userCredentials);
-var username = userCredentials.userName
-var pass = userCredentials.password
-console.log(username, pass);
-return mongoService.connect()
-        .then(db => db.collection('users').findOne({ $and: [{ userName: username },
-        { password: pass }]}))
+    console.log(userCredentials);
+    var username = userCredentials.userName
+    var pass = userCredentials.password
+    console.log(username, pass);
+    return mongoService.connect()
+        .then(db => db.collection('users').findOne({ $and: [{ userName: username }, { password: pass }] }))
         .then(user => {
             console.log('USER FROM DB:::::::', user);
             if (user) {

@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navbar-cont wrapper">
+      {{user}}
       <div class="navbar-logo-cont">
 		  
         <router-link to="/"><img class="navbar-logo" src="../images/logoIcon.png" alt></router-link>
@@ -36,6 +37,11 @@ export default {
   props: {},
   components: {
     // PostService
+  },
+  computed: {
+    user(){
+      return this.$store.getters.getCurrUser
+    }
   },
 };
 

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import PostService from './services/PostService.js';
+import UserService from './services/UserService.js';
 import CommentsService from './services/CommentsService.js';
 
 
@@ -12,9 +13,13 @@ export default new Vuex.Store({
     comments: [],
     currPost: null,
     currComment: null,
-    likes: []
+    likes: [],
+    currUser: null,
   },
   mutations: {
+    setLoggedInUser(state,user){
+      state.currUser = user
+    },
     setPost(state,post){
       state.currPost = post
     },
@@ -67,7 +72,10 @@ export default new Vuex.Store({
     },
     getLikes(state) {
       return state.likes;
-    }
+    },
+    getCurrUser(state) {
+      return state.currUser;
+    },
   },
   actions: {
     addPost(context, post) {
@@ -116,6 +124,22 @@ export default new Vuex.Store({
         .then(res => {
           context.commit({ type: 'addLike', likeBy })
         })
+    },
+    checkLoggedInUser(context){
+      console.log('hello');
+      UserService.checkLoggedInUser().then(res=> {
+        console.log('i`m the USERRRRRRRRRRRRRRRRR',res);
+        
+      })
+      
+    },
+    login(context, userCredentials) {
+      console.log('userCredentials from store::::', userCredentials);
+      UserService.login(userCredentials).then(res=> {
+        console.log('ressssssss::::::::', res);
+        
+        context.commit('setLoggedInUser',res)
+      })
     }
 
   }
