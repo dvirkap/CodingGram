@@ -43,7 +43,9 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+     
+    };
   },
   methods: {},
 
