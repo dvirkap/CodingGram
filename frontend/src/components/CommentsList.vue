@@ -30,6 +30,7 @@ export default {
     comments: Array, 
     post: Object
   },
+
   data() {
       return {
         txt: '',

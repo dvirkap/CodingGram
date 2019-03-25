@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 })
 
 addPostRoute(app)
-// addUserRoute(app)
+addUserRoute(app)
 // addCommentRoute(app)
 
 const PORT = process.env.PORT || 3000;

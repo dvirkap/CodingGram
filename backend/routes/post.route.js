@@ -30,7 +30,7 @@ function addPostRoute(app) {
     app.post('/post', async (req, res) => {
 
         const post = req.body;
-        console.log(post,'postpostpost')
+        console.log(post, 'postpostpost')
         const addedPost = await postService.add(post)
         console.log('Post Created and back from DB:', addedPost);
         res.json(addedPost)
@@ -58,9 +58,9 @@ function addPostRoute(app) {
     //DELETE COMMENT
     app.delete('/post/:postId/:commentId', async (req, res) => {
         console.log(req.params);
-        const params= req.params
+        const params = req.params
         console.log(params);
-        
+
         const deletedComment = await postService.removeComment(params)
         res.end(`comment ${deletedComment} deleted!`)
         // console.log(commentId)
