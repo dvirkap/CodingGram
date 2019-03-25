@@ -3,6 +3,13 @@ const userService = require('../services/user-service.js')
 
 
 function addUserRoute(app) {
+    app.post('/signup', async (req,res) => {
+        var newUser = req.body
+        console.log('newUsernewUser:::::::::::', newUser);
+        
+        // const addedUser = await userService.addUser(newUser)
+        // return res.json(addedUser)
+    })
 
     app.post('/login', (req, res) => {
         const userCredentials = req.body;
