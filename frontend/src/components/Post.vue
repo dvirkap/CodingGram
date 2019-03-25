@@ -3,7 +3,7 @@
     <div>
       <div class="post-title">
         <div class="post-title-info">
-          <img :src="'https://randomuser.me/api/portraits/thumb/men/' + post.creator.userImg">
+          <img :src="post.creator.img">
           <!-- <img src="https://www.designskilz.com/random-users/images/imageM9.jpg" alt> -->
           <p>{{post.creator.userName}}</p>
 

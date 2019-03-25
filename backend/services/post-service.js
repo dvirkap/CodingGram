@@ -40,7 +40,7 @@ function getPostById(postId) {
 }
 
 // ADD POST
-function add(post) {
+function add(post,creator) { 
     var currPost = {
 
         title: post.title,
@@ -56,9 +56,9 @@ function add(post) {
         ],
         createdAt: Date.now(),
         creator: {
-            "userName": "Kenny Goddard",
-            "_id": ObjectId("5c8e97334330fca0bb034d54"),
-            "userImg": "51.jpg"
+            userName: creator.userName,
+            _id: new ObjectId(creator._id) ,
+            img: creator.img
         },
         copiedCount: 1,
         isApproved: false,
