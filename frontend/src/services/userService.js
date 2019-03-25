@@ -22,7 +22,10 @@ return users
 }   
 
 async function login(userCredentials) {
+    console.log(userCredentials);
+    
     var loggedInUser = await axios.post(`${_URL}/login`, userCredentials)
+    console.log('loggedInUser::::::', loggedInUser.data);
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
     return loggedInUser
 }
@@ -46,7 +49,7 @@ async function getById(userId) {
     console.log(userId);
 var user = await axios.get(`${_URL}/user/${userId}`)
 // var user = await axios.get(`api/user/${userId}`)
-console.log('USER:::::::', user.data);
+// console.log('USER:::::::', user.data);
 
 return user.data
 }
