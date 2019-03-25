@@ -71,14 +71,19 @@ export default new Vuex.Store({
   },
   actions: {
     addPost(context, post) {
-      console.log(post, 'paayy')
-      PostService.updatePost(post).then(res => {
+      PostService.updatePost(post)
+      .then(res => {
         if (post._id) {
           context.commit({ type: 'updatePost', post })
-        } else {
-          context.commit({ type: 'addPost', post })
 
+        } 
+        else {
+          context.commit({ type: 'addPost', post })
+          
         }
+        
+      }).then(()=>{
+        return Promise.resolve('yes')
       })
     },
     LoadPost(context, postId){

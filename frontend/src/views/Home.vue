@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="main-cont wrapper">
-      <post-list class="posts-cont"></post-list>
+      <post-list :posts="posts" class="posts-cont"></post-list>
 
       <UserBar></UserBar>
     </div>
@@ -24,12 +24,17 @@ export default {
       name: ""
     };
   },
+    computed: {
+      posts() {
+      return this.$store.getters.postsFiltered;
+    }
+    },
   methods: {
     getUser() {}
   },
-//   	created() {
-//     	this.$store.dispatch({ type: "getPosts"});
-//   }
+  	created() {
+    this.$store.dispatch({ type: "loadPosts" });
+  }
 };
 </script>
 

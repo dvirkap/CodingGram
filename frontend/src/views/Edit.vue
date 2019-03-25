@@ -184,7 +184,9 @@ export default {
       this.isCss = false;
     },
     savePost() {
-      this.$store.dispatch("addPost", this.newPost);
+      this.$store.dispatch("addPost", this.newPost).then(
+        this.$router.push('/')
+      )
     },
 
   },

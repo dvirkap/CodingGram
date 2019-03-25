@@ -34,15 +34,15 @@
         </div>
         <div class="post-editor-body">
           <div class="sec-html" :class="{display: !cmOptions.isHTML}">
-            <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptions"></codemirror>
+            <codemirror class="sec-html" v-model="HTMLcode" :options="cmOptionsHTML"></codemirror>
           </div>
 
           <div class="sec-css" :class="{display: !cmOptions.isCSS}">
-            <codemirror v-model="CSScode" :options="cmOptions"></codemirror>
+            <codemirror v-model="CSScode" :options="cmOptionsCSS"></codemirror>
           </div>
 
           <div class="sec-js" :class="{display: !cmOptions.isJS}">
-            <codemirror v-model="JScode" :options="cmOptions"></codemirror>
+            <codemirror v-model="JScode" :options="cmOptionsJS"></codemirror>
           </div>
 
           <div class="post-runner" :class="{display: !cmOptions.isPREVIEW}">
@@ -60,6 +60,7 @@
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/mode/xml/xml.js";
 import "codemirror/mode/css/css.js";
+import 'codemirror/addon/display/autorefresh.js'
 
 // theme css
 import "codemirror/theme/base16-dark.css";
@@ -91,11 +92,45 @@ export default {
       },
       cmOptionsHTML: {
         tabSize: 1,
-        mode: "text/html",
+        mode: "xml",
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
         readOnly: true,
+        autoRefresh:true,
+
+
+        isPREVIEW: true,
+        isHTML: false,
+        isCSS: false,
+        isJS: false,
+        toggleBtns: false,
+      },
+      cmOptionsCSS: {
+        tabSize: 1,
+        mode: "css",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        readOnly: true,
+        autoRefresh:true,
+
+
+        isPREVIEW: true,
+        isHTML: false,
+        isCSS: false,
+        isJS: false,
+        toggleBtns: false,
+      },
+      cmOptionsJS: {
+        tabSize: 1,
+        mode: "javascript",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        readOnly: true,
+        autoRefresh:true,
+
 
         isPREVIEW: true,
         isHTML: false,
