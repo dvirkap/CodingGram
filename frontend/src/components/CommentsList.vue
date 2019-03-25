@@ -11,8 +11,9 @@
     <div class="post-comment">
       <div class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="txt">
-        
+        <img src="../images/html-coding.svg" class="add-code-btn" @click="addCode">
         <span type="submit" @click.stop.prevent="addComment()" title="Add Comment"><i class="add-comment fas fa-comment-medical"></i></span>
+        <div v-if="isAddingCode"></div>
       </div>
     </div>
   </section>
@@ -36,7 +37,8 @@ export default {
         creator: {
           userName: '',
           commentsList: null
-        }
+        },
+        isAddingCode: false
       }
   },
   
@@ -61,11 +63,16 @@ export default {
       this.$store.dispatch({type: 'addComment', post: this.post});
       // console.log('comment added', comment);
       console.log('comments:', this.post.comments);
+      this.txt = '';
+    },
+    addCode() {
+      console.log('add code!');
+
     }
   },
   computed: {
     commentsLista(){
-      return this.$store.getters.getComments
+      return this.$store.getters.getComments;
     }
   },
 };
