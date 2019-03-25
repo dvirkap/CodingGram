@@ -7,8 +7,8 @@ function addUserRoute(app) {
         var newUser = req.body
         console.log('newUsernewUser:::::::::::', newUser);
         
-        // const addedUser = await userService.addUser(newUser)
-        // return res.json(addedUser)
+        const addedUser = await userService.addUser(newUser)
+        return res.json(addedUser)
     })
 
     app.post('/login', (req, res) => {

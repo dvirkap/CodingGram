@@ -15,6 +15,35 @@ function getById(userId) {
         })
 }
 
+function addUser(newUser) {
+    
+    var userToAdd = {
+            displayName : "yossi", 
+            userName : newUser.userName, 
+            fullName : "yossi ben yossi", 
+            isAdmin : false, 
+            password : newUser.password, 
+            bio : "Aspiring creative writer. I like spicy food and good people.", 
+            phone : "444-555-2222", 
+            email : newUser.email, 
+            job : "Network Engineer", 
+            birthday : "12/11/1986", 
+            img : "https://www.designskilz.com/random-users/images/imageM28.jpg", 
+            address : "4123 New Street Oakland", 
+            createdAt : Date.now() ,
+            followers : [], 
+            following : [], 
+            likedpost: []
+        }
+        
+        console.log(userToAdd);
+        return mongoService.connect()
+        .then(db => db.collection('users').insertOne(userToAdd))
+        .then(res => {
+            userToAdd._id = res.insertedId
+            return userToAdd
+        })
+}
 
 function checkLogin(userCredentials) {
     console.log(userCredentials);
@@ -39,7 +68,8 @@ function checkLogin(userCredentials) {
 module.exports = {
     checkLogin,
     getUsers,
-    getById
+    getById,
+    addUser
 }
 
 
