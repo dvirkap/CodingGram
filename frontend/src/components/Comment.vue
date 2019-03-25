@@ -21,6 +21,7 @@ export default {
       this.$store.dispatch({type: 'deleteComment',commentId: this.comment._id, postId: this.post._id} );
     }
   }
+
 };
 </script>
 

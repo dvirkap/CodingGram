@@ -44,7 +44,7 @@ export default {
       Comment,
   },
   created() {
-    this.commentsList = JSON.parse(JSON.stringify(this.comments))
+   
   },
   methods: {
     addComment() {
@@ -61,11 +61,6 @@ export default {
       this.$store.dispatch({type: 'addComment', post: this.post});
       // console.log('comment added', comment);
       console.log('comments:', this.post.comments);
-    }
-  },
-  computed: {
-    commentsLista(){
-      return this.$store.getters.getComments
     }
   },
 };

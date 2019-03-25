@@ -15,14 +15,14 @@ export default new Vuex.Store({
     likes: []
   },
   mutations: {
-    updatePost(state, {post}) {
+    updatePost(state, { post }) {
       state.currPost = post;
       let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
       state.posts.splice(postIdx, 1, state.currPost)
     },
-    addPost(state, {post}) {
+    addPost(state, { post }) {
       console.log(post);
-      
+
     },
     setPosts(state, payload) {
       state.posts = payload.posts;
@@ -35,21 +35,16 @@ export default new Vuex.Store({
 
       state.currComment = comment
     },
-    deleteComment(state, payload) {
-      let comments = [];
-      for (let i = 0; i < state.comments.length; i++) {
-        if (state.comments[i]._id === payload.commentId) {
-          comments.splice(state.comments[i])
-          
-        }
-      }
-      state.comments = comments;
+    deleteComment(state, { payload }) {
+      let postIdx = state.posts.findIndex(post => post._id === payload.postId)
+      let commentIdx = state.posts[postIdx].comments.findIndex(comment => comment._id === payload.commentId)
+      state.posts[postIdx].comments.splice(commentIdx, 1)
     },
     addLike(state, payload) {
       let likes = [];
       let addLike = true
-      for (let i = 0; i <state.likes.length; i++) {
-        if ( state.likes[i].likeBy.userName === payload.post.userName) {
+      for (let i = 0; i < state.likes.length; i++) {
+        if (state.likes[i].likeBy.userName === payload.post.userName) {
           addLike = false;
         }
         if (addLike === true) state.likes = state.likes.push(payload.likeBy)
@@ -69,23 +64,18 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addPost(context,post){
-      console.log(post,'paayy')
-      PostService.updatePost(post).then(res=>{
-        if(post._id) {
-          context.commit({type:'updatePost', post})
+    addPost(context, post) {
+      console.log(post, 'paayy')
+      PostService.updatePost(post).then(res => {
+        if (post._id) {
+          context.commit({ type: 'updatePost', post })
         } else {
-          context.commit({type:'addPost', post})
+          context.commit({ type: 'addPost', post })
 
         }
       })
-      // console.log('in store!',payload)
     },
-    
-    // async loadPosts(context, payload){
-    //  let posts = await PostService.query()
-    //   context.commit('postsFiltered', posts)
-    // },
+
 
     loadPosts(context, payload) {
       return PostService.query()
@@ -95,28 +85,24 @@ export default new Vuex.Store({
     },
 
     addComment(context, { post }) {
-      console.log('post from store', post);
       return CommentsService.addComment(post)
         .then(res => {
-          console.log('res.data', res)
           context.commit({ type: 'createComment', post: res })
         });
     },
     deleteComment(context, payload) {
-      console.log('commentId from store',payload)
-      console.log('postId from store',payload.postId)
       return CommentsService.deleteComment(payload)
         .then(res => {
-          context.commit({type: 'deleteComment', payload})
+          context.commit({ type: 'deleteComment', payload })
         })
     },
-    addLike(context ,post) {
+    addLike(context, post) {
       let likeBy = post.likeBy
-      console.log('post',post)
+      console.log('post', post)
       return PostService.addLike(post)
-      .then(res => {
-        context.commit({type: 'addLike', likeBy})
-      })
+        .then(res => {
+          context.commit({ type: 'addLike', likeBy })
+        })
     }
 
   }
