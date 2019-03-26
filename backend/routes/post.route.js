@@ -1,19 +1,32 @@
 const postService = require('../services/post-service');
 
+function checkLoggedInUser(req, res, next) {
+    console.log('INSIDE MIDDLEWARE: ', req.session.userName);
+    console.log('INSIDE MIDDLEWARE: ', req.session.user.isAdmin);
+
+    if (!req.session.user || !req.session.user.isAdmin) {
+        console.log('INSIDE');
+       return  res.status(401).end('Unauthorized');
+        }
+    next();
+}
+
 function addPostRoute(app) {
     //Post rest:
 
     //GET LIST OF POSTS
-    {
+    // {
         app.get('/post', async (req, res) => {
+            // console.log('0000',req.query.filter)
+
+
             // console.log('post.route.js REQ.QUERY:', req.query)
-            var posts = await postService.query()
-            // console.log(posts);
+            var posts = await postService.query(req.query.filter)
             res.json(posts)
             // var x = await sendtoAsyncFunc(posts)
             // var y = await sendtosecFunc(x)
         })
-    }
+    // }
 
 
     //GET POST BY ID
@@ -29,9 +42,13 @@ function addPostRoute(app) {
     // CREATE POST
     app.post('/post', async (req, res) => {
 
-        const post = req.body;
+        var post = req.body;
+        var currUser = req.session.loggedInUser
+
+
+        
         console.log(post, 'postpostpost')
-        const addedPost = await postService.add(post)
+        const addedPost = await postService.add(post,currUser)
         console.log('Post Created and back from DB:', addedPost);
         res.json(addedPost)
     })
@@ -56,14 +73,24 @@ function addPostRoute(app) {
     // -------------------------- COMMENTS SECTION ---------------------------
 
     //DELETE COMMENT
-    app.delete('/post/:postId/:commentId', async (req, res) => {
-        console.log(req.params);
-        const params = req.params
-        console.log(params);
+    app.delete('/post/:postId/:commentId',  async (req, res) => {
+        if(req.session.loggedInUser.userName) {
+            const params = req.params
 
-        const deletedComment = await postService.removeComment(params)
-        res.end(`comment ${deletedComment} deleted!`)
-        // console.log(commentId)
+            var post = await postService.getPostById(params.postId)
+            // console.log(post.creator.userName,'post.creator.userName')
+            
+            // console.log(req.session.loggedInUser.userName,'req.session.loggedInUser.userName')
+    
+            
+            if(post.creator.userName === req.session.loggedInUser.userName){
+                // console.log(params,'sdfsdfsdf');
+                
+                const deletedComment = await postService.removeComment(params)
+                res.end(`comment ${deletedComment} deleted!`)
+            }
+        }
+      
     })
 
     // UPADTE COMMENT

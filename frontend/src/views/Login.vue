@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="login">
     <div class="main-cont wrapper">
@@ -6,25 +8,24 @@
           <div class="header">
             <img src="../images/loginLogi.png" alt>
           </div>
-            <form action="">
-
-                <div class="l-part">
-                      <div class="overlap-text">
-                      <input type="text" placeholder="Username" class="input-1" required/>
-                        <span uk-icon="user"></span>
-                        </div>
-                        <div class="overlap-text">
-                          <input type="password" placeholder="Password" class="input-2" required/>
-                          <span uk-icon="lock"></span>
-                        </div>
-                      <button class="btn-login">Log in</button>
-                </div>
-                </form>
+          <form @submit.prevent="signin" >
+            <div class="l-part">
+              <div class="overlap-text">
+                <input type="text" placeholder="Username" class="input-1" required v-model="userCredentials.userName">
+                <span uk-icon="user"></span>
+              </div>
+              <div class="overlap-text">
+                <input type="password" placeholder="Password" class="input-2" required v-model="userCredentials.password">
+                <span uk-icon="lock"></span>
+              </div>
+              <button class="btn-login">Log in</button>
+            </div>
+          </form>
         </div>
         <div class="sub-content">
           <div class="s-part">
             Don't have an account?
-            <a href="#">Sign up</a>
+                <router-link to="/signup">Signup</router-link>
           </div>
         </div>
       </div>
@@ -35,15 +36,31 @@
 
 
 <script>
+import UserService from '@/services/UserService.js'
 export default {
   components: {},
   data() {
-    return {};
-  },
-  methods: {},
+    return {
+      userCredentials: {
+        userName: "",
+        password: ""
+      }
+    }
+    },
+      methods: {
+        signin() {
+          this.$store.dispatch('login', this.userCredentials )
+           .then(() => {
+                this.$router.push('/');
+            })
+        }
 
-  created() {}
-};
+      },
+
+      created() {}
+    
+  
+}
 </script>
 <style>
 .wrapper-login {
@@ -117,7 +134,7 @@ export default {
 
 .s-part {
   text-align: center;
-  font-family: 'Proxima';
+  font-family: "Proxima";
 }
 
 .s-part a {
@@ -127,7 +144,7 @@ export default {
 }
 
 input:focus {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 </style>
 

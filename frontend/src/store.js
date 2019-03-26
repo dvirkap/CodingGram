@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import PostService from './services/PostService.js';
+import UserService from './services/UserService.js';
 import CommentsService from './services/CommentsService.js';
 
 
@@ -12,9 +13,13 @@ export default new Vuex.Store({
     comments: [],
     currPost: null,
     currComment: null,
-    likes: []
+    likes: [],
+    currUser: null,
   },
   mutations: {
+    setLoggedInUser(state,user){
+      state.currUser = user
+    },
     setPost(state,post){
       state.currPost = post
     },
@@ -67,7 +72,10 @@ export default new Vuex.Store({
     },
     getLikes(state) {
       return state.likes;
-    }
+    },
+    getCurrUser(state) {
+      return state.currUser;
+    },
   },
   actions: {
     addPost(context, post) {
@@ -90,8 +98,8 @@ export default new Vuex.Store({
       return PostService.getPostById(postId).then(res=>res)
     },
 
-    loadPosts(context, payload) {
-      return PostService.query()
+    loadPosts(context, filter) {
+      return PostService.query(filter)
         .then(posts => {
           context.commit({ type: 'setPosts', posts })
         })
@@ -104,18 +112,39 @@ export default new Vuex.Store({
         });
     },
     deleteComment(context, payload) {
-      return CommentsService.deleteComment(payload)
+      return CommentsService.deleteComment(payload,)
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
         })
     },
     addLike(context, post) {
       let likeBy = post.likeBy
-      console.log('post', post)
       return PostService.addLike(post)
         .then(res => {
           context.commit({ type: 'addLike', likeBy })
         })
+    },
+    checkLoggedInUser(context){
+      UserService.checkLoggedInUser().then(res=> {
+      })
+      
+    },
+    login(context, userCredentials) {
+      UserService.login(userCredentials).then(res=> {
+        context.commit('setLoggedInUser',res)
+      })
+    },
+    signUp(context,newUser){
+      UserService.signup(newUser).then(user=>{
+        
+        console.log(user)
+        var userName = newUser.userName
+        var password = newUser.password
+        var userCredentials = {userName, password}
+        UserService.login(userCredentials).then(res=> {
+          context.commit('setLoggedInUser',res)
+        })
+      })
     }
 
   }

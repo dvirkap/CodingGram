@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from 'axios';
 // import PostService from '@/services/PostService.js'
 
 export default {
@@ -6,6 +6,9 @@ export default {
     deleteComment,
 }
 
+const axios = Axios.create({
+    withCredentials: true
+})
 const _URL = (process.env.NODE_ENV !== 'development')
     ? '/post/'
     : 'http://localhost:3000/post/';

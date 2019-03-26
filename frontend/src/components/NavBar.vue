@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navbar-cont wrapper">
+      {{user}}
       <div class="navbar-logo-cont">
 		  
         <router-link to="/"><img class="navbar-logo" src="../images/logoIcon.png" alt></router-link>
@@ -10,7 +11,7 @@
       </div>
       <div class="navbar-search-cont">
 
-		  <input type="text" placeholder="What are you looking for?...">
+		  <input v-model="filterByTxt" @keyup="setFilter()" type="text" placeholder="What are you looking for?...">
       
 	  </div>
       <div class="navbar-routers-cont">
@@ -35,7 +36,21 @@ export default {
   name: "NavBar",
   props: {},
   components: {
-    // PostService
+  },
+  data() {
+    return {
+      filterByTxt: '',
+    }
+  },
+  methods: {
+    setFilter(){
+    this.$store.dispatch("loadPosts" ,this.filterByTxt);
+    }
+  },
+  computed: {
+    user(){
+      return this.$store.getters.getCurrUser
+    }
   },
 };
 

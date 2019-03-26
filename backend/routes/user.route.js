@@ -1,20 +1,34 @@
 const userService = require('../services/user-service.js')
 
+
+
 function addUserRoute(app) {
+    app.post('/signup', async (req,res) => {
+        var newUser = req.body
+        console.log('newUsernewUser:::::::::::', newUser);
+        
+        const addedUser = await userService.addUser(newUser)
+        return res.json(addedUser)
+    })
+
     app.post('/login', (req, res) => {
         const userCredentials = req.body;
 
-        // in mongo i extract the user the it truthy by username
-        
-        userService.checkLogin(userCredentials)
-            .then(user => {
-                req.session.loggedInUser = user;
-                res.json(user)
-            })
-            .catch(err => {
-                console.log('BACKEND service ERROR', err);
-                res.status(500).send('Wrong Credentials')
-            })
+        if (req.session.loggedInUser) console.log('req.bodyyyyyyyyyyy', req.body)
+        else {
+            console.log('ttttttttttttt');
+            
+            userService.checkLogin(userCredentials)
+                .then(user => {
+                    req.session.loggedInUser = user;
+                    console.log('req.session.loggedInUser::::::::::!!!!', req.session.loggedInUser);
+                    
+                    res.json(user)
+                })
+                .catch(err => {
+                    res.status(500).send('Wrong Credentials')
+                })
+        }
     })
 
     app.get('/user', async (req, res) => {
@@ -22,9 +36,8 @@ function addUserRoute(app) {
         return res.json(users)
     })
     app.get('/user/:userId', async (req, res) => {
-        
+
         const { userId } = req.params;
-        console.log ('ddddddddddddd');
         var user = await userService.getById(userId)
         return res.json(user)
     })
