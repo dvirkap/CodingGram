@@ -133,7 +133,14 @@ export default new Vuex.Store({
     },
     signUp(context,newUser){
       UserService.signup(newUser).then(user=>{
-        console.log(user,)
+        
+        console.log(user)
+        var userName = newUser.userName
+        var password = newUser.password
+        var userCredentials = {userName, password}
+        UserService.login(userCredentials).then(res=> {
+          context.commit('setLoggedInUser',res)
+        })
       })
     }
 

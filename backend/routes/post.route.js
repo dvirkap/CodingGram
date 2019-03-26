@@ -42,9 +42,13 @@ function addPostRoute(app) {
     // CREATE POST
     app.post('/post', async (req, res) => {
 
-        const post = req.body;
+        var post = req.body;
+        var currUser = req.session.loggedInUser
+
+
+        
         console.log(post, 'postpostpost')
-        const addedPost = await postService.add(post)
+        const addedPost = await postService.add(post,currUser)
         console.log('Post Created and back from DB:', addedPost);
         res.json(addedPost)
     })
