@@ -1,14 +1,17 @@
 /* @import "~font-awesome/css/font-awesome.css"; */
 
-
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 /* @import  '../../node_modules/uikit/dist/css/uikit.min.css'; */
+
 @import "./reset.css";
-
-
 @font-face {
     font-family: Proxima;
     src: url(../fonts/ProximaNovaRegular.ttf)
+}
+
+@font-face {
+    font-family: 'Proxima extra bold';
+    src: url(../fonts/FontsFree-Net-Proxima-Nova-A-W01-Extrabold.ttf)
 }
 
 @font-face {
@@ -94,13 +97,10 @@ body {
 
 .navbar-routers-cont {
     display: flex;
-
     /* background-color: cadetblue; */
     width: max-content;
     align-items: center;
     /* justify-content: center; */
-
-    
     /* width: 100px; */
     /* height: 35px; */
 }
@@ -394,9 +394,9 @@ background-color: #ed4956; */
     height: 100px;
     display: flex;
     flex-direction: column;
-
 }
-.edit-input-title input{
+
+.edit-input-title input {
     box-sizing: border-box;
     font-size: 30px;
     width: 20%;
@@ -404,7 +404,8 @@ background-color: #ed4956; */
     text-align: start;
     padding-left: 10px;
 }
-.edit-input-title button{
+
+.edit-input-title button {
     background: none;
     border: none;
     /* box-sizing: border-box; */
@@ -414,16 +415,19 @@ background-color: #ed4956; */
     /* text-align: start; */
     /* padding-left: 10px; */
 }
-.edit-input-title{
+
+.edit-input-title {
     height: 50%;
     display: flex;
     justify-content: space-between;
 }
-.edit-input-desc{
+
+.edit-input-desc {
     height: 50%;
     width: 80%;
 }
-.edit-input-desc textarea{
+
+.edit-input-desc textarea {
     width: 100%;
     border: none;
     box-sizing: border-box;
@@ -432,15 +436,13 @@ background-color: #ed4956; */
     text-align: start;
     padding-left: 10px;
 }
+
 .html-btn {
     padding: 10px;
     border: none;
     border-right: #b9b9b9 solid 0.2px;
     /* background: #e6e6e6; */
     background: #141414;
-
-
-
     color: white;
 }
 
@@ -565,19 +567,19 @@ background-color: #ed4956; */
 }
 
 .aside-nav {
-        /* display: flex;
+    /* display: flex;
         flex-direction: column; */
-        z-index: 1;
-        position: fixed;
-        right: 0;
-        top: 0;
-        /* background-color: #292929; */
-        /* height: 100vw; */
-        /* border-left: 1px solid rgba(0, 0, 0, 0.3); */
-        transform: translate(90%, 0);
-        transition: transform .6s;
-        /* transition: transform 1s; */
-        margin-top: 70px;
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* background-color: #292929; */
+    /* height: 100vw; */
+    /* border-left: 1px solid rgba(0, 0, 0, 0.3); */
+    transform: translate(90%, 0);
+    transition: transform .6s;
+    /* transition: transform 1s; */
+    margin-top: 70px;
 }
 
 .aside-nav-btn {
@@ -662,25 +664,26 @@ body.open .screen {
     color: #494949;
     letter-spacing: 0px;
     display: flex;
-
 }
-.add-post{
+
+.add-post {
     color: #262626;
     font-size: 40px;
-
-
 }
-.userbar-addpost{
+
+.userbar-addpost {
     align-self: center;
     margin-right: 30px;
     font-family: 'Proxima';
     letter-spacing: 0px;
     display: flex;
 }
-a{
+
+a {
     color: unset;
 }
-.add-comment{
+
+.add-comment {
     font-size: 30px;
     color: #494949;
 }
@@ -829,8 +832,6 @@ a{
     height: 100%;
 }
 
-
-
 .sec-css {
     background-color: #f03850;
     width: 100%;
@@ -842,10 +843,12 @@ a{
     width: 100%;
     height: 100%;
 }
-.CodeMirror{
+
+.CodeMirror {
     /* width: 100%; */
     /* height: 100%; */
 }
+
 .post-runner {
     width: 100%;
     height: 100%;
@@ -873,17 +876,6 @@ a{
 .post-like-bookmark {
     align-self: center;
     margin-right: 30px;
-}
-
-.post-feedback {
-    width: 90%;
-    max-height: 200px;
-    overflow: scroll;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    margin-right: 30px;
-    margin-left: 30px;
-    align-self: center;
 }
 
 .post-comment {
@@ -919,6 +911,18 @@ a{
 }
 
 .comment-txt {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.cmt-txt {
+    display: flex;
+    align-items: center;
+}
+
+.cmt-action {
     align-self: center;
 }
 
@@ -979,22 +983,13 @@ select {
     padding: 5px;
 }
 
-input {
-    /* width: 100%;
-    height: 100%;
-
-    font-size: 13px;
-    font-family: 'Proxima';
-    text-align: center; */
-}
-
-
 iframe {
     border: none;
 }
 
 .delelte-btn {
-    margin: 15px;
+    /* background-color: #3897f0; */
+    margin-left: 15px;
 }
 
 .delelte-btn:hover {
@@ -1009,7 +1004,9 @@ iframe {
 
 .comment-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 5px;
+    /* background-color: #3897f0; */
 }
 
 .post-bar-container {
@@ -1028,4 +1025,104 @@ iframe {
 
 .add-code-btn:hover {
     cursor: pointer;
+}
+
+.comment-cmp {
+    padding: 5px;
+    padding-bottom: 0px;
+    /* background-color: #3897f0; */
+}
+
+.post-feedback {
+    box-sizing: border-box;
+    padding: 10px;
+    font-family: 'Proxima';
+    border-top: 1px solid #dbdbdb;
+    /* border-bottom: 1px solid #dbdbdb; */
+    width: 100%;
+    /* height: 100px; */
+    max-height: 200px;
+    overflow: scroll;
+    /* margin-right: 30px; */
+    /* margin-left: 30px; */
+    /* align-self: center; */
+    /* background-color: #f7f7f7 */
+    /* background-color: #3897f0; */
+
+
+}
+
+.comment-txt-time {
+    padding-left: 5px;
+    align-self: initial;
+    font-size: 0.7em;
+    color: #9b9b9b;
+    /* background-color: #c8f038; */
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    font-family: 'Proxima extra bold';
+
+
+}
+
+.comment-user img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #797979;
+
+
+    margin-right: 5px;
+}
+
+.replay {
+    box-sizing: border-box;
+    border-radius: 5px;
+    /* background-color: #b638f0; */
+    background-color: #f7f7f7;
+    padding: 5px;
+    /* padding-top: 0px; */
+    margin: 0px 0px 0px 40px;
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 20px; */
+    /* margin-right: 20px; */
+}
+
+.replay-body {
+
+    box-sizing: border-box;
+    height: 100%;
+    margin: 5px 10px 0px 10px;
+    /* padding: 5px; */
+    /* background-color: #ffffff */
+}
+
+.comment-txt-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.comment-txt-body {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 5px 10px 0px 10px;
+    padding: 5px;
+    /* background-color: #f7f7f7 */
+}
+
+.replay-title {
+
+
+    /* background-color: #3897f0; */
+    /* background-color: #ffffff; */
+
+    display: flex;
+    justify-content: space-between;
 }

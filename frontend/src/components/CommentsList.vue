@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div class="post-feedback" style="overflow:hidden">
+    <div class="post-feedback">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment :user="user" :comment="comment" :post="post"></Comment>
+          <Comment class="comment-cmp" :user="user" :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>

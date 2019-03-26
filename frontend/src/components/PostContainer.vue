@@ -4,7 +4,7 @@
 
     <post :post="post"/>
     <post-bar :post="post"/>
-    <comments-list :user="user" :comments="post.comments" :post="post"/>
+    <comments-list class="comment-list" :user="user" :comments="post.comments" :post="post"/>
   </section>
 </template>
 
