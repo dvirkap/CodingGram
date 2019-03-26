@@ -54,7 +54,7 @@ export default {
     signup(){
         this.$store.dispatch('signUp', this.newUser )
            .then(() => {
-                // this.$router.push('/');
+this.$router.push('/');
             })
     }
   },

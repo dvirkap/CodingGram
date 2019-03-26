@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import PostService from './services/PostService.js';
 import UserService from './services/UserService.js';
 import CommentsService from './services/CommentsService.js';
+import RepliesService from './services/RepliesService.js';
 
 
 Vue.use(Vuex)
@@ -113,6 +114,20 @@ export default new Vuex.Store({
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
         })
+    },
+    addReply(context, payload) {
+      //The payload: commentId, reply
+      return RepliesService.addReply(payload)
+        .then(res => {
+          context.commit({ type: 'createReply', reply: res })
+        });
+    },
+    deleteReply(context, payload) {
+      //The payload: commentId, reply
+      return RepliesService.deleteReply(payload)
+        .then(res => {
+          context.commit({ type: 'deleteReply', reply: res })
+        });
     },
     addLike(context, post) {
       let likeBy = post.likeBy
