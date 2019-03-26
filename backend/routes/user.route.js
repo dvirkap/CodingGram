@@ -14,7 +14,7 @@ function addUserRoute(app) {
     app.post('/login', (req, res) => {
         const userCredentials = req.body;
 
-        if (req.session.loggedInUser) console.log('req.bodyyyyyyyyyyy', req.body)
+        if (req.session.loggedInUser) res.json( req.session.loggedInUser)
         else {
             console.log('ttttttttttttt');
             
