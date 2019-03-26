@@ -83,13 +83,10 @@ export default new Vuex.Store({
       .then(res => {
         if (post._id) {
           context.commit({ type: 'updatePost', post })
-
         } 
         else {
           context.commit({ type: 'addPost', post })
-          
         }
-        
       }).then(()=>{
         return Promise.resolve('yes')
       })

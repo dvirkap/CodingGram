@@ -3,15 +3,17 @@
     <div class="post-feedback" style="overflow:hidden">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment :comment="comment" :post="post"></Comment>
+          <Comment :user="user" :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>
 
     <div class="post-comment">
-      <div class="post-comment-input">
+      <div v-if="user" class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="txt">
         <img src="../images/html-coding.svg" class="add-code-btn" @click="addCode">
+
+
         <span type="submit" @click.stop.prevent="addComment()" title="Add Comment"><i class="add-comment fas fa-comment-medical"></i></span>
         <div v-if="isAddingCode"></div>
       </div>
@@ -28,7 +30,8 @@ export default {
   // props: ['comments', 'post'],
   props: {
     comments: Array, 
-    post: Object
+    post: Object,
+    user: Object
   },
 
   data() {

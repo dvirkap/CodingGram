@@ -5,7 +5,7 @@
         {{comment.creator.userName}}:
         {{comment.txt}}
       </div>
-      <span @click="removeComment" class="delelte-btn" title="Delete Comment"><i class="far fa-trash-alt"></i></span>
+      <span v-if="user" @click="removeComment" class="delelte-btn" title="Delete Comment"><i class="far fa-trash-alt"></i></span>
     </div>
   </section>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "Comment",
-  props: ["comment", "post"],
+  props: ["comment", "post",'user'],
   methods: {
     removeComment() {
       // console.log('CHECK', this.post)

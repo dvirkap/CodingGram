@@ -1,8 +1,10 @@
 <template>
   <section class="post">
+
+
     <post :post="post"/>
     <post-bar :post="post"/>
-    <comments-list :comments="post.comments" :post="post"/>
+    <comments-list :user="user" :comments="post.comments" :post="post"/>
   </section>
 </template>
 
@@ -20,7 +22,7 @@ components: {
 },
 data() {
  return {
-   user: null,
+
  }
 },
 created() {
@@ -28,7 +30,7 @@ created() {
     // console.log(this.user);
 },
 
-props: ['post'],
+props: ['post','user'],
 computed: {
   
     getCommentsForDisplay() {

@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <div class="main-cont wrapper">
-      <post-list :posts="posts" class="posts-cont"></post-list>
-
+      <post-list :user="user" :posts="posts" class="posts-cont"></post-list>
       <UserBar></UserBar>
     </div>
   </div>
@@ -27,6 +26,9 @@ export default {
     computed: {
       posts() {
       return this.$store.getters.postsFiltered;
+    },
+    user(){
+      return this.$store.getters.getCurrUser
     }
     },
   methods: {

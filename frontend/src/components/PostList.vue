@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul>
-      <li v-for="post in posts" :key="post._id"><post-container :post="post" /></li>
+      <li v-for="post in posts" :key="post._id"><post-container :user="user" :post="post" /></li>
     </ul>
   </section>
 </template>
@@ -16,7 +16,7 @@ import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
-  props: ['posts'],
+  props: ['posts','user'],
   components: {
     // MonacoEditor,
     PostContainer
