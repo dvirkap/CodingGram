@@ -12,6 +12,9 @@
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
+            <span @click="likeComment" class="delelte-btn" title="like">
+              <i class="far fa-heart"></i>
+            </span>
             <span @click="showCommentCode" class="delelte-btn" title="Show Code">
               <i class="fas fa-code"></i>
             </span>
@@ -97,6 +100,13 @@ export default {
     },
       showCommentCode() {
       this.$emit("showCommentCode", this.comment);
+    },
+    likeComment() {
+      var payload = {
+        postId: this.post._id,
+        comment: this.comment
+      }
+       this.$emit("likeComment", payload);
     }
   },
   components:{

@@ -152,6 +152,16 @@ function removeComment(params) {
         })
 }
 
+function addLikeComment(post) {
+    var postId = post._id
+    return mongoService.connect()
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
+        .then(res => {
+            post._id = postId;
+            return post;
+        })
+}
+
 // --------------------------- Replies -----------------------------------
 
 //ADD NEW REPLY
@@ -182,7 +192,8 @@ module.exports = {
     getPostById,
     removeComment,
     updateComment,
-    addReply
+    addReply,
+    addLikeComment
 
 }
 
