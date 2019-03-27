@@ -5,60 +5,58 @@
         <div class="left-aside-nav-icons-cont">
           <div class="left-aside-nav-cont">
             <div class="aside-cont-title">
-              <div class="aside-cont-title-ps">
+              <div v-if="userNav" class="aside-cont-title-ps">
                 <img
                   src="https://www.designskilz.com/random-users/images/imageM7.jpg"
                   class="aside-user-img"
                 >
                 <p class="left-aside-cont-title-ps-username">User_Name</p>
-              <div class="left-userbar-addpost">
-                <router-link to="/edit">
-                  <span class="add-post" title="Add Post">
-                    <i class="far fa-plus-square"></i>
-                  </span>
-                </router-link>
-                <!-- <p>ALERT BUTTON</p> -->
-                <!-- <p>{{post.title}}</p> -->
-                <!-- <p>
-            <span class="hashtag">BUTTON/ALERT</span>
-                </p>-->
+                <div class="left-userbar-addpost">
+                  <router-link to="/edit">
+                    <span class="add-post" title="Add Post">
+                      <i class="far fa-plus-square"></i>
+                    </span>
+                  </router-link>
+                </div>
               </div>
-              </div>
-              <!-- <div class="post-title-tag"> -->
             </div>
             <div class="left-aside-cards-cont">
-              <div
-                @mouseover="showText1=true"
-                @mouseout="showText1=false"
-                class="left-aside-card-cont">
-                <h1></h1>
-                <p v-if="showText2"></p>
+              <div v-if="secNav1" class="left-aside-card-cont">
+                <h1>secNav1</h1>
               </div>
-              <div
-                @mouseover="showText2=true"
-                @mouseout="showText2=false"
-                class="left-aside-card-cont">
-                <p v-if="showText2"></p>
+              <div v-if="secNav2" class="left-aside-card-cont">
+                <h1>secNav2</h1>
               </div>
             </div>
           </div>
           <div class="left-aside-nav-panel">
             <div @click="toggleMenu" class="left-aside-nav-btn" v-if="OpenLeftNavBtn">☰</div>
             <div @click="toggleMenu" class="left-aside-nav-btn" v-if="closeLeftNavBtn">✖</div>
-            <img src="../images/envelope.svg" @mouseover="openSecNav" @mouseout="closeSecNav">
-            <img src="../images/envelope.svg">
-            <img src="../images/envelope.svg">
-            <img src="../images/envelope.svg">
-            <img src="../images/envelope.svg">
+            <div class="nav-panel-btn" :class="{selected: secNav1}">
+              <img
+                src="../images/envelope.svg"
+                @click="show1"
+                
+              >
+            </div>
+            <div class="nav-panel-btn" :class="{selected: secNav2}">
+              <img @click="show2" src="../images/envelope.svg">
+            </div>
+            <!-- <div class="nav-panel-btn">
+              <img src="../images/envelope.svg">
+            </div>
+            <div class="nav-panel-btn">
+              <img src="../images/envelope.svg">
+            </div>
+            <div class="nav-panel-btn">
+              <img src="../images/envelope.svg">
+            </div> -->
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if="SecNav" class="open-sec-nav">
-
-    </div>
-
+    <!-- <div v-if="secNav" class="open-sec-nav"></div> -->
   </div>
 </template>
 
@@ -67,11 +65,12 @@ export default {
   name: "UserPanel",
   data() {
     return {
-      showText1: false,
-      showText2: false,
       closeLeftNavBtn: false,
       OpenLeftNavBtn: true,
-      SecNav: false
+      secNav: true,
+      userNav: true,
+      secNav1: false,
+      secNav2: false,
     };
   },
   methods: {
@@ -79,24 +78,46 @@ export default {
       this.closeLeftNavBtn = !this.closeLeftNavBtn;
       this.OpenLeftNavBtn = !this.OpenLeftNavBtn;
       document.body.classList.toggle("open-left");
+      this.secNav1= false
+      this.secNav2= false
     },
     openSecNav() {
-        this.SecNav = true;
-        document.body.classList.toggle("open-sec-nav");        
+      this.secNav = true;
+      document.body.classList.toggle("open-sec-nav");
     },
     closeSecNav() {
-        this.SecNav = false;
-        document.body.classList.toggle("open-sec-nav");
+      this.secNav = false;
+      document.body.classList.toggle("open-sec-nav");
+      console.log('aaaaaaaaaaaaaaaaa')
+    },
+    show1() {
+      this.closeLeftNavBtn = true;
+      this.OpenLeftNavBtn = false;
+      document.body.classList.add("open-left");
+      this.userNav = true;
+      this.secNav1 = true;
+      this.secNav2 = false;
+    },
+    show2() {
+      this.closeLeftNavBtn = true;
+      this.OpenLeftNavBtn = false;
+      document.body.classList.add("open-left");
+      this.userNav = true;
+      this.secNav1 = false;
+      this.secNav2 = true;
     }
   }
 };
 </script>
 
 <style scoped>
+.selected {
+    background-color: blue;
+}
 
 .add-post {
-    margin-left: 90px;
-    color: white;
+  margin-left: 90px;
+  color: white;
 }
 
 .left-aside-cont {
@@ -109,6 +130,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #494949;
+  min-width: 325px;;
 }
 
 .left-aside-nav-icons-cont {
@@ -174,7 +196,6 @@ export default {
   background-color: white;
   width: 300px;
   height: 80px;
-  border: 1px solid #dbdbdb;
   margin: 10px;
   transition: 0.4s;
   border-radius: 5px;
@@ -188,7 +209,7 @@ export default {
 .left-aside-card-cont img {
   height: 70%;
   width: 70%;
-  margin: 10px;
+  padding: 10px;
 }
 
 .left-aside-user-img {
@@ -217,13 +238,18 @@ export default {
 }
 
 .left-aside-nav-panel img {
-    margin: 15px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.nav-panel-btn:hover {
+  background-color: blue;
 }
 
 .left-aside-nav-btn {
-    color: white;
-    margin: 15px;
-    font-size: 2rem;
+  color: white;
+  margin: 15px;
+  font-size: 2rem;
 }
 
 .left-aside-nav-btn:hover {
