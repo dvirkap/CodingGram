@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
+  <!-- <div class="home"> -->
     <div class="main-cont wrapper">
+      <user-panel></user-panel>
       <post-list
         @deletePost="deletePost"
         @addComment="addComment"
@@ -13,7 +14,7 @@
 
       <UserBar></UserBar>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 
@@ -21,11 +22,13 @@
 <script>
 import PostList from "../components/PostList";
 import UserBar from "../components/UserBar.vue";
+import UserPanel from "../components/UserPanel.vue";
 
 export default {
   components: {
     PostList,
-    UserBar
+    UserBar,
+    UserPanel
   },
   computed: {
     posts() {

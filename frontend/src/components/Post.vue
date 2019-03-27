@@ -1,12 +1,13 @@
 <template>
   <section>
-    <div>
+    <div class="post-cont">
       <div class="post-title">
         <div class="post-title-info">
           <img :src="post.creator.img">
           <p>{{post.creator.userName}}</p>
         </div>
         <p>{{post.title}}</p>
+        <h6 class="post-time">15 Hours ago</h6>
       </div>
 
       <div class="post-img">
