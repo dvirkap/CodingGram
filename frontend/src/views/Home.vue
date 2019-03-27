@@ -7,8 +7,14 @@
         v-if="isModal"
         @closeModal="closeModal"
         :currPost="currPost"
+        :currComment="currComment"
+         @addComment="addComment"
         >
       </comment-code>
+
+
+
+
     <div class="main-cont wrapper">
 
 
@@ -16,11 +22,13 @@
 
       <user-panel></user-panel>
       <post-list
+        @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
         @deletePost="deletePost"  
         @addComment="addComment"
         @deleteComment="deleteComment"
         @addLike="addLike"
+       
         :LoggedInUser="LoggedInUser"
         :posts="posts"
         class="posts-cont"
@@ -46,7 +54,8 @@ export default {
   data() {
     return {
       isModal: false, 
-      currPost: null,     
+      currPost: null,    
+      currComment: null, 
     }
   },
   components: {
@@ -74,11 +83,20 @@ export default {
       this.$store.dispatch("deleteComment", payload);
     },
     addComment(newComment, postId) {
+      console.log('newComment:::', newComment);
+      console.log('postId:::', postId);
+      
       var payload = {
         newComment,
         postId
       };
       this.$store.dispatch("addComment", payload);
+      this.isModal = false 
+      this.currPost = null;
+      // this.currComment = null;
+
+ 
+
     },
     addLike(post) {
       this.$store.dispatch("addLike", post);
@@ -93,7 +111,13 @@ export default {
       this.currPost = post
       console.log('in homeee',post)
       this.isModal = true;
-    }
+    },
+    showCommentCode(comment){
+      this.currComment = comment
+      console.log('in homeee',comment)
+      this.isModal = true;
+    },
+
   },
   created() {
     this.$store.dispatch("loadPosts");
