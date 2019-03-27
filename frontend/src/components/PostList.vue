@@ -3,6 +3,7 @@
     <ul>
       <li v-for="post in posts" :key="post._id">
         <post-container 
+          @addCommentCode="addCommentCode"
             @deletePost="deletePost"  
             @addComment="addComment"
             @addLike="addLike" 
@@ -32,6 +33,11 @@ export default {
     deletePost(post){
       this.$emit('deletePost', post)
     },
+    addCommentCode(post){
+      console.log('added 3',post)
+      this.$emit('addCommentCode',post)
+    }
+
   },
 };
 </script>
