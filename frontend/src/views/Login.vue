@@ -75,6 +75,7 @@ export default {
   background-color: #fff;
   border: 2px solid #e6e6e6;
   padding: 40px 50px;
+  margin-top: 50px;
 }
 
 .header {
@@ -82,9 +83,8 @@ export default {
 }
 
 .header img {
-  margin: auto;
+  margin: 0 auto;
   position: relative;
-  left: 25px;
 }
 
 .input-1,
