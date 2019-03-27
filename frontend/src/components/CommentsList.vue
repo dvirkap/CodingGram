@@ -6,14 +6,15 @@
     <div class="post-feedback customScroll">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment class="comment-cmp"
-           :LoggedInUser="LoggedInUser"
+          <Comment
+            class="comment-cmp"
+            @showCommentCode="showCommentCode"
+            :LoggedInUser="LoggedInUser"
             :comment="comment"
-             :post="post"
-              @deleteComment="deleteComment"
-              @openModal="addCode"
-              />
-        
+            :post="post"
+            @deleteComment="deleteComment"
+            @openModal="addCode"
+          />
         </li>
       </ul>
     </div>
@@ -21,12 +22,12 @@
     <div class="post-comment">
       <div v-if="LoggedInUser" class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="comment.txt">
-        <img src="../images/html-coding.svg" class="add-code-btn"  @click="addCommentCode">
+        <img src="../images/html-coding.svg" class="add-code-btn" @click="addCommentCode">
 
         <span type="submit" @click="addComment" title="Add Comment">
           <i class="add-comment fas fa-comment-medical"></i>
         </span>
-        <div v-if="isAddingCode"></div>
+        <!-- <div v-if="isAddingCode"></div> -->
       </div>
     </div>
   </section>
@@ -34,7 +35,6 @@
 
 <script>
 import Comment from "./Comment.vue";
-
 
 import UtilService from "@/services/UtilService.js";
 
@@ -50,43 +50,42 @@ export default {
     return {
       comment: {
         txt: null,
-          snippet: {
-            lang: 'js',
-            html: null,
-            css: null,
-            code: null
-
-          }
+        snippet: {
+          lang: "js",
+          html: null,
+          css: null,
+          code: null
+        }
       },
-      isAddingCode: false
-    }
+      isCommentWithCode: false
+    };
   },
 
   components: {
-    Comment,
-
+    Comment
   },
   created() {},
   methods: {
     deleteComment(commentId, postId) {
-       this.$emit("deleteComment", commentId, postId);
+      this.$emit("deleteComment", commentId, postId);
     },
     addComment() {
-      var newComment = this.comment
-      var postId = this.post._id
-      console.log('POST ID FROM COMMENTLIST:::::::', postId);
-      
-        this.$emit("addComment", newComment, postId );
- 
+      var newComment = this.comment;
+      var postId = this.post._id;
+      console.log("POST ID FROM COMMENTLIST:::::::", postId);
+
+      this.$emit("addComment", newComment, postId);
     },
     addCode() {
       // this.$emit('openModal',this.post)
     },
-    addCommentCode(){
-      console.log('added 1',this.post)
-      this.$emit('addCommentCode',this.post)
+    addCommentCode() {
+      console.log("added 1", this.post);
+      this.$emit("addCommentCode", this.post);
+    },
+    showCommentCode(comment) {
+      this.$emit("showCommentCode", comment);
     }
-
   }
 };
 </script>

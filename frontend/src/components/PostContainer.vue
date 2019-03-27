@@ -4,6 +4,7 @@
     <post-bar :post="post" @addLike="addLike"/>
     <comments-list
       class="comment-list"
+      @showCommentCode="showCommentCode"
       @addComment="addComment"
       @addCommentCode="addCommentCode"
       @deleteComment="deleteComment"
@@ -42,6 +43,9 @@ export default {
     addCommentCode(post) {
       console.log("added 2", post);
       this.$emit("addCommentCode", post);
+    },
+    showCommentCode(comment) {
+      this.$emit("showCommentCode", comment);
     }
   }
 };

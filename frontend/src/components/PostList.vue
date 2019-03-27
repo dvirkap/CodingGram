@@ -3,6 +3,7 @@
     <ul>
       <li v-for="post in posts" :key="post._id">
         <post-container
+          @showCommentCode="showCommentCode"
           @deletePost="deletePost"
           @addComment="addComment"
           @addCommentCode="addCommentCode"
@@ -44,7 +45,12 @@ export default {
     addCommentCode(post){
       console.log('added 3',post)
       this.$emit('addCommentCode',post)
-    }
+    },
+        showCommentCode(comment){
+      this.$emit('showCommentCode',comment)
+
+    },
+
 
   },
 };

@@ -12,7 +12,7 @@
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-            <span @click="openModal" class="delelte-btn" title="Show Code">
+            <span @click="showCommentCode" class="delelte-btn" title="Show Code">
               <i class="fas fa-code"></i>
             </span>
               <span v-if="LoggedInUser" class="delelte-btn" title="Approve">
@@ -47,6 +47,7 @@
             </span>
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
+
           <div class="cmt-action">
             <span
               v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
@@ -93,6 +94,9 @@ export default {
       
       var postId = this.post._id
       this.$emit("deleteComment", commentId, postId);
+    },
+      showCommentCode() {
+      this.$emit("showCommentCode", this.comment);
     }
   },
   components:{
