@@ -35,7 +35,7 @@
         class="posts-cont"
       ></post-list>
 
-      <UserBar></UserBar>
+      <!-- <UserBar></UserBar> -->
     </div>
 </div>
 
@@ -61,7 +61,7 @@ export default {
   },
   components: {
     PostList,
-    UserBar,
+    // UserBar,
     UserPanel,
     CommentCode
 
