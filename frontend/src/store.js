@@ -27,6 +27,12 @@ export default new Vuex.Store({
     setPost(state,post){
       state.currPost = post
     },
+    deletePost(state, post) {
+      var postDeleted = post
+      let postIdx = state.posts.findIndex(post => post._id === postDeleted._id)
+      state.posts.splice(postIdx, 1)
+      
+    },
     updatePost(state, {post}) {
       state.currPost = post;
       let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
@@ -43,9 +49,10 @@ export default new Vuex.Store({
       state.posts = posts
     },
     createComment(state, payload) {
-      const comment = payload.post.comments[payload.post.comments.length - 1];
+    
+      // const comment = payload.post.comments[payload.post.comments.length - 1];
 
-      state.currComment = comment
+      // state.currComment = comment
     },
     deleteComment(state, { payload }) {
       let postIdx = state.posts.findIndex(post => post._id === payload.postId)
@@ -82,6 +89,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    deletePost(context, post) {
+      // console.log(`POST TO BE DELETED:::::`, post);
+      PostService.deletePost(post)
+      .then(res => {
+        context.commit({ type: 'deletePost', post: res })
+        context.dispatch('loadPosts')
+
+
+      })
+      
+    },
+
     addPost(context, post) {
       PostService.updatePost(post)
       .then(res => {
@@ -104,17 +123,16 @@ export default new Vuex.Store({
         })
     },
 
-    addComment(context,post) {
-
-      return CommentsService.addComment(post)
+    addComment(context,payload) {
+      return CommentsService.addComment(payload)
         .then(res => {
           context.commit({ type: 'createComment', post: res })
-
           context.dispatch('loadPosts')
         });
     },
     deleteComment(context, payload) {
-      return CommentsService.deleteComment(payload,)
+      console.log('deleteComment::::::::::psyload:::::::::::', payload);
+      return CommentsService.deleteComment(payload)
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
           context.dispatch('loadPosts')

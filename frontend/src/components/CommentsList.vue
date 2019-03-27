@@ -6,16 +6,22 @@
     <div class="post-feedback customScroll">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
+          <Comment class="comment-cmp"
+           :LoggedInUser="LoggedInUser"
+            :comment="comment"
+             :post="post"
+              @deleteComment="deleteComment"
+              @openModal="addCode"
+              />
         
-          <Comment class="comment-cmp" @openModal="addCode" :LoggedInUser="LoggedInUser" :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>
 
     <div class="post-comment">
       <div v-if="LoggedInUser" class="post-comment-input">
-        <input type="text" placeholder="Enter comment" v-model="newCommentTxt">
-        <img src="../images/html-coding.svg" class="add-code-btn" @click="addCommentCode">
+        <input type="text" placeholder="Enter comment" v-model="comment.txt">
+        <img src="../images/html-coding.svg" class="add-code-btn"  @click="addCommentCode">
 
         <span type="submit" @click="addComment" title="Add Comment">
           <i class="add-comment fas fa-comment-medical"></i>
@@ -42,10 +48,18 @@ export default {
 
   data() {
     return {
+      comment: {
+        txt: null,
+          snippet: {
+            lang: 'js',
+            html: null,
+            css: null,
+            code: null
 
-      newCommentTxt: "",
+          }
+      },
       isAddingCode: false
-    };
+    }
   },
 
   components: {
@@ -54,23 +68,16 @@ export default {
   },
   created() {},
   methods: {
+    deleteComment(commentId, postId) {
+       this.$emit("deleteComment", commentId, postId);
+    },
     addComment() {
-      let comment = {
-        txt: this.newCommentTxt,
-        _id: UtilService.makeId(12),
-        createdAt: new Date(),
-        creator: {
-          userName: this.LoggedInUser.userName,
-          _id: this.LoggedInUser._id,
-          img: this.LoggedInUser.img
-        }
-      };
-
-      var postUp = JSON.parse(JSON.stringify(this.post));
-
-      postUp.comments.push(comment);
-      this.$emit("addComment", postUp);
-      this.newCommentTxt = "";
+      var newComment = this.comment
+      var postId = this.post._id
+      console.log('POST ID FROM COMMENTLIST:::::::', postId);
+      
+        this.$emit("addComment", newComment, postId );
+ 
     },
     addCode() {
       // this.$emit('openModal',this.post)
