@@ -1,4 +1,6 @@
 const postService = require('../services/post-service');
+const userService = require('../services/user-service');
+
 
 function checkLoggedInUser(req, res, next) {
     console.log('INSIDE MIDDLEWARE: ', req.session.userName);
@@ -40,12 +42,14 @@ function addPostRoute(app) {
     app.put('/post/like', async (req, res) => {
         var post = req.body;
         var currUser = req.session.loggedInUser
+
         if (currUser) {
             if (post.likeBy.length) {
                 var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
                 if (indexUser === -1) {
                     console.log('added')
                     post.likeBy.push(currUser)
+                    currUser.likedpost.push(post)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
                 } else {

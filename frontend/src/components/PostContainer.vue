@@ -1,7 +1,7 @@
 <template>
   <section class="post">
     <post @deletePost="deletePost" :LoggedInUser="LoggedInUser" :post="post"/>
-    <post-bar :post="post" @addLike="addLike"/>
+    <post-bar :LoggedInUser="LoggedInUser" :post="post" @addLike="addLike"/>
     <comments-list
       class="comment-list"
       @showCommentCode="showCommentCode"
