@@ -353,6 +353,11 @@ background-color: #ed4956; */
     height: 50%;
     display: flex;
 }
+.edit-editors-modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
 
 .html-editor {
     width: 100%;
@@ -1123,8 +1128,6 @@ iframe {
     display: flex;
     align-items: center;
     font-family: 'Proxima extra bold';
-
-
 }
 
 .comment-user img {
@@ -1188,4 +1191,116 @@ iframe {
 .post-likes{
     font-family: "Proxima";
     color: #262626;
+}
+
+
+.editor-modal-main{
+    box-sizing: border-box;
+
+    position: fixed;
+    /* width: 100%; */
+    /* height: 100%; */
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000bd;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+.editor-modal-cont{
+    /* overflow: scroll; */
+
+    box-sizing: border-box;
+    margin-bottom: 5%;
+    width: 70%;
+    height: 80%;
+    /* background-color: #ffffff; */
+    background-color: #f7f7f7;
+    border: 2px solid #dbdbdb;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.editor-modal-desc{
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    height: 20%;
+    font-family: 'Proxima bold';
+    color: #262626;
+
+}
+.txt-area-modal{
+    overflow: scroll;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+}
+.editor-modal-editor{
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70%;
+
+}
+.editor-modal-editor-cont{
+    background-color: #f7f7f7;
+    width: 100%;
+    height: 100%;
+}
+.editor-modal-editor-cont-title{
+    width: 100%;
+    height: 10%;
+    display: flex;
+}
+.editor-modal-btns{
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.editor-modal-run{
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.editor-modal-editor-body{
+    box-sizing: border-box;
+
+    border: 2px solid #dbdbdb;
+
+    width: 100%;
+    height: 90%;
+    display: flex;
+}
+.editor-modal-editor-body-runner{
+    box-sizing: border-box;
+
+    width: 50%;
+    height: 100%;
+}
+.editor-modal-editor-body-frame{
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+
+}
+.editor-modal-editor-body-code{
+    width: 50%;
+    height: 100%;
+}
+.editor-modal-actions{
+    padding: 5px;
+    /* background-color: #F0D54B; */
+    width: 100%;
+    height: 10%;
+    display: flex;
 }

@@ -1,9 +1,13 @@
 <template>
   <section>
+
+
+
     <div class="post-feedback">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment class="comment-cmp" :LoggedInUser="LoggedInUser" :comment="comment" :post="post"></Comment>
+        
+          <Comment class="comment-cmp" @openModal="addCode" :LoggedInUser="LoggedInUser" :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>
@@ -11,7 +15,7 @@
     <div class="post-comment">
       <div v-if="LoggedInUser" class="post-comment-input">
         <input type="text" placeholder="Enter comment" v-model="newCommentTxt">
-        <img src="../images/html-coding.svg" class="add-code-btn" @click="addCode">
+        <img src="../images/html-coding.svg" class="add-code-btn" @click="addCommentCode">
 
         <span type="submit" @click="addComment" title="Add Comment">
           <i class="add-comment fas fa-comment-medical"></i>
@@ -24,6 +28,8 @@
 
 <script>
 import Comment from "./Comment.vue";
+
+
 import UtilService from "@/services/UtilService.js";
 
 export default {
@@ -36,13 +42,15 @@ export default {
 
   data() {
     return {
+
       newCommentTxt: "",
       isAddingCode: false
     };
   },
 
   components: {
-    Comment
+    Comment,
+
   },
   created() {},
   methods: {
@@ -65,8 +73,13 @@ export default {
       this.newCommentTxt = "";
     },
     addCode() {
-      console.log("add code!");
+      // this.$emit('openModal',this.post)
+    },
+    addCommentCode(){
+      console.log('added 1',this.post)
+      this.$emit('addCommentCode',this.post)
     }
+
   }
 };
 </script>

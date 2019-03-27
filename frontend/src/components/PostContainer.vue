@@ -10,6 +10,7 @@
         @addLike="addLike"/>
     <comments-list
         class="comment-list"
+        @addCommentCode="addCommentCode"
         @addComment="addComment"
         :LoggedInUser="LoggedInUser"
         :comments="post.comments"
@@ -39,6 +40,12 @@ export default {
     deletePost(post){
       this.$emit('deletePost', post)
     },
+    addCommentCode(post){
+            console.log('added 2',post)
+
+      this.$emit('addCommentCode',post)
+
+    }
   }
 };
 </script>

@@ -1,8 +1,22 @@
 <template>
   <!-- <div class="home"> -->
+<div>
+
+
+      <comment-code 
+        v-if="isModal"
+        @closeModal="closeModal"
+        :currPost="currPost"
+        >
+      </comment-code>
     <div class="main-cont wrapper">
+
+
+    
+
       <user-panel></user-panel>
       <post-list
+        @addCommentCode="addCommentCode"
         @deletePost="deletePost"  
         @addComment="addComment"
         @addLike="addLike"
@@ -13,21 +27,34 @@
 
       <UserBar></UserBar>
     </div>
-  <!-- </div> -->
+</div>
+
 </template>
 
 
 
 <script>
 import PostList from "../components/PostList";
+import CommentCode from "../components/CommentCode";
+
+
 import UserBar from "../components/UserBar.vue";
 import UserPanel from "../components/UserPanel.vue";
 
 export default {
+  data() {
+    return {
+      isModal: false, 
+      currPost: null,     
+    }
+  },
   components: {
     PostList,
     UserBar,
-    UserPanel
+    UserPanel,
+    CommentCode
+
+
   },
   computed: {
     posts() {
@@ -47,6 +74,14 @@ export default {
     deletePost(post){
       this.$store.dispatch("deletePost", post);
     },
+    closeModal(){
+      this.isModal = !this.isModal;
+    },
+    addCommentCode(post){
+      this.currPost = post
+      console.log('in homeee',post)
+      this.isModal = true;
+    }
   },
   created() {
     this.$store.dispatch("loadPosts");
