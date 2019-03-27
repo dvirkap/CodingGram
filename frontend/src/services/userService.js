@@ -34,14 +34,19 @@ return users
 
 async function login(userCredentials) {
     var loggedInUser = await axios.post(`${_URL}/login`, userCredentials)
-    console.log('loggedInUser::::::', loggedInUser.data);
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser.data))
     return loggedInUser.data
 }
 
-async function signup(newUserCredentials) {
-    var user = await axios.post(`${_URL}/signup`, newUserCredentials)
-    return user
+// async function signup(newUserCredentials) {
+//     var user = await axios.post(`${_URL}/signup`, newUserCredentials)
+
+//     return user
+// }
+
+function signup(newUserCredentials) {
+    console.log(newUserCredentials,'in store service')
+    return axios.post(`${_URL}/signup`, newUserCredentials).then(res=>res.data)
 }
 
 async function logout() {

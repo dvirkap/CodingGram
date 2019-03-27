@@ -15,10 +15,8 @@ const _URL = (process.env.NODE_ENV !== 'development')
 
 
 async function addComment(post) {
-    console.log('post from front service', post);
-    const postId = post._id
-    console.log(postId);
-    const updatedPost = await axios.put(`${_URL}${postId}`, post)
+        const postId = post._id
+        const updatedPost = await axios.put(`${_URL}${postId}`, post)
     return updatedPost.data
 }
 

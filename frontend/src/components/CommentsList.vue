@@ -1,18 +1,21 @@
 <template>
   <section>
-    <div class="post-feedback" style="overflow:hidden">
+    <div class="post-feedback">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment :comment="comment" :post="post"></Comment>
+          <Comment class="comment-cmp" :LoggedInUser="LoggedInUser" :comment="comment" :post="post"></Comment>
         </li>
       </ul>
     </div>
 
     <div class="post-comment">
-      <div class="post-comment-input">
-        <input type="text" placeholder="Enter comment" v-model="txt">
+      <div v-if="LoggedInUser" class="post-comment-input">
+        <input type="text" placeholder="Enter comment" v-model="newCommentTxt">
         <img src="../images/html-coding.svg" class="add-code-btn" @click="addCode">
-        <span type="submit" @click.stop.prevent="addComment()" title="Add Comment"><i class="add-comment fas fa-comment-medical"></i></span>
+
+        <span type="submit" @click="addComment" title="Add Comment">
+          <i class="add-comment fas fa-comment-medical"></i>
+        </span>
         <div v-if="isAddingCode"></div>
       </div>
     </div>
@@ -21,56 +24,50 @@
 
 <script>
 import Comment from "./Comment.vue";
-import UtilService from '@/services/UtilService.js';
+import UtilService from "@/services/UtilService.js";
 
 export default {
   name: "CommentsList",
-  // props: ['comments', 'post'],
   props: {
-    comments: Array, 
-    post: Object
+    comments: Array,
+    post: Object,
+    LoggedInUser: Object
   },
 
   data() {
-      return {
-        txt: '',
-        createdAt: '',
-        creator: {
-          userName: '',
-          commentsList: null
-        },
-        isAddingCode: false
-      }
+    return {
+      newCommentTxt: "",
+      isAddingCode: false
+    };
   },
-  
+
   components: {
-      Comment,
+    Comment
   },
-  created() {
-   
-  },
+  created() {},
   methods: {
     addComment() {
       let comment = {
-        txt: this.txt,
+        txt: this.newCommentTxt,
         _id: UtilService.makeId(12),
         createdAt: new Date(),
         creator: {
-          userName: 'Ploni',
+          userName: this.LoggedInUser.userName,
+          _id: this.LoggedInUser._id,
+          img: this.LoggedInUser.img
         }
       };
-      this.post.comments.push(comment)
-      console.log('comments:', this.post._id);
-      this.$store.dispatch({type: 'addComment', post: this.post});
-      // console.log('comment added', comment);
-      console.log('comments:', this.post.comments);
-      this.txt = '';
+
+      var postUp = JSON.parse(JSON.stringify(this.post));
+
+      postUp.comments.push(comment);
+      this.$emit("addComment", postUp);
+      this.newCommentTxt = "";
     },
     addCode() {
-      console.log('add code!');
-
+      console.log("add code!");
     }
-  },
+  }
 };
 </script>
 

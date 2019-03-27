@@ -1,10 +1,10 @@
 <template>
   <section>
-    <!-- <i class="fas fa-sign-language" @click="addLike"></i> -->
     <div class="post-bar-container">
       <img src="../images/clap.svg" class="like-btn" @click="addLike">
       <div class="like-badge">
-        <span>{{post.likeBy.length}}</span>
+        <span v-if="post.likeBy.length" class="post-likes">{{post.likeBy.length}}</span>
+        <span v-else class="post-likes">Be the First</span>
       </div>
     </div>
   </section>
@@ -16,14 +16,9 @@ export default {
   props: ["post"],
   methods: {
     addLike() {
-      this.$store.dispatch("addLike", this.post);
+      this.$emit('addLike', this.post)
     }
   },
-  computed: {
-      getLikes() {
-          return this.$store.getters.getLikes;
-      }
-  }
 };
 </script>
 

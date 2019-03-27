@@ -34,13 +34,15 @@ async function updatePost(post) {
     const postId = post._id
     if (postId) {
         var editedPost = await axios.put(`${_URL}${postId}`, post)
-        return res.data(editedPost)
+        return editedPost
     } else {
         var addedPost = await axios.post(`${_URL}`, post)
         return addedPost
     }
 }
 
-function addLike(post) {
-    return axios.post(`${_URL}`, post)
+async function addLike(post) {
+
+    var editedPost = await axios.put(`${_URL}like`, post)
+    return editedPost
 }

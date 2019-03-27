@@ -618,16 +618,7 @@ background-color: #ed4956; */
     margin-right: 30px;
 }
 
-.post-feedback {
-    width: 90%;
-    max-height: 200px;
-    overflow: scroll;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    margin-right: 30px;
-    margin-left: 30px;
-    align-self: center;
-}
+
 
 .post-comment {
     width: 100%;

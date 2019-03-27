@@ -6,8 +6,8 @@ function checkLoggedInUser(req, res, next) {
 
     if (!req.session.user || !req.session.user.isAdmin) {
         console.log('INSIDE');
-       return  res.status(401).end('Unauthorized');
-        }
+        return res.status(401).end('Unauthorized');
+    }
     next();
 }
 
@@ -16,16 +16,16 @@ function addPostRoute(app) {
 
     //GET LIST OF POSTS
     // {
-        app.get('/post', async (req, res) => {
-            // console.log('0000',req.query.filter)
+    app.get('/post', async (req, res) => {
+        // console.log('0000',req.query.filter)
 
 
-            // console.log('post.route.js REQ.QUERY:', req.query)
-            var posts = await postService.query(req.query.filter)
-            res.json(posts)
-            // var x = await sendtoAsyncFunc(posts)
-            // var y = await sendtosecFunc(x)
-        })
+        // console.log('post.route.js REQ.QUERY:', req.query)
+        var posts = await postService.query(req.query.filter)
+        res.json(posts)
+        // var x = await sendtoAsyncFunc(posts)
+        // var y = await sendtosecFunc(x)
+    })
     // }
 
 
@@ -41,16 +41,41 @@ function addPostRoute(app) {
 
     // CREATE POST
     app.post('/post', async (req, res) => {
-
         var post = req.body;
         var currUser = req.session.loggedInUser
-
-
-        
-        console.log(post, 'postpostpost')
-        const addedPost = await postService.add(post,currUser)
-        console.log('Post Created and back from DB:', addedPost);
+        const addedPost = await postService.add(post, currUser)
         res.json(addedPost)
+    })
+    // like/unlike POST
+    app.put('/post/like', async (req, res) => {
+        var post = req.body;
+        var currUser = req.session.loggedInUser
+        console.log(currUser,'currUsercurrUser')
+        console.log('start')
+
+        if(currUser){
+            if(post.likeBy.length){
+                var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
+                    if (indexUser === -1) {
+                            console.log('added')
+                            post.likeBy.push(currUser)
+                            const updatedPost = await postService.update(post);
+                            res.json(updatedPost);
+                    } else{
+                            console.log('removeed')
+                            post.likeBy.splice(indexUser,1)
+                            const updatedPost = await postService.update(post);
+                            res.json(updatedPost);
+                    };
+            } else{
+                    console.log('added')
+                    post.likeBy.push(currUser)
+                    const updatedPost = await postService.update(post);
+                    res.json(updatedPost);
+            };
+        } else {
+            console.log('no user')
+        }
     })
 
     // UPDATE POST
@@ -58,8 +83,6 @@ function addPostRoute(app) {
         const post = req.body;
         const updatedPost = await postService.update(post);
         res.json(updatedPost);
-
-
     })
 
     // DELETE POST
@@ -73,36 +96,39 @@ function addPostRoute(app) {
     // -------------------------- COMMENTS SECTION ---------------------------
 
     //DELETE COMMENT
-    app.delete('/post/:postId/:commentId',  async (req, res) => {
-        if(req.session.loggedInUser.userName) {
+    app.delete('/post/:postId/:commentId', async (req, res) => {
+        if (req.session.loggedInUser.userName) {
             const params = req.params
-
             var post = await postService.getPostById(params.postId)
-            // console.log(post.creator.userName,'post.creator.userName')
-            
-            // console.log(req.session.loggedInUser.userName,'req.session.loggedInUser.userName')
-    
-            
-            if(post.creator.userName === req.session.loggedInUser.userName){
-                // console.log(params,'sdfsdfsdf');
-                
+            if (post.creator.userName === req.session.loggedInUser.userName) {
                 const deletedComment = await postService.removeComment(params)
                 res.end(`comment ${deletedComment} deleted!`)
             }
         }
-      
+
     })
 
     // UPADTE COMMENT
     app.put('/post/:postId', async (req, res) => {
         const post = req.body;
-        console.log('post.route update, before post-service:', post);
+
+
         const updatedPost = await postService.updateComment(post);
-        console.log('updatedPost', updatedPost);
 
         res.json(updatedPost);
 
 
+    })
+
+    // -------------------------- Replies SECTION ---------------------------
+    //ADD REPLY
+    app.post('/reply', async (req, res) => {
+
+        var reply = req.body;
+        var currUser = req.session.loggedInUser
+        console.log('req.body:::::::::::', reply);
+        var addedReply = await postService.addReply(reply)
+        res.json(addedReply)
     })
 
 }

@@ -1,9 +1,16 @@
 <template>
   <!-- <div class="home"> -->
     <div class="main-cont wrapper">
-      <user-panel></user-panel>
-      <post-list :posts="posts" class="posts-cont"></post-list>
-      <user-bar></user-bar>
+      <post-list
+        @deletePost="deletePost"  
+        @addComment="addComment"
+        @addLike="addLike"
+        :LoggedInUser="LoggedInUser"
+        :posts="posts"
+        class="posts-cont"
+      ></post-list>
+
+      <UserBar></UserBar>
     </div>
   <!-- </div> -->
 </template>
@@ -21,20 +28,26 @@ export default {
     UserBar,
     UserPanel
   },
-  data() {
-    return {
-      name: ""
-    };
-  },
-    computed: {
-      posts() {
+  computed: {
+    posts() {
       return this.$store.getters.postsFiltered;
-    }
     },
-  methods: {
-    getUser() {}
+    LoggedInUser() {
+      return this.$store.getters.getCurrUser;
+    }
   },
-  	created() {
+  methods: {
+    addComment(newCmt) {
+      this.$store.dispatch("addComment", newCmt);
+    },
+    addLike(post) {
+      this.$store.dispatch("addLike", post);
+    },
+    deletePost(post){
+      this.$store.dispatch("deletePost", post);
+    },
+  },
+  created() {
     this.$store.dispatch("loadPosts");
   }
 };

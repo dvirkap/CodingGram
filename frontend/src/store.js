@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import PostService from './services/PostService.js';
 import UserService from './services/UserService.js';
 import CommentsService from './services/CommentsService.js';
+import RepliesService from './services/RepliesService.js';
 
 
 Vue.use(Vuex)
@@ -19,6 +20,10 @@ export default new Vuex.Store({
   mutations: {
     setLoggedInUser(state,user){
       state.currUser = user
+    },
+    setLoggoutUser(state){
+      state.currUser = null;
+      console.log(state.currUser,'state.currUser')
     },
     setPost(state,post){
       state.currPost = post
@@ -81,18 +86,11 @@ export default new Vuex.Store({
     addPost(context, post) {
       PostService.updatePost(post)
       .then(res => {
-        if (post._id) {
-          context.commit({ type: 'updatePost', post })
-
-        } 
-        else {
-          context.commit({ type: 'addPost', post })
-          
-        }
-        
-      }).then(()=>{
-        return Promise.resolve('yes')
+        context.dispatch('loadPosts').then(()=>{
+          return Promise.resolve('yes')
+        })
       })
+
     },
     LoadPost(context, postId){
       return PostService.getPostById(postId).then(res=>res)
@@ -102,26 +100,45 @@ export default new Vuex.Store({
       return PostService.query(filter)
         .then(posts => {
           context.commit({ type: 'setPosts', posts })
+        }).then(()=>{
+          return Promise.resolve('yes')
         })
     },
 
-    addComment(context, { post }) {
+    addComment(context,post) {
+
       return CommentsService.addComment(post)
         .then(res => {
           context.commit({ type: 'createComment', post: res })
+
+          context.dispatch('loadPosts')
         });
     },
     deleteComment(context, payload) {
       return CommentsService.deleteComment(payload,)
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
+          context.dispatch('loadPosts')
+
         })
     },
+    addReply(context, payload) {
+      return RepliesService.addReply(payload)
+        .then(res => {
+          context.commit({ type: 'createReply', reply: res })
+        });
+    },
+    deleteReply(context, payload) {
+      return RepliesService.deleteReply(payload)
+        .then(res => {
+          context.commit({ type: 'deleteReply', reply: res })
+        });
+    },
     addLike(context, post) {
-      let likeBy = post.likeBy
+
       return PostService.addLike(post)
         .then(res => {
-          context.commit({ type: 'addLike', likeBy })
+          context.dispatch('loadPosts')
         })
     },
     checkLoggedInUser(context){
@@ -136,15 +153,12 @@ export default new Vuex.Store({
     },
     signUp(context,newUser){
       UserService.signup(newUser).then(user=>{
-        
-        console.log(user)
-        var userName = newUser.userName
-        var password = newUser.password
-        var userCredentials = {userName, password}
-        UserService.login(userCredentials).then(res=> {
-          context.commit('setLoggedInUser',res)
-        })
+          context.commit('setLoggedInUser',user)
       })
+    },
+    Logout(context){
+      UserService.logout()
+      context.commit('setLoggoutUser')
     }
 
   }
