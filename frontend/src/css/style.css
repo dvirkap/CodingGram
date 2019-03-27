@@ -588,10 +588,10 @@ background-color: #ed4956; */
     display: flex;
     flex-direction: column;
     position: fixed;
-    right: 0;
+    left: 0;
     padding: 0 25px;
     /* max-width: 100%; */
-    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
     height: 100vw;
     background-color: #ffffff;
 }
@@ -677,11 +677,17 @@ body.open .screen {
 }
 
 .posts-cont {
+    max-width: 100%;
+    height: auto;
+    margin-left: 300px;
+    /* padding-right: 100px; */
+}
+/* .posts-cont {
     width: 100%;
     height: auto;
     padding-left: 75px;
     padding-right: 258px;
-}
+} */
 
 .post {
     border-radius: 5px;
