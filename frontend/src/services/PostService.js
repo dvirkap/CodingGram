@@ -4,7 +4,8 @@ export default {
     query,
     getPostById,
     updatePost,
-    addLike
+    addLike,
+    deletePost
 }
 
 const axios = Axios.create({
@@ -28,7 +29,15 @@ async function getPostById(postId) {
     var post = await axios.get(`${_URL}${postId}`);
     return post.data
 }
-
+async function deletePost(post) {
+    console.log(`POST TO BE DELETED:::::`, post);
+    var postId = post._id
+    var headers = {
+        data: post
+    }
+    var deletedPost = await axios.delete(`${_URL}${postId}`, post)
+    return deletedPost;
+}
 // add/edit post
 async function updatePost(post) {
     const postId = post._id

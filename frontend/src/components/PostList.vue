@@ -2,13 +2,18 @@
   <section>
     <ul>
       <li v-for="post in posts" :key="post._id">
-        <post-container 
+        <post-container
+          @showCommentCode="showCommentCode"
+          @deletePost="deletePost"
+          @addComment="addComment"
           @addCommentCode="addCommentCode"
-            @deletePost="deletePost"  
-            @addComment="addComment"
-            @addLike="addLike" 
-            :LoggedInUser="LoggedInUser" 
-            :post="post" />
+          @deleteComment="deleteComment"
+          @addLike="addLike"
+          :LoggedInUser="LoggedInUser"
+          :post="post"
+        />
+      
+          
       </li>
     </ul>
   </section>
@@ -19,24 +24,33 @@ import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
-  props: ['posts','LoggedInUser'],
+  props: ["posts", "LoggedInUser"],
   components: {
     PostContainer
   },
   methods: {
-    addComment(newCmt){
-      this.$emit('addComment',newCmt);
+    deleteComment(commentId, postId) {
+      this.$emit("deleteComment", commentId, postId);
+    },
+    addComment(newComment, postId) {
+      this.$emit("addComment", newComment, postId);
     },
     addLike(post) {
-      this.$emit('addLike', post)
+      this.$emit("addLike", post);
     },
-    deletePost(post){
-      this.$emit('deletePost', post)
+    deletePost(post) {
+      this.$emit("deletePost", post);
     },
+  
     addCommentCode(post){
       console.log('added 3',post)
       this.$emit('addCommentCode',post)
-    }
+    },
+        showCommentCode(comment){
+      this.$emit('showCommentCode',comment)
+
+    },
+
 
   },
 };

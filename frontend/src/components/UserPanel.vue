@@ -127,6 +127,7 @@ export default {
 }
 
 .left-aside-nav-cont {
+
   display: flex;
   flex-direction: column;
   background-color: #494949;
@@ -136,6 +137,7 @@ export default {
 .left-aside-nav-icons-cont {
   display: flex;
   flex-direction: row;
+
 }
 
 .left-aside-cont-title {
@@ -221,7 +223,7 @@ export default {
 .left-aside-nav {
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  z-index: 100;
   position: fixed;
   left: 0;
   top: 0;

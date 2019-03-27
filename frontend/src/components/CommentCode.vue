@@ -3,7 +3,8 @@
     <div class="editor-modal-cont">
       <div class="editor-modal-desc">
         <h2>Comment:</h2>
-        <textarea class="txt-area-modal"></textarea>
+        <textarea v-if="isNewComment" class="txt-area-modal" v-model="newComment.txt"></textarea>
+        <textarea v-else class="txt-area-modal" v-model="newComment.txt" readonly></textarea>
       </div>
 
       <div class="editor-modal-editor">
@@ -64,7 +65,7 @@
         </div>
       </div>
       <div class="editor-modal-actions">
-        <button>save</button>
+        <button @click="addComment">save</button>
         <button @click="closeModal">close</button>
         <button>like</button>
       </div>
@@ -85,21 +86,25 @@ import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "CommentCode",
-  props: ['currPost'],
+  props: ["currPost",'currComment'],
   data() {
     return {
+      isNewComment: false,
       isHtml: true,
       isCss: false,
       isJs: false,
       iframsrc: "",
+
       newComment: {
-        desc: "",
+        txt: "",
         snippet: {
-          html: this.currPost.snippet.html,
-          css: this.currPost.snippet.css,
-          code: this.currPost.snippet.code
-        },
+          lang: "js",
+          html: "",
+          css: "",
+          code: ""
+        }
       },
+
       cmOptionsHTML: {
         tabSize: 1,
         mode: "xml",
@@ -130,6 +135,15 @@ export default {
         autoRefresh: true,
         autoCloseBrackets: true
       }
+      //  newComment: {
+      //   txt: '',
+      //   snippet: {
+      //     lang: "js",
+      //     html: this.currPost.snippet.html,
+      //     css: this.currPost.snippet.css,
+      //     code: this.currPost.snippet.code
+      //   }
+      // },
     };
   },
   methods: {
@@ -161,14 +175,40 @@ export default {
     <body>
       ${this.newComment.snippet.html}
     <script>
-      ${this.newComment.snippet.code}
-      <\/script>
+      ${this.newComment.snippet.code}<\/script>
     </body>
     </html>`;
       this.iframsrc = html;
+    },
+    addComment() {
+      var postId = this.currPost._id;
+      this.$emit("addComment", this.newComment, postId);
     }
   },
   created() {
+    if (this.currPost) {
+          this.isNewComment = true;
+          this.newComment = {
+            txt: "",
+            snippet: {
+              lang: "js",
+              html: this.currPost.snippet.html,
+              css: this.currPost.snippet.css,
+              code: this.currPost.snippet.code
+            }
+          };
+    }else {
+      this.isNewComment = false;
+          this.newComment = {
+            txt: this.currComment.txt,
+            snippet: {
+              lang: "js",
+              html: this.currComment.snippet.html,
+              css: this.currComment.snippet.css,
+              code: this.currComment.snippet.code
+            }
+          };
+    }
     this.codeForPreview();
   }
 };

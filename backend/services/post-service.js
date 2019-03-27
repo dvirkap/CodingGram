@@ -19,11 +19,10 @@ function query(filter) {
             ]
         }
         return mongoService.connect()
-            .then(db => db.collection('posts').find(filterObj)
-                .toArray())
+            .then(db => db.collection('posts').find(filterObj).sort({ createdAt: -1}).toArray())
     } else {
         return mongoService.connect()
-            .then(db => db.collection('posts').find({})
+            .then(db => db.collection('posts').find({}).sort({ createdAt: -1})
                 .toArray())
     }
 }
@@ -103,26 +102,41 @@ function removePost(postId) {
 
 
 // ADD NEW COMMENT
-function updateComment(post) {
-    // console.log('POSTOBJECT::::::::::::::', post);
+function updateComment(id, newComment, currUser) {
+    console.log('POSTID:::::::', id);
+    console.log('NEW COMMENT:::::::', newComment);
+    console.log('CURR USER:::::::', currUser);
 
-    // var newComment = {
-    //     txt: sdfdsfsdf,
-    //     _id: WQK1pN7AKtNs,
-    //     createdAt: Date.now(),
-    //     creator: {
-    //         userName: Ploni
-    //     }
-    // }
-    const strId = post._id
-    const postId = strId
+    var comment = {
+        _id: new ObjectId(),
+        txt: newComment.txt,
+        snippet: {
+            lang: newComment.snippet.lang,
+            html: newComment.snippet.html,
+            css: newComment.snippet.css,
+            code: newComment.snippet.code
+        },
+        createdAt: Date.now(),
+        creator: {
+            userName: currUser.userName,
+            _id: currUser._id,
+            img: currUser.img
+        },
+        replies: [],
+        isApproved: false,
+        likeBy: []
+    }
+    // const strId = post._id
+    const postId = id
     return mongoService.connect()
-        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: post.comments[post.comments.length - 1] } }))
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: {$each:[comment], $position: 0} } }))
         // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: post.comments[post.comments.length - 1] } }))
         .then(res => {
-            post._id = strId;
+            var post = res
+            post._id = postId;
             return post;
         })
+
 }
 
 // DELETE COMMENT
@@ -133,7 +147,7 @@ function removeComment(params) {
             // var commentID = new ObjectId(params.commentId)
             const collection = db.collection('posts');
             console.log('commentId from back service', params)
-            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: params.commentId } } })
+            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
             // return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: commentID} })
         })
 }
@@ -145,12 +159,12 @@ function addReply(reply) {
     console.log('---------------reply----------------', reply);
     // console.log('---------------reply----------------', currUser);
     var newReply = {
-                commentId: "add id",
-                txt: "the first reply",
-                createdAt: Date.now(),
-                creator: {
-                    userName: "Ploni"
-                }
+        commentId: "add id",
+        txt: "the first reply",
+        createdAt: Date.now(),
+        creator: {
+            userName: "Ploni"
+        }
     }
 
     return mongoService.connect()
