@@ -1,6 +1,7 @@
 <template>
   <!-- <div class="home"> -->
     <div class="main-cont wrapper">
+      <user-panel></user-panel>
       <post-list
         @deletePost="deletePost"  
         @addComment="addComment"
