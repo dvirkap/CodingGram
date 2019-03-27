@@ -46,14 +46,43 @@ function addPostRoute(app) {
         const addedPost = await postService.add(post, currUser)
         res.json(addedPost)
     })
+    // like/unlike POST
+    app.put('/post/like', async (req, res) => {
+        var post = req.body;
+        var currUser = req.session.loggedInUser
+        console.log(currUser,'currUsercurrUser')
+        console.log('start')
+
+        if(currUser){
+            if(post.likeBy.length){
+                var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
+                    if (indexUser === -1) {
+                            console.log('added')
+                            post.likeBy.push(currUser)
+                            const updatedPost = await postService.update(post);
+                            res.json(updatedPost);
+                    } else{
+                            console.log('removeed')
+                            post.likeBy.splice(indexUser,1)
+                            const updatedPost = await postService.update(post);
+                            res.json(updatedPost);
+                    };
+            } else{
+                    console.log('added')
+                    post.likeBy.push(currUser)
+                    const updatedPost = await postService.update(post);
+                    res.json(updatedPost);
+            };
+        } else {
+            console.log('no user')
+        }
+    })
 
     // UPDATE POST
     app.put('/post/:postId', async (req, res) => {
         const post = req.body;
         const updatedPost = await postService.update(post);
         res.json(updatedPost);
-
-
     })
 
     // DELETE POST
@@ -82,9 +111,9 @@ function addPostRoute(app) {
     // UPADTE COMMENT
     app.put('/post/:postId', async (req, res) => {
         const post = req.body;
-        console.log('post.route update, before post-service:', post);
+
+
         const updatedPost = await postService.updateComment(post);
-        console.log('updatedPost', updatedPost);
 
         res.json(updatedPost);
 
@@ -94,7 +123,7 @@ function addPostRoute(app) {
     // -------------------------- Replies SECTION ---------------------------
     //ADD REPLY
     app.post('/reply', async (req, res) => {
-        
+
         var reply = req.body;
         var currUser = req.session.loggedInUser
         console.log('req.body:::::::::::', reply);

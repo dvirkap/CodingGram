@@ -16,11 +16,13 @@ function getById(userId) {
 }
 
 function addUser(newUser) {
+    console.log(newUser,'in routes service')
+
     
     var userToAdd = {
-            displayName : "yossi", 
+            displayName : "", 
             userName : newUser.userName, 
-            fullName : "yossi ben yossi", 
+            fullName : "", 
             isAdmin : false, 
             password : newUser.password, 
             bio : "Aspiring creative writer. I like spicy food and good people.", 
@@ -28,18 +30,17 @@ function addUser(newUser) {
             email : newUser.email, 
             job : "Network Engineer", 
             birthday : "12/11/1986", 
-            img : "https://www.designskilz.com/random-users/images/imageM28.jpg", 
+            img : "https://www.designskilz.com/random-users/images/imageM27.jpg", 
             address : "4123 New Street Oakland", 
             createdAt : Date.now() ,
             followers : [], 
             following : [], 
             likedpost: []
         }
-        
-        console.log(userToAdd);
         return mongoService.connect()
         .then(db => db.collection('users').insertOne(userToAdd))
         .then(res => {
+            console.log(res,'resssssss')
             userToAdd._id = res.insertedId
             return userToAdd
         })

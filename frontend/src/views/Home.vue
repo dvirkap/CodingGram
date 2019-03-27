@@ -1,7 +1,15 @@
 <template>
   <div class="home">
     <div class="main-cont wrapper">
-      <post-list :user="user" :posts="posts" class="posts-cont"></post-list>
+      <post-list
+        @deletePost="deletePost"  
+        @addComment="addComment"
+        @addLike="addLike"
+        :LoggedInUser="LoggedInUser"
+        :posts="posts"
+        class="posts-cont"
+      ></post-list>
+
       <UserBar></UserBar>
     </div>
   </div>
@@ -18,23 +26,26 @@ export default {
     PostList,
     UserBar
   },
-  data() {
-    return {
-      name: ""
-    };
-  },
-    computed: {
-      posts() {
+  computed: {
+    posts() {
       return this.$store.getters.postsFiltered;
     },
-    user(){
-      return this.$store.getters.getCurrUser
+    LoggedInUser() {
+      return this.$store.getters.getCurrUser;
     }
-    },
-  methods: {
-    getUser() {}
   },
-  	created() {
+  methods: {
+    addComment(newCmt) {
+      this.$store.dispatch("addComment", newCmt);
+    },
+    addLike(post) {
+      this.$store.dispatch("addLike", post);
+    },
+    deletePost(post){
+      this.$store.dispatch("deletePost", post);
+    },
+  },
+  created() {
     this.$store.dispatch("loadPosts");
   }
 };

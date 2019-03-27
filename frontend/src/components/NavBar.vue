@@ -1,40 +1,42 @@
 <template>
   <div class="navbar">
     <div class="navbar-cont wrapper">
-      {{user}}
+
+
       <div class="navbar-logo-cont">
 		  
         <router-link to="/"><img class="navbar-logo" src="../images/logoIcon.png" alt></router-link>
           <div class="navbar-logo-txt">
             <router-link to="/"><span>CodingGram</span></router-link>
           </div>
+
+
       </div>
+        <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link>
+
       <div class="navbar-search-cont">
 
 		  <input v-model="filterByTxt" @keyup="setFilter()" type="text" placeholder="What are you looking for?...">
       
 	  </div>
+
       <div class="navbar-routers-cont">
-        
-        <!-- <router-link to="/"><img class="navbar-routers" src="../images/clap.svg" alt></router-link> -->
-        <!-- <router-link to="/"><i class="fas fa-user">Hello Guest</i></router-link> -->
-        <router-link to="/login"> <span uk-icon="user"></span> Login</router-link>
-        <router-link to="/signup"> <span uk-icon="sign-in"></span> Sign In</router-link>
-
-
-         
-        <!-- <router-link to="/">signup </router-link> -->
-        <!-- <router-link to="/">login</router-link> -->
+        <span v-if="LoggenInUser" @click="logout" uk-icon="sign-out">Logout</span>
+        <router-link v-if="!LoggenInUser" to="/login"> <span uk-icon="user"></span> Login</router-link>
+        <router-link v-if="!LoggenInUser" to="/signup"> <span uk-icon="sign-in"></span> Sign up</router-link>
       </div>
     </div>
+
+
   </div>
+  
 </template>
 
 <script>
 import PostService from '@/services/PostService.js'
 export default {
   name: "NavBar",
-  props: {},
+  props: [],
   components: {
   },
   data() {
@@ -45,10 +47,15 @@ export default {
   methods: {
     setFilter(){
     this.$store.dispatch("loadPosts" ,this.filterByTxt);
+    },
+    logout(){
+      console.log('navvv')
+
+    this.$store.dispatch("Logout");
     }
   },
   computed: {
-    user(){
+    LoggenInUser(){
       return this.$store.getters.getCurrUser
     }
   },

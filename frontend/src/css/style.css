@@ -999,7 +999,6 @@ iframe {
 .like-badge {
     color: grey;
     align-self: center;
-    margin: 5px;
 }
 
 .comment-container {
@@ -1125,4 +1124,8 @@ iframe {
 
     display: flex;
     justify-content: space-between;
+}
+.post-likes{
+    font-family: "Proxima";
+    color: #262626;
 }

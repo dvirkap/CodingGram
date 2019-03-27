@@ -4,11 +4,15 @@ const userService = require('../services/user-service.js')
 
 function addUserRoute(app) {
     app.post('/signup', async (req,res) => {
+
+
         var newUser = req.body
-        console.log('newUsernewUser:::::::::::', newUser);
-        
+        console.log(newUser,'in routes')
+
         const addedUser = await userService.addUser(newUser)
-        return res.json(addedUser)
+
+        req.session.loggedInUser = addedUser
+        res.json(addedUser)
     })
 
     app.post('/login', (req, res) => {
@@ -16,12 +20,10 @@ function addUserRoute(app) {
 
         if (req.session.loggedInUser) res.json(req.session.loggedInUser)
         else {
-            console.log('ttttttttttttt');
             
             userService.checkLogin(userCredentials)
                 .then(user => {
                     req.session.loggedInUser = user;
-                    console.log('req.session.loggedInUser::::::::::!!!!', req.session.loggedInUser);
                     
                     res.json(user)
                 })
@@ -29,6 +31,9 @@ function addUserRoute(app) {
                     res.status(500).send('Wrong Credentials')
                 })
         }
+    })
+    app.post('/logout', (req, res) => {
+        req.session.loggedInUser = null;
     })
 
     app.get('/user', async (req, res) => {
