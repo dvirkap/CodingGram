@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="navbar-cont wrapper">
+    <div class="navbar-cont navWrapper">
 
 
       <div class="navbar-logo-cont">

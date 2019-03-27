@@ -5,11 +5,14 @@
         <post-container
           @deletePost="deletePost"
           @addComment="addComment"
+          @addCommentCode="addCommentCode"
           @deleteComment="deleteComment"
           @addLike="addLike"
           :LoggedInUser="LoggedInUser"
           :post="post"
         />
+      
+          
       </li>
     </ul>
   </section>
@@ -36,8 +39,14 @@ export default {
     },
     deletePost(post) {
       this.$emit("deletePost", post);
+    },
+  
+    addCommentCode(post){
+      console.log('added 3',post)
+      this.$emit('addCommentCode',post)
     }
-  }
+
+  },
 };
 </script>
 

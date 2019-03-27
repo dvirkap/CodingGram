@@ -1,0 +1,178 @@
+<template>
+  <section class="editor-modal-main" @click.self="closeModal">
+    <div class="editor-modal-cont">
+      <div class="editor-modal-desc">
+        <h2>Comment:</h2>
+        <textarea class="txt-area-modal"></textarea>
+      </div>
+
+      <div class="editor-modal-editor">
+        <div class="editor-modal-editor-cont">
+          <div class="editor-modal-editor-cont-title">
+            <div class="editor-modal-btns">
+              <button @click="htmlMode" class="html-btn active-btnL">
+                <h1>
+                  HTML
+                  <i class="html-btnL fab fa-html5"></i>
+                </h1>
+              </button>
+
+              <button @click="cssMode" class="html-btn active-btnL">
+                <h1>
+                  CSS
+                  <i class="css-btnL fab fa-css3-alt"></i>
+                </h1>
+              </button>
+
+              <button @click="jsMode" class="html-btn active-btnL">
+                <h1>
+                  JS
+                  <i class="js-btnL fab fa-js"></i>
+                </h1>
+              </button>
+            </div>
+
+            <div class="editor-modal-run">
+              <button class="btn-run" @click="codeForPreview()">
+                <h1>
+                  RUN CODE
+                  <i class="run fas fa-play"></i>
+                </h1>
+              </button>
+            </div>
+          </div>
+
+          <div class="editor-modal-editor-body">
+            <div class="editor-modal-editor-body-code">
+              <div class="edit-editors-modal">
+                <div v-show="isHtml" class="html-editor">
+                  <codemirror v-model="newComment.snippet.html" :options="cmOptionsHTML"></codemirror>
+                </div>
+
+                <div v-show="isCss" class="css-editor">
+                  <codemirror v-model="newComment.snippet.css" :options="cmOptionsCSS"></codemirror>
+                </div>
+                <div v-show="isJs" class="js-editor">
+                  <codemirror v-model="newComment.snippet.code" :options="cmOptionsJS"></codemirror>
+                </div>
+              </div>
+            </div>
+            <div class="editor-modal-editor-body-runner">
+              <iframe class="editor-modal-editor-body-frame" :srcdoc="iframsrc"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="editor-modal-actions">
+        <button>save</button>
+        <button @click="closeModal">close</button>
+        <button>like</button>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import "codemirror/mode/javascript/javascript.js";
+import "codemirror/mode/xml/xml.js";
+import "codemirror/mode/css/css.js";
+import "codemirror/addon/display/autorefresh.js";
+import "codemirror/addon/edit/closebrackets.js";
+import "codemirror/addon/edit/closetag.js";
+
+// theme css
+import "codemirror/theme/base16-dark.css";
+
+export default {
+  name: "CommentCode",
+  props: ['currPost'],
+  data() {
+    return {
+      isHtml: true,
+      isCss: false,
+      isJs: false,
+      iframsrc: "",
+      newComment: {
+        desc: "",
+        snippet: {
+          html: this.currPost.snippet.html,
+          css: this.currPost.snippet.css,
+          code: this.currPost.snippet.code
+        },
+      },
+      cmOptionsHTML: {
+        tabSize: 1,
+        mode: "xml",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        autoRefresh: true,
+        autoCloseBrackets: true,
+        autoCloseTags: true
+      },
+      cmOptionsCSS: {
+        tabSize: 1,
+        mode: "css",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        autofocus: true,
+        autoRefresh: true,
+        autoCloseBrackets: true
+      },
+      cmOptionsJS: {
+        tabSize: 1,
+        mode: "javascript",
+        theme: "base16-dark",
+        lineNumbers: true,
+        line: true,
+        autofocus: true,
+        autoRefresh: true,
+        autoCloseBrackets: true
+      }
+    };
+  },
+  methods: {
+    closeModal() {
+      this.$emit("closeModal");
+    },
+    htmlMode() {
+      this.isHtml = true;
+      this.isCss = false;
+      this.isJs = false;
+    },
+    cssMode() {
+      this.isCss = true;
+      this.isHtml = false;
+      this.isJs = false;
+    },
+    jsMode() {
+      this.isJs = true;
+      this.isHtml = false;
+      this.isCss = false;
+    },
+    codeForPreview() {
+      var html = `<html>
+    <head>
+    <style>
+      ${this.newComment.snippet.css}
+    </style>
+    </head>
+    <body>
+      ${this.newComment.snippet.html}
+    <script>
+      ${this.newComment.snippet.code}
+      <\/script>
+    </body>
+    </html>`;
+      this.iframsrc = html;
+    }
+  },
+  created() {
+    this.codeForPreview();
+  }
+};
+</script>
+
+<style>
+</style>

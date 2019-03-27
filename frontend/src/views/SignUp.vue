@@ -81,9 +81,8 @@ export default {
 }
 
 .header img {
-  margin: auto;
+  margin: 0 auto;
   position: relative;
-  left: 25px;
 }
 
 .input-1,
