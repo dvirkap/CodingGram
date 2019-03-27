@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div>
+    <div class="post-cont">
       <div class="post-title">
         <div class="post-title-info">
           <img :src="post.creator.img">

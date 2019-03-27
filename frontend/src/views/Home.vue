@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <!-- <div class="home"> -->
     <div class="main-cont wrapper">
+      <user-panel></user-panel>
       <post-list :posts="posts" class="posts-cont"></post-list>
-
-      <UserBar></UserBar>
+      <user-bar></user-bar>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 
@@ -13,11 +13,13 @@
 <script>
 import PostList from "../components/PostList";
 import UserBar from "../components/UserBar.vue";
+import UserPanel from "../components/UserPanel.vue";
 
 export default {
   components: {
     PostList,
-    UserBar
+    UserBar,
+    UserPanel
   },
   data() {
     return {
