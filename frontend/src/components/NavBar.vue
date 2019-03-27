@@ -12,16 +12,17 @@
 
 
       </div>
-        <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link>
 
       <div class="navbar-search-cont">
 
 		  <input v-model="filterByTxt" @keyup="setFilter()" type="text" placeholder="What are you looking for?...">
       
 	  </div>
+    
 
       <div class="navbar-routers-cont">
-        <span v-if="LoggenInUser" @click="logout" uk-icon="sign-out">Logout</span>
+        <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link>
+        <span v-if="LoggenInUser" @click="logout" uk-icon="sign-out" class="logout">Logout</span>
         <router-link v-if="!LoggenInUser" to="/login"> <span uk-icon="user"></span> Login</router-link>
         <router-link v-if="!LoggenInUser" to="/signup"> <span uk-icon="sign-in"></span> Sign up</router-link>
       </div>
