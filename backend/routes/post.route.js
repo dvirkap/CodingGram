@@ -12,27 +12,15 @@ function checkLoggedInUser(req, res, next) {
 }
 
 function addPostRoute(app) {
-    //Post rest:
-
-    //GET LIST OF POSTS
-    // {
     app.get('/post', async (req, res) => {
-        // console.log('0000',req.query.filter)
-
-
-        // console.log('post.route.js REQ.QUERY:', req.query)
         var posts = await postService.query(req.query.filter)
         res.json(posts)
-        // var x = await sendtoAsyncFunc(posts)
-        // var y = await sendtosecFunc(x)
     })
-    // }
 
 
     //GET POST BY ID
     app.get('/post/:postId', async (req, res) => {
         var postId = req.params.postId
-        // console.log('post.route postId:', postId);
         const post = await postService.getPostById(postId)
         console.log('post is---------', post);
         res.json(post);
@@ -43,35 +31,34 @@ function addPostRoute(app) {
     app.post('/post', async (req, res) => {
         var post = req.body;
         var currUser = req.session.loggedInUser
-        const addedPost = await postService.add(post, currUser)
-        res.json(addedPost)
+        if (currUser) {
+            const addedPost = await postService.add(post, currUser)
+            res.json(addedPost)
+        }
     })
     // like/unlike POST
     app.put('/post/like', async (req, res) => {
         var post = req.body;
         var currUser = req.session.loggedInUser
-        console.log(currUser,'currUsercurrUser')
-        console.log('start')
-
-        if(currUser){
-            if(post.likeBy.length){
+        if (currUser) {
+            if (post.likeBy.length) {
                 var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
-                    if (indexUser === -1) {
-                            console.log('added')
-                            post.likeBy.push(currUser)
-                            const updatedPost = await postService.update(post);
-                            res.json(updatedPost);
-                    } else{
-                            console.log('removeed')
-                            post.likeBy.splice(indexUser,1)
-                            const updatedPost = await postService.update(post);
-                            res.json(updatedPost);
-                    };
-            } else{
+                if (indexUser === -1) {
                     console.log('added')
                     post.likeBy.push(currUser)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
+                } else {
+                    console.log('removeed')
+                    post.likeBy.splice(indexUser, 1)
+                    const updatedPost = await postService.update(post);
+                    res.json(updatedPost);
+                };
+            } else {
+                console.log('added')
+                post.likeBy.push(currUser)
+                const updatedPost = await postService.update(post);
+                res.json(updatedPost);
             };
         } else {
             console.log('no user')
@@ -81,16 +68,22 @@ function addPostRoute(app) {
     // UPDATE POST
     app.put('/post/:postId', async (req, res) => {
         const post = req.body;
-        const updatedPost = await postService.update(post);
-        res.json(updatedPost);
+        var postCreatorId = post.creator._id
+        if (postCreatorId === req.session.loggedInUser._id) {
+            const updatedPost = await postService.update(post);
+            res.json(updatedPost);
+        }
     })
 
     // DELETE POST
     app.delete('/post/:postId', async (req, res) => {
-        const postId = req.params.postId;
-        console.log('postId::::::::', postId);
-        const deletedPost = await postService.removePost(postId)
-        res.end()
+        var postCreatorId = req.body.post.creator._id
+        if (postCreatorId === req.session.loggedInUser._id) {
+            const postId = req.params.postId;
+            console.log('postId::::::::', postId);
+            const deletedPost = await postService.removePost(postId)
+            res.end()
+        }
     })
 
     // -------------------------- COMMENTS SECTION ---------------------------
@@ -99,8 +92,9 @@ function addPostRoute(app) {
     app.delete('/post/:postId/:commentId', async (req, res) => {
         if (req.session.loggedInUser.userName) {
             const params = req.params
+            var commentCreatorId = req.body.comment.creator._id
             var post = await postService.getPostById(params.postId)
-            if (post.creator.userName === req.session.loggedInUser.userName) {
+            if (commentCreatorId === req.session.loggedInUser._id) {
                 const deletedComment = await postService.removeComment(params)
                 res.end(`comment ${deletedComment} deleted!`)
             }
@@ -108,15 +102,15 @@ function addPostRoute(app) {
 
     })
 
-    // UPADTE COMMENT
-    app.put('/post/:postId', async (req, res) => {
-        const post = req.body;
-
-
-        const updatedPost = await postService.updateComment(post);
-
-        res.json(updatedPost);
-
+    // ADD/UPDATE COMMENT
+    app.put('/post/:postId/comment', async (req, res) => {
+        if (req.session.loggedInUser.userName) {
+            var currUser = req.session.loggedInUser
+            const id = req.params.postId
+            const newComment = req.body;
+            const updatedPost = await postService.updateComment(id, newComment, currUser);
+            res.json(updatedPost);
+        }
 
     })
 

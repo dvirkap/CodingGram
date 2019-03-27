@@ -1,19 +1,15 @@
 <template>
   <section class="post">
-
-    <post
-        @deletePost="deletePost"  
-        :LoggedInUser="LoggedInUser" 
-        :post="post"/>
-    <post-bar 
-        :post="post"
-        @addLike="addLike"/>
+    <post @deletePost="deletePost" :LoggedInUser="LoggedInUser" :post="post"/>
+    <post-bar :post="post" @addLike="addLike"/>
     <comments-list
-        class="comment-list"
-        @addComment="addComment"
-        :LoggedInUser="LoggedInUser"
-        :comments="post.comments"
-        :post="post"/>
+      class="comment-list"
+      @addComment="addComment"
+      @deleteComment="deleteComment"
+      :LoggedInUser="LoggedInUser"
+      :comments="post.comments"
+      :post="post"
+    />
   </section>
 </template>
 
@@ -30,15 +26,18 @@ export default {
   },
   props: ["post", "LoggedInUser"],
   methods: {
-    addComment(newCmt) {
-      this.$emit("addComment", newCmt);
+    deleteComment(commentId, postId) {
+      this.$emit("deleteComment", commentId, postId);
+    },
+    addComment(newComment, postId) {
+      this.$emit("addComment", newComment, postId);
     },
     addLike(post) {
-      this.$emit('addLike', post)
+      this.$emit("addLike", post);
     },
-    deletePost(post){
-      this.$emit('deletePost', post)
-    },
+    deletePost(post) {
+      this.$emit("deletePost", post);
+    }
   }
 };
 </script>

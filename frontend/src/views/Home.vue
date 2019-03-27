@@ -2,8 +2,9 @@
   <div class="home">
     <div class="main-cont wrapper">
       <post-list
-        @deletePost="deletePost"  
+        @deletePost="deletePost"
         @addComment="addComment"
+        @deleteComment="deleteComment"
         @addLike="addLike"
         :LoggedInUser="LoggedInUser"
         :posts="posts"
@@ -35,15 +36,26 @@ export default {
     }
   },
   methods: {
-    addComment(newCmt) {
-      this.$store.dispatch("addComment", newCmt);
+    deleteComment(commentId, postId) {
+      var payload = {
+        commentId,
+        postId
+      };
+      this.$store.dispatch("deleteComment", payload);
+    },
+    addComment(newComment, postId) {
+      var payload = {
+        newComment,
+        postId
+      };
+      this.$store.dispatch("addComment", payload);
     },
     addLike(post) {
       this.$store.dispatch("addLike", post);
     },
-    deletePost(post){
+    deletePost(post) {
       this.$store.dispatch("deletePost", post);
-    },
+    }
   },
   created() {
     this.$store.dispatch("loadPosts");

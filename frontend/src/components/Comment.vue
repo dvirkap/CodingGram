@@ -6,8 +6,8 @@
           <div class="cmt-txt">
             <span class="comment-user">
               <img :src="comment.creator.img">
-              {{comment.creator.userName}}
 
+              {{comment.creator.userName}}
             </span>
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
@@ -15,41 +15,56 @@
             <span class="delelte-btn" title="Show Code">
               <i class="fas fa-code"></i>
             </span>
-              <span v-if="LoggedInUser" class="delelte-btn" title="Show Code">
+            <span v-if="LoggedInUser" class="delelte-btn" title="Show Code">
               <i class="far fa-check-square"></i>
             </span>
             <span v-if="LoggedInUser" class="delelte-btn" title="Replay">
               <i class="fas fa-reply"></i>
             </span>
-            <span v-if="LoggedInUser && LoggedInUser._id === comment.creator._id" class="delelte-btn" title="Replay">
+            <span
+              v-if="LoggedInUser && LoggedInUser._id === comment.creator._id"
+              class="delelte-btn"
+              title="Replay"
+            >
               <i class="far fa-edit"></i>
             </span>
-            <span v-if="LoggedInUser && LoggedInUser._id == comment.creator._id" @click="removeComment" class="delelte-btn" title="Delete Comment">
+            <span
+              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
+              @click="deleteComment"
+              class="delelte-btn"
+              title="Delete Comment"
+            >
               <i class="far fa-trash-alt"></i>
             </span>
           </div>
         </div>
       </div>
       <div class="comment-txt-body">
-        <span class="comment-body">
-        {{comment.txt}} sdfsdafasf sdfsdaf sdafsdf sdaf sadf sdf sdaf sda fsdaf sdfsdfsdf sdfsdfsdf
-        </span>
+        <span class="comment-body">{{comment.txt}}</span>
       </div>
       <div class="replay">
         <div class="replay-title">
           <div class="cmt-txt">
             <span class="comment-user">
               <img :src="comment.creator.img">
-
               {{comment.creator.userName}}
             </span>
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-            <span v-if="LoggedInUser && LoggedInUser._id == comment.creator._id" class="delelte-btn" title="Edit">
+            <span
+              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
+              class="delelte-btn"
+              title="Edit"
+            >
               <i class="far fa-edit"></i>
             </span>
-            <span v-if="LoggedInUser && LoggedInUser._id == comment.creator._id" @click="removeComment" class="delelte-btn" title="Delete Comment">
+            <span
+              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
+              @click="deleteComment"
+              class="delelte-btn"
+              title="Delete Comment"
+            >
               <i class="far fa-trash-alt"></i>
             </span>
           </div>
@@ -62,7 +77,6 @@
           sdafasdfsdfa dsfsdfsdfsdf fds
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -72,20 +86,25 @@ export default {
   name: "Comment",
   props: ["comment", "post", "LoggedInUser"],
   methods: {
-    removeComment() {
+    deleteComment() {
       // console.log('CHECK', this.post)
-      console.log(
-        "start removing",
-        "comm",
-        this.comment._id,
-        "post",
-        this.post._id
-      );
-      this.$store.dispatch({
-        type: "deleteComment",
-        commentId: this.comment._id,
-        postId: this.post._id
-      });
+      // console.log(
+      //   "start removing",
+      //   "comm",
+      //   this.comment._id,
+      //   "post",
+      //   this.post._id
+      // );
+      var commentId = this.comment._id;
+      console.log('commentId:', commentId);
+      
+      var postId = this.post._id
+      this.$emit("deleteComment", commentId, postId);
+      // this.$store.dispatch({
+      //   type: "deleteComment",
+      //   commentId: this.comment._id,
+      //   postId: this.post._id
+      // });
     }
   }
 };

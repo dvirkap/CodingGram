@@ -3,14 +3,19 @@
     <div class="post-feedback">
       <ul>
         <li v-for="comment in comments" :key="comment._id">
-          <Comment class="comment-cmp" :LoggedInUser="LoggedInUser" :comment="comment" :post="post"></Comment>
+          <Comment class="comment-cmp"
+           :LoggedInUser="LoggedInUser"
+            :comment="comment"
+             :post="post"
+              @deleteComment="deleteComment"
+              ></Comment>
         </li>
       </ul>
     </div>
 
     <div class="post-comment">
       <div v-if="LoggedInUser" class="post-comment-input">
-        <input type="text" placeholder="Enter comment" v-model="newCommentTxt">
+        <input type="text" placeholder="Enter comment" v-model="comment.txt">
         <img src="../images/html-coding.svg" class="add-code-btn" @click="addCode">
 
         <span type="submit" @click="addComment" title="Add Comment">
@@ -36,9 +41,18 @@ export default {
 
   data() {
     return {
-      newCommentTxt: "",
+      comment: {
+        txt: null,
+          snippet: {
+            lang: 'js',
+            html: null,
+            css: null,
+            code: null
+
+          }
+      },
       isAddingCode: false
-    };
+    }
   },
 
   components: {
@@ -46,23 +60,30 @@ export default {
   },
   created() {},
   methods: {
+    deleteComment(commentId, postId) {
+       this.$emit("deleteComment", commentId, postId);
+    },
     addComment() {
-      let comment = {
-        txt: this.newCommentTxt,
-        _id: UtilService.makeId(12),
-        createdAt: new Date(),
-        creator: {
-          userName: this.LoggedInUser.userName,
-          _id: this.LoggedInUser._id,
-          img: this.LoggedInUser.img
-        }
-      };
+      var newComment = this.comment
+      var postId = this.post._id
+      console.log('POST ID FROM COMMENTLIST:::::::', postId);
+      
+        this.$emit("addComment", newComment, postId );
+        // this.newCommentTxt = "";
+      // let comment = {
+      //   txt: this.newCommentTxt,
+      //   _id: UtilService.makeId(12),
+      //   createdAt: new Date(),
+      //   creator: {
+      //     userName: this.LoggedInUser.userName,
+      //     _id: this.LoggedInUser._id,
+      //     img: this.LoggedInUser.img
+      //   }
+      // };
 
-      var postUp = JSON.parse(JSON.stringify(this.post));
+      // var postUp = JSON.parse(JSON.stringify(this.post));
 
-      postUp.comments.push(comment);
-      this.$emit("addComment", postUp);
-      this.newCommentTxt = "";
+      // postUp.comments.push(comment);
     },
     addCode() {
       console.log("add code!");

@@ -2,12 +2,14 @@
   <section>
     <ul>
       <li v-for="post in posts" :key="post._id">
-        <post-container 
-            @deletePost="deletePost"  
-            @addComment="addComment"
-            @addLike="addLike" 
-            :LoggedInUser="LoggedInUser" 
-            :post="post" />
+        <post-container
+          @deletePost="deletePost"
+          @addComment="addComment"
+          @deleteComment="deleteComment"
+          @addLike="addLike"
+          :LoggedInUser="LoggedInUser"
+          :post="post"
+        />
       </li>
     </ul>
   </section>
@@ -18,21 +20,24 @@ import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
-  props: ['posts','LoggedInUser'],
+  props: ["posts", "LoggedInUser"],
   components: {
     PostContainer
   },
   methods: {
-    addComment(newCmt){
-      this.$emit('addComment',newCmt);
+    deleteComment(commentId, postId) {
+      this.$emit("deleteComment", commentId, postId);
+    },
+    addComment(newComment, postId) {
+      this.$emit("addComment", newComment, postId);
     },
     addLike(post) {
-      this.$emit('addLike', post)
+      this.$emit("addLike", post);
     },
-    deletePost(post){
-      this.$emit('deletePost', post)
-    },
-  },
+    deletePost(post) {
+      this.$emit("deletePost", post);
+    }
+  }
 };
 </script>
 
