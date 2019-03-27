@@ -50,9 +50,8 @@ export default {
       methods: {
         signin() {
           this.$store.dispatch('login', this.userCredentials )
-           .then(() => {
+            console.log(this.userCredentials,'in login page')
                 this.$router.push('/');
-            })
         }
 
       },

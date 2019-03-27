@@ -18,19 +18,17 @@ function addUserRoute(app) {
     app.post('/login', (req, res) => {
         const userCredentials = req.body;
 
-        if (req.session.loggedInUser) res.json(req.session.loggedInUser)
-        else {
-            
+        // if (req.session.loggedInUser) res.json(req.session.loggedInUser)
+        // else {
             userService.checkLogin(userCredentials)
                 .then(user => {
                     req.session.loggedInUser = user;
-                    
                     res.json(user)
                 })
                 .catch(err => {
                     res.status(500).send('Wrong Credentials')
                 })
-        }
+        // }
     })
     app.post('/logout', (req, res) => {
         req.session.loggedInUser = null;

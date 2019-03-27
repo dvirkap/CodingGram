@@ -23,7 +23,6 @@ export default new Vuex.Store({
     },
     setLoggoutUser(state){
       state.currUser = null;
-      console.log(state.currUser,'state.currUser')
     },
     setPost(state,post){
       state.currPost = post
@@ -135,7 +134,6 @@ export default new Vuex.Store({
         });
     },
     addLike(context, post) {
-
       return PostService.addLike(post)
         .then(res => {
           context.dispatch('loadPosts')
@@ -148,6 +146,7 @@ export default new Vuex.Store({
     },
     login(context, userCredentials) {
       UserService.login(userCredentials).then(res=> {
+        console.log(res,'in store back then')
         context.commit('setLoggedInUser',res)
       })
     },
