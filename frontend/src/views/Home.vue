@@ -20,7 +20,7 @@
 
     
 
-      <user-panel></user-panel>
+      <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
@@ -28,6 +28,7 @@
         @addComment="addComment"
         @deleteComment="deleteComment"
         @addLike="addLike"
+        @likeComment="likeComment"
        
         :LoggedInUser="LoggedInUser"
         :posts="posts"
@@ -75,6 +76,9 @@ export default {
     }
   },
   methods: {
+    Logout(){
+    this.$store.dispatch("Logout");
+    },
     deleteComment(commentId, postId) {
       var payload = {
         commentId,
@@ -117,6 +121,9 @@ export default {
       console.log('in homeee',comment)
       this.isModal = true;
     },
+    likeComment(payload) {
+       this.$store.dispatch("likeComment", payload);
+    }
 
   },
   created() {

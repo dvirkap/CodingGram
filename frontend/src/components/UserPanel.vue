@@ -3,15 +3,43 @@
   <nav class="menu" tabindex="0">
 	<div class="smartphone-menu-trigger"></div>
   <header class="avatar">
-		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
-    <h2>John D.</h2>
+    <!-- <img :src="comment.creator.img"> -->
+<!-- {{LoggedInUser}} -->
+
+		<img v-if="!LoggedInUser" src="../images/guest.png" />
+		<img v-else :src="LoggedInUser.img" />
+
+    <h2 v-if="!LoggedInUser" class="hello">Hello guest !</h2>
+    <h2 v-else class="hello">Hello {{LoggedInUser.userName}} !</h2>
+
   </header>
+
 	<ul>
-    <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-    <li tabindex="0" class="icon-customers"><span>Customers</span></li>
-    <li tabindex="0" class="icon-users"><span>Users</span></li>
-    <li tabindex="0" class="icon-settings"><span>Settings</span></li>
+
+
+
+    
+
+
+
+    <li tabindex="0" class="icon-add-post"><router-link to="/edit"><span>New Post</span></router-link></li>
+    <li tabindex="0" class="icon-add-question"> <span>Ask Something</span></li>
+    <li tabindex="0" class="icon-home"><router-link to="/"><span>Home</span></router-link></li>
+    <li v-if="!LoggedInUser" tabindex="0" class="icon-signup"><router-link to="/signup"><span>Sign Up</span></router-link></li>
+    <li v-if="LoggedInUser" @click="logout" tabindex="0" class="icon-logout"><span>Logout</span></li>
+    <li v-if="!LoggedInUser" tabindex="0" class="icon-login"><router-link to="/login"><span>Login</span></router-link></li>
+    <li v-if="LoggedInUser" tabindex="0" class="icon-settings"><span>Settings</span></li>
   </ul>
+  <ul>
+           <li tabindex="0" class="icon-explore"><span>Explore</span></li>
+      <ul>
+        <li>New Posts</li>
+        <li>Top Rated</li>
+        <li>newb</li>
+
+      </ul>
+  </ul>
+
 </nav>
 
 
@@ -20,6 +48,7 @@
 <script>
 export default {
   name: "UserPanel",
+  props: ['LoggedInUser'],
   data() {
     return {
       closeLeftNavBtn: false,
@@ -45,7 +74,6 @@ export default {
     closeSecNav() {
       this.secNav = false;
       document.body.classList.toggle("open-sec-nav");
-      console.log('aaaaaaaaaaaaaaaaa')
     },
     show1() {
       this.closeLeftNavBtn = true;
@@ -62,12 +90,19 @@ export default {
       this.userNav = true;
       this.secNav1 = false;
       this.secNav2 = true;
+    },
+    logout(){
+    this.$emit("Logout");
     }
   }
 };
 </script>
 
 <style scoped>
+
+a{
+  text-decoration: none;
+}
 
 .menu {
   /* background: #5bc995; */
@@ -94,12 +129,16 @@ export default {
   width: 100px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid #ffea92;
+  border: 4px solid #1d1d1d;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 .menu .avatar h2 {
+
+  font-family: 'Proxima';
   font-weight: normal;
   margin-bottom: 0;
+  margin-top: 5px;
+
 }
 .menu ul {
   list-style: none;
@@ -107,6 +146,7 @@ export default {
   margin: 0;
 }
 .menu ul li {
+  font-family: "Proxima";
   padding: 0.5em 1em 0.5em 3em;
   font-size: 0.95em;
   font-weight: regular;
@@ -116,18 +156,32 @@ export default {
   transition: all 0.15s linear;
   cursor: pointer;
 }
-.menu ul li.icon-dashboard {
-  background-image: url("http://www.entypo.com/images//gauge.svg");
+.menu ul li.icon-add-post {
+  background-image: url("../images/new-message.svg"); 
 }
-.menu ul li.icon-customers {
-  background-image: url("http://www.entypo.com/images//briefcase.svg");
+.menu ul li.icon-home {
+  background-image: url("../images/home.svg"); 
 }
-.menu ul li.icon-users {
-  background-image: url("http://www.entypo.com/images//users.svg");
+.menu ul li.icon-add-question {
+  background-image: url("../images/help.svg");
+}
+.menu ul li.icon-signup {
+  background-image: url("../images/add-user.svg");
+}
+.menu ul li.icon-logout {
+  background-image: url("../images/log-out.svg");
+}
+.menu ul li.icon-login {
+  background-image: url("../images/login.svg");
+}
+
+.menu ul li.icon-explore {
+  background-image: url("../images/magnifier.svg");
 }
 .menu ul li.icon-settings {
   background-image: url("http://www.entypo.com/images//tools.svg");
 }
+
 .menu ul li:hover {
   /* background-color: rgba(0, 0, 0, 0.1); */
   background-color: blue;
@@ -151,6 +205,7 @@ export default {
     width: 60px;
   }
   .menu .avatar h2 {
+    font-family: 'Proxima';
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -163,6 +218,8 @@ export default {
     transition: all 0.15s ease-in-out;
   }
   .menu .avatar:hover h2 {
+  font-family: 'Proxima';
+
     opacity: 1;
     transform: translate3d(0px, -50%, 0);
   }
@@ -245,5 +302,9 @@ export default {
     pointer-events: none;
   }
 }
-
+.side-title{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: yellow;
+  padding: 5px;
+}
 </style>

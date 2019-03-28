@@ -6,16 +6,22 @@
           <div class="cmt-txt">
             <span class="comment-user">
               <img :src="comment.creator.img">
-
               {{comment.creator.userName}}
             </span>
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-            <span @click="showCommentCode" class="delelte-btn" title="Show Code">
+            <span class="delelte-btn" title="like">
+            <i v-if="!LoggedInUser" class="far fa-heart"></i>   
+            <i v-if="isLiked && LoggedInUser" @click="likeComment" class="like-btn fas fa-heart"></i>
+            <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="like-btn far fa-heart"></i>
+            {{comment.likeBy.length}}
+
+            </span>
+            <span v-if="comment.snippet.html" @click="showCommentCode" class="delelte-btn" title="Show Code">
               <i class="fas fa-code"></i>
             </span>
-              <span v-if="LoggedInUser" class="delelte-btn" title="Approve">
+              <span v-if="LoggedInUser && post.creator._id === comment.creator._id" class="delelte-btn" title="Approve">
               <i class="far fa-check-square"></i>
             </span>
             <span v-if="LoggedInUser" class="delelte-btn" title="Replay">
@@ -97,11 +103,24 @@ export default {
     },
       showCommentCode() {
       this.$emit("showCommentCode", this.comment);
+    },
+    likeComment() {
+      var payload = {
+        postId: this.post._id,
+        comment: this.comment
+      }
+       this.$emit("likeComment", payload);
     }
   },
   components:{
 
 
+  },
+  computed: {
+        isLiked(){
+      if(this.LoggedInUser && this.comment.likeBy.length) {
+        return this.comment.likeBy.some(user => user._id === this.LoggedInUser._id )}
+    }
   },
 
 };

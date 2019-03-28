@@ -188,6 +188,8 @@ export default {
       console.log("this is new code", newCode);
     }
   },
+  created() {
+  },
 };
 </script>
 <style>
