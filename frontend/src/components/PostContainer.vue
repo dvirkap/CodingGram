@@ -4,6 +4,7 @@
     <post-bar :LoggedInUser="LoggedInUser" :post="post" @addLike="addLike"/>
     <comments-list
       class="comment-list"
+      @addReplay="addReplay"
       @showCommentCode="showCommentCode"
       @addComment="addComment"
       @addCommentCode="addCommentCode"
@@ -29,6 +30,9 @@ export default {
   },
   props: ["post", "LoggedInUser"],
   methods: {
+    addReplay(newReplay) {
+      this.$emit("addReplay", newReplay);
+    },
     deleteComment(commentId, postId) {
       this.$emit("deleteComment", commentId, postId);
     },
@@ -49,7 +53,7 @@ export default {
       this.$emit("showCommentCode", comment);
     },
     likeComment(payload) {
-       this.$emit("likeComment", payload);
+      this.$emit("likeComment", payload);
     }
   }
 };

@@ -3,6 +3,7 @@
     <ul>
       <li v-for="post in posts" :key="post._id">
         <post-container
+          @addReplay="addReplay"
           @showCommentCode="showCommentCode"
           @deletePost="deletePost"
           @addComment="addComment"
@@ -30,6 +31,9 @@ export default {
     PostContainer
   },
   methods: {
+    addReplay(newReplay) {
+      this.$emit("addReplay", newReplay);
+    },
     deleteComment(commentId, postId) {
       this.$emit("deleteComment", commentId, postId);
     },

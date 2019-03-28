@@ -22,6 +22,7 @@
 
       <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
+        @addReplay="addReplay"
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
         @deletePost="deletePost"  
@@ -76,6 +77,9 @@ export default {
     }
   },
   methods: {
+    addReplay(newReplay) {
+      this.$store.dispatch("addReplay", newReplay);
+    },
     Logout(){
     this.$store.dispatch("Logout");
     },
@@ -87,8 +91,6 @@ export default {
       this.$store.dispatch("deleteComment", payload);
     },
     addComment(newComment, postId) {
-      console.log('newComment:::', newComment);
-      console.log('postId:::', postId);
       
       var payload = {
         newComment,
@@ -97,7 +99,7 @@ export default {
       this.$store.dispatch("addComment", payload);
       this.isModal = false 
       this.currPost = null;
-      // this.currComment = null;
+
 
  
 
