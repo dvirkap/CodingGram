@@ -6,6 +6,7 @@
         <li v-for="comment in comments" :key="comment._id">
           <Comment
             class="comment-cmp"
+            @addReplay="addReplay"
             @showCommentCode="showCommentCode"
             :LoggedInUser="LoggedInUser"
             :comment="comment"
@@ -65,6 +66,9 @@ export default {
   },
   created() {},
   methods: {
+    addReplay(newReplay){
+      this.$emit('addReplay',newReplay)
+    },
     deleteComment(commentId, postId) {
       this.$emit("deleteComment", commentId, postId);
     },
