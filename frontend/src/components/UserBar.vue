@@ -5,7 +5,6 @@
       <img src="@/images/codingAcademy.jpg">
     </div>
     <div class="aside-card-cont">
-      <!-- <h1>dddddddd123joj4567891011/121314</h1> -->
       <img src="@/images/javascript.jpg">
     </div>
     <div class="aside-card-cont">

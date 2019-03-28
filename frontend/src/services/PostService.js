@@ -35,7 +35,7 @@ async function deletePost(post) {
     var headers = {
         data: post
     }
-    var deletedPost = await axios.delete(`${_URL}${postId}`, post)
+    var deletedPost = await axios.delete(`${_URL}${postId}`, headers)
     return deletedPost;
 }
 // add/edit post

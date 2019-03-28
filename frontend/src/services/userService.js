@@ -19,11 +19,21 @@ const _URL = (process.env.NODE_ENV !== 'development')
     ? ''
     : 'http://localhost:3000';
 var users = [];
-var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+
 
 async function checkLoggedInUser() {
-    var user = await axios.post(`${_URL}/login`)
-    return user
+    var user = JSON.parse(localStorage.getItem('loggedInUser'))
+    if(user) {
+        var userCredentials = {
+            userName: user.userName,
+            password: user.password
+          }
+        login(userCredentials)
+     return user;
+    } else return null
+    // return  JSON.parse(localStorage.getItem('loggedInUser'))
+    // var user = await axios.post(`${_URL}/login`)
+    // return loggedInUser
 }
 
 async function query() {
@@ -33,9 +43,13 @@ return users
 }   
 
 async function login(userCredentials) {
+    
     var loggedInUser = await axios.post(`${_URL}/login`, userCredentials)
+    console.log(loggedInUser.data);
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser.data))
-    return loggedInUser.data
+        // localStorage.setItem('loggedInUser', loggedInUser.data)
+        return  JSON.parse(localStorage.getItem('loggedInUser'))
+    // return loggedInUser.data
 }
 
 // async function signup(newUserCredentials) {
@@ -46,17 +60,24 @@ async function login(userCredentials) {
 
 function signup(newUserCredentials) {
     console.log(newUserCredentials,'in store service')
-    return axios.post(`${_URL}/signup`, newUserCredentials).then(res=>res.data)
+    return axios.post(`${_URL}/signup`, newUserCredentials).then(res=> {
+        localStorage.setItem('loggedInUser', JSON.stringify(res.data))
+    })
 }
 
 async function logout() {
-    var userLoggedOut = await axios.get(`${_URL}/logout`)
     localStorage.removeItem('loggedInUser')
-    loggedInUser = null
+    var userLoggedOut = await axios.post(`${_URL}/logout`)
+    // localStorage.removeItem('loggedInUser')
+    console.log('LOG OUT');
+    
+    // loggedInUser = null
 }
 
 function getLoggedInUser() {
-    return loggedInUser;
+    return  JSON.parse(localStorage.getItem('loggedInUser'))
+    // loggedInUser = localStorage.getItem('loggedInUser')
+    // return loggedInUser;
 }
  
 async function getById(userId) {

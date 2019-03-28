@@ -70,11 +70,7 @@
           </div>
         </div>
         <div class="replay-body">
-          sdfasdfasdf
-          sdfasdfasdfsdfasdf
-          sdafsdfsdafsf
-          sdfsdfasdfsdfasdfsdfsfsdfsdf
-          sdafasdfsdfa dsfsdfsdfsdf fds
+          OMG your code is amazing
         </div>
       </div>
     </div>

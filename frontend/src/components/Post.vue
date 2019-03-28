@@ -32,7 +32,7 @@
               <i class="far fa-edit"></i>
             </router-link>
           </div>
-          <div v-if="LoggedInUser && LoggedInUser._id === post.creator._id" @click="deletePost" class="post-editor-title-run">
+          <div v-if="LoggedInUser && LoggedInUser._id === post.creator._id" @click.prevent="deletePost" class="post-editor-title-run">
 
                 <i class="far fa-trash-alt"></i>
 
