@@ -476,6 +476,19 @@ background-color: #ed4956; */
     /* background: #e6e6e6; */
     background: #141414;
     color: white;
+    width: 100%;
+}
+
+.html-btn:last-child {
+    border-right: 0;    
+}
+
+.html-btn:hover {
+    color: white;
+    background-color: #141414;
+    border-bottom: #141414 5px solid;
+    border-left: #141414 2px solid; 
+
 }
 
 .js-btnL {
@@ -508,9 +521,15 @@ background-color: #ed4956; */
     color: white;
     border: none;
     width: max-content;
+    margin-left: 5px;
+    height: 100%;
     /* justify-content: center; */
     /* justify-self: center; */
     /* justify-: flex-end; */
+}
+
+.btn-run:hover {
+    color: greenyellow;
 }
 
 .aside-cont {
@@ -522,7 +541,6 @@ background-color: #ed4956; */
     /* width: 35%; */
     /* height: 500px; */
     height: 100vw;
-
 }
 
 .aside-nav-cont {
@@ -799,9 +817,10 @@ a {
     font-family: 'Proxima';
     border-bottom: 1px solid #dbdbdb;
     width: 100%;
-    height: 20px;
+    height: 40px;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .post-editor-title span {
@@ -831,7 +850,8 @@ a {
 
 .post-editor-title-preview:hover {
     color: white;
-    background: rgb(48, 48, 48);
+    background-color: #141414;
+    border-bottom: #141414 3px solid;
 }
 
 .post-editor-title-html:hover {
@@ -880,8 +900,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
-    height: 100%;
+    width: 100%;
+    height: 106%;
     cursor: pointer;
     border-right: 1px solid #dbdbdb;
     transition: 0.3s;
@@ -900,12 +920,18 @@ a {
 
 .post-editor-title-run:hover {
     color: white;
-    background: rgb(48, 48, 48);
+    background-color: #141414;    
 }
 
 .active-editor-title {
     color: white;
-    background: rgb(48, 48, 48);
+    background-color: #141414;    
+}
+
+.post-editor-active {
+    background-color: #141414;    
+    color: white;
+    border-bottom: #141414 3px solid;
 }
 
 .span {
@@ -1296,6 +1322,27 @@ iframe {
     display: flex;
     align-items: center;
 }
+/* 
+.editor-modal-btns:hover {
+    background: rgb(48, 48, 48);
+    color: white;
+} */
+
+.editor-modal-btn-active {
+    background-color: #141414;
+    color: white;
+    border-bottom: #141414 5px solid;
+    border-left: #141414 2px solid; 
+}
+
+.editor-modal-btn-active:first-child {
+    /* margin-left: 2px; */
+} 
+
+.editor-modal-btn-active:last-child {
+    /* margin-left: 2px; */
+}
+
 .editor-modal-run{
     box-sizing: border-box;
     width: 50%;
@@ -1303,7 +1350,6 @@ iframe {
     display: flex;
     align-items: center;
 }
-
 
 .editor-modal-editor-body{
     box-sizing: border-box;
@@ -1313,6 +1359,7 @@ iframe {
     width: 100%;
     height: 90%;
     display: flex;
+    border-left: #141414 2px solid;
 }
 .editor-modal-editor-body-runner{
     box-sizing: border-box;
@@ -1336,6 +1383,39 @@ iframe {
     width: 100%;
     height: 10%;
     display: flex;
+    justify-content: flex-end;
+}
+
+.editor-btn {
+    background-color: #141414;
+    color: white;
+    border: none;
+
+}
+
+.editor-close-btn {
+    border-radius: 50%;
+    text-align: center;
+    float: right;
+    margin: 5px 5px 15px;
+}
+
+.editor-close-btn:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.editor-modal-desc-title {
+    margin: 10px 0 0 5px;
+}
+
+.editor-save-btn {
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.editor-save-btn:hover {
+    color: greenyellow;
 }
 
 .wrapper-profile{

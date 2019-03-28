@@ -2,7 +2,10 @@
   <section class="editor-modal-main" @click.self="closeModal">
     <div class="editor-modal-cont">
       <div class="editor-modal-desc">
-        <h2>Comment:</h2>
+
+        <button @click="closeModal" class="editor-close-btn editor-btn">✖</button>
+
+        <h2 class="editor-modal-desc-title">Comment:</h2>
         <textarea v-if="isNewComment" class="txt-area-modal" v-model="newComment.txt"></textarea>
         <textarea v-else class="txt-area-modal" v-model="newComment.txt" readonly></textarea>
       </div>
@@ -11,21 +14,21 @@
         <div class="editor-modal-editor-cont">
           <div class="editor-modal-editor-cont-title">
             <div class="editor-modal-btns">
-              <button @click="htmlMode" class="html-btn active-btnL">
+              <button @click="htmlMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isHtml}">
                 <h1>
                   HTML
                   <i class="html-btnL fab fa-html5"></i>
                 </h1>
               </button>
 
-              <button @click="cssMode" class="html-btn active-btnL">
+              <button @click="cssMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isCss}">
                 <h1>
                   CSS
                   <i class="css-btnL fab fa-css3-alt"></i>
                 </h1>
               </button>
 
-              <button @click="jsMode" class="html-btn active-btnL">
+              <button @click="jsMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isJs}">
                 <h1>
                   JS
                   <i class="js-btnL fab fa-js"></i>
@@ -65,9 +68,9 @@
         </div>
       </div>
       <div class="editor-modal-actions">
-        <button @click="addComment">save</button>
-        <button @click="closeModal">close</button>
-        <button>like</button>
+        <button @click="addComment" class="editor-save-btn editor-btn">save</button>
+        <!-- <button @click="closeModal">close</button> -->
+        <!-- <button>like</button> -->
       </div>
     </div>
   </section>
