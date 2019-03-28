@@ -477,6 +477,7 @@ background-color: #ed4956; */
     background: #141414;
     color: white;
     width: 100%;
+    /* max-width: max-content; */
 }
 
 .html-btn:last-child {
@@ -1147,6 +1148,11 @@ iframe {
     margin-right: 15px;
     color: red;
 }
+.comment-like-b {
+    cursor: pointer;
+    margin: 5px;
+    margin-right: 15px;
+}
 
 .add-code-btn {
     margin-right: 10px;
@@ -1459,4 +1465,7 @@ iframe {
 }
 .profile{
     margin-top: 70px;
+}
+.tryry{
+    display: flex;
 }

@@ -139,11 +139,13 @@ export default new Vuex.Store({
 
         })
     },
-    addReply(context, payload) {
-      return RepliesService.addReply(payload)
-        .then(res => {
-          context.commit({ type: 'createReply', reply: res })
-        });
+    addReplay(context, newReplay) {
+      
+
+      // return RepliesService.addReply(payload)
+      //   .then(res => {
+      //     context.commit({ type: 'createReply', reply: res })
+      //   });
     },
     deleteReply(context, payload) {
       return RepliesService.deleteReply(payload)
