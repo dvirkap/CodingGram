@@ -124,8 +124,6 @@ function addPostRoute(app) {
 
         if (currUser) {
             if (comment.likeBy.length) {
-
-
                 var indexUser = comment.likeBy.findIndex(user => user._id === currUser._id)
                 if (indexUser === -1) {
 
@@ -144,6 +142,12 @@ function addPostRoute(app) {
                     post.comments.splice(currCommentIdx, 1, updatedComment)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
+
+                    // var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
+                    // var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment, 1)
+                    // var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
+
+                    // post.comments.splice(currCommentIdx, 1, updatedComment)
 
                 };
             } else {

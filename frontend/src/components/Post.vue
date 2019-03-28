@@ -13,20 +13,45 @@
 
       <div class="post-img">
         <div class="post-editor-title">
-          <div class="post-editor-title-preview" @click="previewMode">
+          <div class="post-editor-title-preview" @click="previewMode" :class="{'post-editor-active': isPREVIEW}">
             <i class="fa fa-eye">
               <span>&nbsp; Result</span>
             </i>
           </div>
-          <div class="post-editor-title-html" @click="htmlMode">
+          
+          <!-- <div class="post-editor-title-html" @click="htmlMode">
             <i class="fab fa-html5"></i>
-          </div>
-          <div class="post-editor-title-css" @click="cssMode">
+          </div> -->
+          <button @click="htmlMode" class="html-btn active-btnL" :class="{'post-editor-active': isHTML}">
+            <h1>
+              HTML
+              <i class="html-btnL fab fa-html5"></i>
+            </h1>
+          </button>
+
+
+          <!-- <div class="post-editor-title-css" @click="cssMode">
             <i class="fab fa-css3-alt"></i>
-          </div>
-          <div class="post-editor-title-js" @click="jsMode">
+          </div> -->
+          <button @click="cssMode" class="html-btn active-btnL" :class="{'post-editor-active': isCSS}">
+            <h1>
+              CSS
+              <i class="css-btnL fab fa-css3-alt"></i>
+            </h1>
+          </button>
+
+
+          <!-- <div class="post-editor-title-js" @click="jsMode">
             <i class="fab fa-js"></i>
-          </div>
+          </div> -->
+          <button @click="jsMode" class="html-btn active-btnL" :class="{'post-editor-active': isJS}">
+            <h1>
+              JS
+              <i class="js-btnL fab fa-js"></i>
+            </h1>
+          </button>
+
+
           <div v-if="LoggedInUser && LoggedInUser._id === post.creator._id" class="post-editor-title-run">
             <router-link :to="'/edit/'+post._id">
               <i class="far fa-edit"></i>
