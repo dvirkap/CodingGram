@@ -128,8 +128,6 @@ function addPostRoute(app) {
         
         if (currUser) {
             if (comment.likeBy.length) {
-
-
                 var indexUser = comment.likeBy.findIndex(user => user._id === currUser._id)
                 if (indexUser === -1) {
 
@@ -141,11 +139,14 @@ function addPostRoute(app) {
                     res.json(updatedPost);
                 } else {
                     console.log('removeed')
-                    var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
-                    var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment,1)
+
+                    var currUserLikeIdxOnComment = comment.likeBy.findIndex(user => user._id === currUser._id)
+                    comment.likeBy.splice(currUserLikeIdxOnComment,1)
+
+                    // var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment,1)
                     var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
                     
-                    post.comments.splice(currCommentIdx,1, updatedComment)
+                    post.comments.splice(currCommentIdx,1, comment)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
 
