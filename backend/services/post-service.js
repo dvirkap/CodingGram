@@ -1,5 +1,7 @@
 const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
+const UtilService = require('../services/UtilService');
+
 
 
 //GET ALL POSTS
@@ -107,7 +109,7 @@ function updateComment(id, newComment, currUser) {
     console.log('CURR USER:::::::', currUser);
 
     var comment = {
-        _id: new ObjectId(),
+        _id: UtilService.makeId(12),
         txt: newComment.txt,
         snippet: {
             lang: newComment.snippet.lang,
