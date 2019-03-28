@@ -14,6 +14,7 @@
             :post="post"
             @deleteComment="deleteComment"
             @openModal="addCode"
+            @likeComment="likeComment"
           />
         </li>
       </ul>
@@ -85,6 +86,9 @@ export default {
     },
     showCommentCode(comment) {
       this.$emit("showCommentCode", comment);
+    },
+    likeComment(payload) {
+       this.$emit("likeComment", payload);
     }
   }
 };

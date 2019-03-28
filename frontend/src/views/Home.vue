@@ -28,6 +28,7 @@
         @addComment="addComment"
         @deleteComment="deleteComment"
         @addLike="addLike"
+        @likeComment="likeComment"
        
         :LoggedInUser="LoggedInUser"
         :posts="posts"
@@ -117,6 +118,9 @@ export default {
       console.log('in homeee',comment)
       this.isModal = true;
     },
+    likeComment(payload) {
+       this.$store.dispatch("likeComment", payload);
+    }
 
   },
   created() {

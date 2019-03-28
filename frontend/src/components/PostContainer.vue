@@ -8,6 +8,7 @@
       @addComment="addComment"
       @addCommentCode="addCommentCode"
       @deleteComment="deleteComment"
+      @likeComment="likeComment"
       :LoggedInUser="LoggedInUser"
       :comments="post.comments"
       :post="post"
@@ -46,6 +47,9 @@ export default {
     },
     showCommentCode(comment) {
       this.$emit("showCommentCode", comment);
+    },
+    likeComment(payload) {
+       this.$emit("likeComment", payload);
     }
   }
 };

@@ -118,6 +118,52 @@ function addPostRoute(app) {
 
     })
 
+    app.put('/comment/like', async (req, res) => {
+        var post = req.body.post;
+        var currUser = req.session.loggedInUser
+        var comment = req.body.comment
+
+   
+        
+        
+        if (currUser) {
+            if (comment.likeBy.length) {
+
+
+                var indexUser = comment.likeBy.findIndex(user => user._id === currUser._id)
+                if (indexUser === -1) {
+
+                    console.log('added')
+                    comment.likeBy.push(currUser)
+                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
+                    post.comments.splice(currCommentIdx,1, comment)
+                    const updatedPost = await postService.update(post);
+                    res.json(updatedPost);
+                } else {
+                    console.log('removeed')
+                    var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
+                    var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment,1)
+                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
+                    
+                    post.comments.splice(currCommentIdx,1, updatedComment)
+                    const updatedPost = await postService.update(post);
+                    res.json(updatedPost);
+
+                };
+            } else {
+               
+                console.log('added')
+                comment.likeBy.push(currUser)
+                var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
+                post.comments.splice(currCommentIdx,1, comment)
+                const updatedPost = await postService.update(post);
+                res.json(updatedPost);
+            };
+        } else {
+            console.log('no user')
+        }
+    })
+
     // -------------------------- Replies SECTION ---------------------------
     //ADD REPLY
     app.post('/reply', async (req, res) => {

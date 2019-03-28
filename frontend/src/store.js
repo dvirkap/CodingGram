@@ -157,6 +157,12 @@ export default new Vuex.Store({
           context.dispatch('loadPosts')
         })
     },
+    likeComment(context, payload) {
+      return CommentsService.likeComment(payload)
+        .then(res => {
+          context.dispatch('loadPosts')
+        })
+    },
     checkLoggedInUser(context){
       UserService.checkLoggedInUser().then(res=> {
       })
