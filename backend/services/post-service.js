@@ -142,7 +142,7 @@ function removeComment(params) {
         .then(db => {
             console.log(params)
             console.log('commentId from back service', params)
-            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: params.commentId } } })
+            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
         })
 }
 
