@@ -44,7 +44,7 @@
       <div class="comment-txt-body">
         <span class="comment-body">{{comment.txt}}</span>
       </div>
-      <div class="replay">
+      <!-- <div class="replay">
         <div class="replay-title">
           <div class="cmt-txt">
             <span class="comment-user">
@@ -79,7 +79,7 @@
           sdfsdfasdfsdfasdfsdfsfsdfsdf
           sdafasdfsdfa dsfsdfsdfsdf fds
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
