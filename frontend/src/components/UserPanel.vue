@@ -15,17 +15,31 @@
   </header>
 
 	<ul>
+
+
+
     
-    <li tabindex="0" class="icon-add-post"><span>New Post</span></li>
-    <li tabindex="0" class="icon-add-question"><span>Ask Something</span></li>
-    <li v-if="!LoggedInUser" tabindex="0" class="icon-signup"><span>Sign Up</span></li>
-    <li v-if="LoggedInUser" tabindex="0" class="icon-logout"><span>Logout</span></li>
-    <li v-if="!LoggedInUser" tabindex="0" class="icon-login"><span>Login</span></li>
-    <li tabindex="0" class="icon-explore"><span>Explore</span></li>
 
+
+
+    <li tabindex="0" class="icon-add-post"><router-link to="/edit"><span>New Post</span></router-link></li>
+    <li tabindex="0" class="icon-add-question"> <span>Ask Something</span></li>
+    <li tabindex="0" class="icon-home"><router-link to="/"><span>Home</span></router-link></li>
+    <li v-if="!LoggedInUser" tabindex="0" class="icon-signup"><router-link to="/signup"><span>Sign Up</span></router-link></li>
+    <li v-if="LoggedInUser" @click="logout" tabindex="0" class="icon-logout"><span>Logout</span></li>
+    <li v-if="!LoggedInUser" tabindex="0" class="icon-login"><router-link to="/login"><span>Login</span></router-link></li>
     <li v-if="LoggedInUser" tabindex="0" class="icon-settings"><span>Settings</span></li>
-
   </ul>
+  <ul>
+           <li tabindex="0" class="icon-explore"><span>Explore</span></li>
+      <ul>
+        <li>New Posts</li>
+        <li>Top Rated</li>
+        <li>newb</li>
+
+      </ul>
+  </ul>
+
 </nav>
 
 
@@ -60,7 +74,6 @@ export default {
     closeSecNav() {
       this.secNav = false;
       document.body.classList.toggle("open-sec-nav");
-      console.log('aaaaaaaaaaaaaaaaa')
     },
     show1() {
       this.closeLeftNavBtn = true;
@@ -77,12 +90,19 @@ export default {
       this.userNav = true;
       this.secNav1 = false;
       this.secNav2 = true;
+    },
+    logout(){
+    this.$emit("Logout");
     }
   }
 };
 </script>
 
 <style scoped>
+
+a{
+  text-decoration: none;
+}
 
 .menu {
   /* background: #5bc995; */
@@ -138,6 +158,9 @@ export default {
 }
 .menu ul li.icon-add-post {
   background-image: url("../images/new-message.svg"); 
+}
+.menu ul li.icon-home {
+  background-image: url("../images/home.svg"); 
 }
 .menu ul li.icon-add-question {
   background-image: url("../images/help.svg");

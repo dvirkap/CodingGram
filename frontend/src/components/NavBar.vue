@@ -21,10 +21,9 @@
     
 
       <div class="navbar-routers-cont">
-        <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link>
-        <span v-if="LoggenInUser" @click="logout" uk-icon="sign-out" class="logout">Logout</span>
-        <router-link v-if="!LoggenInUser" to="/login"> <span uk-icon="user"></span> Login</router-link>
-        <router-link v-if="!LoggenInUser" to="/signup"> <span uk-icon="sign-in"></span> Sign up</router-link>
+        <!-- <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link> -->
+
+
       </div>
     </div>
 

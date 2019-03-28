@@ -20,7 +20,7 @@
 
     
 
-      <user-panel :LoggedInUser="LoggedInUser"></user-panel>
+      <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
@@ -76,6 +76,9 @@ export default {
     }
   },
   methods: {
+    Logout(){
+    this.$store.dispatch("Logout");
+    },
     deleteComment(commentId, postId) {
       var payload = {
         commentId,
