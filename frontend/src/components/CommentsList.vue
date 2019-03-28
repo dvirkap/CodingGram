@@ -1,8 +1,6 @@
 <template>
   <section>
 
-
-
     <div class="post-feedback customScroll">
       <ul>
         <li v-for="comment in comments" :key="comment._id">

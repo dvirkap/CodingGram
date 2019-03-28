@@ -6,18 +6,19 @@
           <div class="cmt-txt">
             <span class="comment-user">
               <img :src="comment.creator.img">
+
               {{comment.creator.userName}}
             </span>
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
             <span class="delelte-btn" title="like">
-            <i v-if="!LoggedInUser" class="far fa-heart"></i>   
-            <i v-if="isLiked && LoggedInUser" @click="likeComment" class="like-btn fas fa-heart"></i>
-            <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="like-btn far fa-heart"></i>
-            {{comment.likeBy.length}}
-
+              <i v-if="!LoggedInUser" class="far fa-heart"></i>   
+              <i v-if="isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn fas fa-heart"></i>
+              <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn far fa-heart"></i>
+              <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span>
             </span>
+
             <span v-if="comment.snippet.html" @click="showCommentCode" class="delelte-btn" title="Show Code">
               <i class="fas fa-code"></i>
             </span>
