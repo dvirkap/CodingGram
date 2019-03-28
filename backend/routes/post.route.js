@@ -166,10 +166,14 @@ function addPostRoute(app) {
     // -------------------------- Replies SECTION ---------------------------
     //ADD REPLY
     app.post('/reply', async (req, res) => {
-
+        // txt: '',
+        // commentId: this.comment._id,
+        // postId: this.post._id,
+        // creator: this.LoggedInUser
         var reply = req.body;
+        console.log(`reply req body:::::::::::`, reply);
+        
         var currUser = req.session.loggedInUser
-        console.log('req.body:::::::::::', reply);
         var addedReply = await postService.addReply(reply)
         res.json(addedReply)
     })

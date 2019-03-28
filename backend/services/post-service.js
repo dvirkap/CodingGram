@@ -160,21 +160,22 @@ function addLikeComment(post) {
 
 //ADD NEW REPLY
 function addReply(reply) {
-    console.log('---------------reply----------------', reply);
-    var newReply = {
-        commentId: "add id",
-        txt: "the first reply",
-        createdAt: Date.now(),
-        creator: {
-            userName: "Ploni"
-        }
-    }
+    // var post = getPostById(reply.postId)
+    var commentId = reply.commentId
+    var postId = reply.postId
 
+
+    
     return mongoService.connect()
-        .then(db => db.collection('replies').insertOne(newReply))
+        // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: { $each: [reply], $position: 0 } } }))
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) ,  "comments._id": commentId  }, {$push: {"comments.$.replies": reply}} ))
         .then(res => {
-            return res
-        })
+            console.log('result::::::::::::', res);
+            
+            var comment = res
+            comment._id = commentId;
+            return comment;
+})
 }
 
 module.exports = {

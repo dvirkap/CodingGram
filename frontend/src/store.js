@@ -142,7 +142,7 @@ export default new Vuex.Store({
     addReplay(context, newReplay) {
       
 
-      // return RepliesService.addReply(payload)
+      return RepliesService.addReply(newReplay)
       //   .then(res => {
       //     context.commit({ type: 'createReply', reply: res })
       //   });
