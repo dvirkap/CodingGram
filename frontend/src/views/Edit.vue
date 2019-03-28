@@ -16,12 +16,9 @@
           </div>
         </div>
         <div class="editor-btns">
-          <div>
+          <div class="tryry">
             <button @click="htmlMode()" :class="{'html-btn': true,'active-btnL': !isHtml}">
-              <h1>
-                HTML
-                <i class="html-btnL fab fa-html5"></i>
-              </h1>
+              <h1>HTML<i class="html-btnL fab fa-html5"></i></h1>
             </button>
             <button @click="cssMode()" :class="{'html-btn': true,'active-btnL': !isCss}">
               <h1>
@@ -44,32 +41,17 @@
           </button>
         </div>
         <div class="edit-editors">
-
-
           <div v-show="isHtml" class="html-editor">
-
             <codemirror v-model="newPost.snippet.html" :options="cmOptionsHTML"></codemirror>
           </div>
 
-
-
-
           <div v-show="isCss" class="css-editor">
-
-            
             <codemirror v-model="newPost.snippet.css" :options="cmOptionsCSS"></codemirror>
           </div>
 
-
-
-
           <!-- <div v-show="isJs" class="js-editor" > -->
           <div v-show="isJs" class="js-editor">
-
-
-
-
-            <codemirror  v-model="newPost.snippet.code" :options="cmOptionsJS"></codemirror>
+            <codemirror v-model="newPost.snippet.code" :options="cmOptionsJS"></codemirror>
           </div>
         </div>
 
@@ -87,15 +69,12 @@
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/mode/xml/xml.js";
 import "codemirror/mode/css/css.js";
-import 'codemirror/addon/display/autorefresh.js'
-import 'codemirror/addon/edit/closebrackets.js'
-import 'codemirror/addon/edit/closetag.js'
-
+import "codemirror/addon/display/autorefresh.js";
+import "codemirror/addon/edit/closebrackets.js";
+import "codemirror/addon/edit/closetag.js";
 
 // theme css
 import "codemirror/theme/base16-dark.css";
-
-
 
 export default {
   components: {},
@@ -121,9 +100,9 @@ export default {
         theme: "base16-dark",
         lineNumbers: true,
         line: true,
-        autoRefresh:true,
+        autoRefresh: true,
         autoCloseBrackets: true,
-        autoCloseTags: true,
+        autoCloseTags: true
       },
       cmOptionsCSS: {
         tabSize: 1,
@@ -132,9 +111,8 @@ export default {
         lineNumbers: true,
         line: true,
         autofocus: true,
-        autoRefresh:true,
-        autoCloseBrackets: true,
-
+        autoRefresh: true,
+        autoCloseBrackets: true
       },
       cmOptionsJS: {
         tabSize: 1,
@@ -143,8 +121,8 @@ export default {
         lineNumbers: true,
         line: true,
         autofocus: true,
-        autoRefresh:true,
-        autoCloseBrackets: true,
+        autoRefresh: true,
+        autoCloseBrackets: true
 
         // showHint: true,
       }
@@ -171,12 +149,9 @@ export default {
       this.isJs = false;
     },
     cssMode() {
-
       this.isCss = true;
       this.isHtml = false;
       this.isJs = false;
-
-
     },
     jsMode() {
       this.isJs = true;
@@ -184,11 +159,10 @@ export default {
       this.isCss = false;
     },
     savePost() {
-      this.$store.dispatch("addPost", this.newPost).then(
-        this.$router.push('/')
-      )
-    },
-
+      this.$store
+        .dispatch("addPost", this.newPost)
+        .then(this.$router.push("/"));
+    }
   },
 
   created() {
