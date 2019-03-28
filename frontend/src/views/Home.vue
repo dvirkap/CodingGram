@@ -20,7 +20,7 @@
 
     
 
-      <user-panel></user-panel>
+      <user-panel :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
