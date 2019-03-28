@@ -7,60 +7,67 @@
           <p>{{post.creator.userName}}</p>
         </div>
         <p>{{post.title}}</p>
-        <!-- <h6 class="post-time">{{post.createdAt}}</h6> -->
         <h6 class="post-time">15 Hours ago</h6>
       </div>
 
       <div class="post-img">
         <div class="post-editor-title">
-          <div class="post-editor-title-preview" @click="previewMode" :class="{'post-editor-active': isPREVIEW}">
+          <div
+            class="post-editor-title-preview"
+            @click="previewMode"
+            :class="{'post-editor-active': isPREVIEW}"
+          >
             <i class="fa fa-eye">
               <span>&nbsp; Result</span>
             </i>
           </div>
-          
-          <!-- <div class="post-editor-title-html" @click="htmlMode">
-            <i class="fab fa-html5"></i>
-          </div> -->
-          <button @click="htmlMode" class="html-btn active-btnL" :class="{'post-editor-active': isHTML}">
+          <button
+            @click="htmlMode"
+            class="html-btn active-btnL"
+            :class="{'post-editor-active': isHTML}"
+          >
             <h1>
               HTML
               <i class="html-btnL fab fa-html5"></i>
             </h1>
           </button>
 
-
-          <!-- <div class="post-editor-title-css" @click="cssMode">
-            <i class="fab fa-css3-alt"></i>
-          </div> -->
-          <button @click="cssMode" class="html-btn active-btnL" :class="{'post-editor-active': isCSS}">
+          <button
+            @click="cssMode"
+            class="html-btn active-btnL"
+            :class="{'post-editor-active': isCSS}"
+          >
             <h1>
               CSS
               <i class="css-btnL fab fa-css3-alt"></i>
             </h1>
           </button>
 
-
-          <!-- <div class="post-editor-title-js" @click="jsMode">
-            <i class="fab fa-js"></i>
-          </div> -->
-          <button @click="jsMode" class="html-btn active-btnL" :class="{'post-editor-active': isJS}">
+          <button
+            @click="jsMode"
+            class="html-btn active-btnL"
+            :class="{'post-editor-active': isJS}"
+          >
             <h1>
               JS
               <i class="js-btnL fab fa-js"></i>
             </h1>
           </button>
 
-
-          <div v-if="LoggedInUser && LoggedInUser._id === post.creator._id" class="post-editor-title-run">
+          <div
+            v-if="LoggedInUser && LoggedInUser._id === post.creator._id"
+            class="post-editor-title-run"
+          >
             <router-link :to="'/edit/'+post._id">
               <i class="far fa-edit"></i>
             </router-link>
           </div>
-          <div v-if="LoggedInUser && LoggedInUser._id === post.creator._id" @click="deletePost" class="post-editor-title-run">
-
-                <i class="far fa-trash-alt"></i>
-
+          <div
+            v-if="LoggedInUser && LoggedInUser._id === post.creator._id"
+            @click.prevent="deletePost"
+            class="post-editor-title-run"
+          >
+            <i class="far fa-trash-alt"></i>
           </div>
         </div>
         <div class="post-editor-body">
@@ -113,7 +120,7 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true,
+        autoRefresh: true
       },
       cmOptionsCSS: {
         tabSize: 1,
@@ -122,7 +129,7 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true,
+        autoRefresh: true
       },
       cmOptionsJS: {
         tabSize: 1,
@@ -131,13 +138,13 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true,
+        autoRefresh: true
       }
     };
   },
   methods: {
-    deletePost(){
-      this.$emit('deletePost', this.post)
+    deletePost() {
+      this.$emit("deletePost", this.post);
     },
     previewMode() {
       this.isPREVIEW = true;
@@ -188,8 +195,7 @@ export default {
       console.log("this is new code", newCode);
     }
   },
-  created() {
-  },
+  created() {}
 };
 </script>
 <style>

@@ -2,7 +2,6 @@
   <section class="editor-modal-main" @click.self="closeModal">
     <div class="editor-modal-cont">
       <div class="editor-modal-desc">
-
         <button @click="closeModal" class="editor-close-btn editor-btn">✖</button>
 
         <h2 class="editor-modal-desc-title">Comment:</h2>
@@ -14,21 +13,33 @@
         <div class="editor-modal-editor-cont">
           <div class="editor-modal-editor-cont-title">
             <div class="editor-modal-btns">
-              <button @click="htmlMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isHtml}">
+              <button
+                @click="htmlMode"
+                class="html-btn active-btnL"
+                :class="{'editor-modal-btn-active': isHtml}"
+              >
                 <h1>
                   HTML
                   <i class="html-btnL fab fa-html5"></i>
                 </h1>
               </button>
 
-              <button @click="cssMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isCss}">
+              <button
+                @click="cssMode"
+                class="html-btn active-btnL"
+                :class="{'editor-modal-btn-active': isCss}"
+              >
                 <h1>
                   CSS
                   <i class="css-btnL fab fa-css3-alt"></i>
                 </h1>
               </button>
 
-              <button @click="jsMode" class="html-btn active-btnL" :class="{'editor-modal-btn-active': isJs}">
+              <button
+                @click="jsMode"
+                class="html-btn active-btnL"
+                :class="{'editor-modal-btn-active': isJs}"
+              >
                 <h1>
                   JS
                   <i class="js-btnL fab fa-js"></i>
@@ -89,7 +100,7 @@ import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "CommentCode",
-  props: ["currPost",'currComment'],
+  props: ["currPost", "currComment"],
   data() {
     return {
       isNewComment: false,
@@ -190,27 +201,27 @@ export default {
   },
   created() {
     if (this.currPost) {
-          this.isNewComment = true;
-          this.newComment = {
-            txt: "",
-            snippet: {
-              lang: "js",
-              html: this.currPost.snippet.html,
-              css: this.currPost.snippet.css,
-              code: this.currPost.snippet.code
-            }
-          };
-    }else {
+      this.isNewComment = true;
+      this.newComment = {
+        txt: "",
+        snippet: {
+          lang: "js",
+          html: this.currPost.snippet.html,
+          css: this.currPost.snippet.css,
+          code: this.currPost.snippet.code
+        }
+      };
+    } else {
       this.isNewComment = false;
-          this.newComment = {
-            txt: this.currComment.txt,
-            snippet: {
-              lang: "js",
-              html: this.currComment.snippet.html,
-              css: this.currComment.snippet.css,
-              code: this.currComment.snippet.code
-            }
-          };
+      this.newComment = {
+        txt: this.currComment.txt,
+        snippet: {
+          lang: "js",
+          html: this.currComment.snippet.html,
+          css: this.currComment.snippet.css,
+          code: this.currComment.snippet.code
+        }
+      };
     }
     this.codeForPreview();
   }

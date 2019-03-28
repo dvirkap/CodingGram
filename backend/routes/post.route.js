@@ -3,11 +3,8 @@ const userService = require('../services/user-service');
 
 
 function checkLoggedInUser(req, res, next) {
-    console.log('INSIDE MIDDLEWARE: ', req.session.userName);
-    console.log('INSIDE MIDDLEWARE: ', req.session.user.isAdmin);
 
     if (!req.session.user || !req.session.user.isAdmin) {
-        console.log('INSIDE');
         return res.status(401).end('Unauthorized');
     }
     next();
@@ -24,7 +21,6 @@ function addPostRoute(app) {
     app.get('/post/:postId', async (req, res) => {
         var postId = req.params.postId
         const post = await postService.getPostById(postId)
-        console.log('post is---------', post);
         res.json(post);
 
     })
@@ -47,25 +43,21 @@ function addPostRoute(app) {
             if (post.likeBy.length) {
                 var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
                 if (indexUser === -1) {
-                    console.log('added')
                     post.likeBy.push(currUser)
                     // currUser.likedpost.push(post)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
                 } else {
-                    console.log('removeed')
                     post.likeBy.splice(indexUser, 1)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
                 };
             } else {
-                console.log('added')
                 post.likeBy.push(currUser)
                 const updatedPost = await postService.update(post);
                 res.json(updatedPost);
             };
         } else {
-            console.log('no user')
         }
     })
 
@@ -81,7 +73,11 @@ function addPostRoute(app) {
 
     // DELETE POST
     app.delete('/post/:postId', async (req, res) => {
-        var postCreatorId = req.body.post.creator._id
+        console.log('req.session.loggedInUser._id:::::::',req.session.loggedInUser._id);
+        console.log('req.body.creator._id:::::::::',req.body.creator._id);
+        // console.log(req.session, 'updateeeeeeeeeeeeeee');
+
+        var postCreatorId = req.body.creator._id
         if (postCreatorId === req.session.loggedInUser._id) {
             const postId = req.params.postId;
             console.log('postId::::::::', postId);
@@ -95,9 +91,11 @@ function addPostRoute(app) {
     //DELETE COMMENT
     app.delete('/post/:postId/:commentId', async (req, res) => {
         if (req.session.loggedInUser.userName) {
+            console.log('req.session.loggedInUser._id:::::::',req.session.loggedInUser._id);
+            console.log('req.body.creator._id:::::::::',req.body.comment.creator._id);
             const params = req.params
             var commentCreatorId = req.body.comment.creator._id
-            var post = await postService.getPostById(params.postId)
+            // var post = await postService.getPostById(params.postId)
             if (commentCreatorId === req.session.loggedInUser._id) {
                 const deletedComment = await postService.removeComment(params)
                 res.end(`comment ${deletedComment} deleted!`)
@@ -123,9 +121,9 @@ function addPostRoute(app) {
         var currUser = req.session.loggedInUser
         var comment = req.body.comment
 
-   
-        
-        
+
+
+
         if (currUser) {
             if (comment.likeBy.length) {
                 var indexUser = comment.likeBy.findIndex(user => user._id === currUser._id)
@@ -133,35 +131,35 @@ function addPostRoute(app) {
 
                     console.log('added')
                     comment.likeBy.push(currUser)
-                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
-                    post.comments.splice(currCommentIdx,1, comment)
+                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
+                    post.comments.splice(currCommentIdx, 1, comment)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
                 } else {
                     console.log('removeed')
+                    var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
+                    var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment, 1)
+                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
 
-                    var currUserLikeIdxOnComment = comment.likeBy.findIndex(user => user._id === currUser._id)
-                    comment.likeBy.splice(currUserLikeIdxOnComment,1)
-
-                    // var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment,1)
-                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
-                    
-                    post.comments.splice(currCommentIdx,1, comment)
+                    post.comments.splice(currCommentIdx, 1, updatedComment)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
 
+                    // var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
+                    // var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment, 1)
+                    // var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
+
+                    // post.comments.splice(currCommentIdx, 1, updatedComment)
+
                 };
             } else {
-               
-                console.log('added')
                 comment.likeBy.push(currUser)
-                var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id )
-                post.comments.splice(currCommentIdx,1, comment)
+                var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
+                post.comments.splice(currCommentIdx, 1, comment)
                 const updatedPost = await postService.update(post);
                 res.json(updatedPost);
             };
         } else {
-            console.log('no user')
         }
     })
 

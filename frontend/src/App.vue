@@ -20,6 +20,7 @@ export default {
     NavBar,
   },
   created() {
+    this.$store.dispatch('checkLoggedInUser')
   },
 }
 </script>

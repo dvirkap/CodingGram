@@ -27,7 +27,7 @@ export default new Vuex.Store({
     setPost(state,post){
       state.currPost = post
     },
-    deletePost(state, post) {
+    deletePost1(state, post) {
       var postDeleted = post
       let postIdx = state.posts.findIndex(post => post._id === postDeleted._id)
       state.posts.splice(postIdx, 1)
@@ -93,7 +93,7 @@ export default new Vuex.Store({
       // console.log(`POST TO BE DELETED:::::`, post);
       PostService.deletePost(post)
       .then(res => {
-        context.commit({ type: 'deletePost', post: res })
+        context.commit({ type: 'deletePost1', post: res })
         context.dispatch('loadPosts')
 
 
@@ -167,6 +167,7 @@ export default new Vuex.Store({
     },
     checkLoggedInUser(context){
       UserService.checkLoggedInUser().then(res=> {
+        context.commit('setLoggedInUser',res)
       })
       
     },

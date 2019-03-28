@@ -22,7 +22,6 @@ function connectToMongo() {
             return dbConn;
         })
 }
-
 module.exports = {
     connect : connectToMongo
 }

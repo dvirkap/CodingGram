@@ -19,10 +19,10 @@ function query(filter) {
             ]
         }
         return mongoService.connect()
-            .then(db => db.collection('posts').find(filterObj).sort({ createdAt: -1}).toArray())
+            .then(db => db.collection('posts').find(filterObj).sort({ createdAt: -1 }).toArray())
     } else {
         return mongoService.connect()
-            .then(db => db.collection('posts').find({}).sort({ createdAt: -1})
+            .then(db => db.collection('posts').find({}).sort({ createdAt: -1 })
                 .toArray())
     }
 }
@@ -79,12 +79,10 @@ function add(post, creator) {
 function update(post) {
     const strId = post._id
     const postId = strId
-    // console.log('EDIT POST --- POSTID BEFORE MONGO:::::::', postId, post);
     delete post._id
     return mongoService.connect()
         .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
         .then(res => {
-            // console.log('UPDATE POST BACK FROM POST-SERVICE:', post);
 
             post._id = strId;
             return post;
@@ -127,11 +125,9 @@ function updateComment(id, newComment, currUser) {
         isApproved: false,
         likeBy: []
     }
-    // const strId = post._id
     const postId = id
     return mongoService.connect()
-        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: {$each:[comment], $position: 0} } }))
-        // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: post.comments[post.comments.length - 1] } }))
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: { $each: [comment], $position: 0 } } }))
         .then(res => {
             var post = res
             post._id = postId;
@@ -145,11 +141,8 @@ function removeComment(params) {
     return mongoService.connect()
         .then(db => {
             console.log(params)
-            // var commentID = new ObjectId(params.commentId)
-            const collection = db.collection('posts');
             console.log('commentId from back service', params)
-            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
-            // return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: commentID} })
+            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
         })
 }
 
@@ -168,7 +161,6 @@ function addLikeComment(post) {
 //ADD NEW REPLY
 function addReply(reply) {
     console.log('---------------reply----------------', reply);
-    // console.log('---------------reply----------------', currUser);
     var newReply = {
         commentId: "add id",
         txt: "the first reply",

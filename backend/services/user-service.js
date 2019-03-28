@@ -14,20 +14,7 @@ function getById(userId) {
             return post
         })
 }
-// //EDIT POST
-// function update(user) {
-//     const strId = user._id
-//     const userId = strId
-//     delete user._id
-//     return mongoService.connect()
-//         .then(db => db.collection('users').updateOne({ _id: new ObjectId(userId) }, { $set: user }))
-//         .then(res => {
 
-
-//             user._id = strId;
-//             return user;
-//         })
-// }
 
 function addUser(newUser) {
     console.log(newUser,'in routes service')
@@ -75,7 +62,7 @@ function checkLogin(userCredentials) {
             }
             else {
                 console.log('about to send an error')
-                return Promise.reject(new Error("bad usernameor password"))
+                return Promise.reject(new Error("bad username or password"))
             }
         })
 }
