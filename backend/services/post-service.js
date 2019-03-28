@@ -141,9 +141,8 @@ function removeComment(params) {
     return mongoService.connect()
         .then(db => {
             console.log(params)
-            const collection = db.collection('posts');
             console.log('commentId from back service', params)
-            return collection.updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
+            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: params.commentId } } })
         })
 }
 

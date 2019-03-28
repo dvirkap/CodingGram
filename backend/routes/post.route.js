@@ -91,9 +91,11 @@ function addPostRoute(app) {
     //DELETE COMMENT
     app.delete('/post/:postId/:commentId', async (req, res) => {
         if (req.session.loggedInUser.userName) {
+            console.log('req.session.loggedInUser._id:::::::',req.session.loggedInUser._id);
+            console.log('req.body.creator._id:::::::::',req.body.comment.creator._id);
             const params = req.params
             var commentCreatorId = req.body.comment.creator._id
-            var post = await postService.getPostById(params.postId)
+            // var post = await postService.getPostById(params.postId)
             if (commentCreatorId === req.session.loggedInUser._id) {
                 const deletedComment = await postService.removeComment(params)
                 res.end(`comment ${deletedComment} deleted!`)

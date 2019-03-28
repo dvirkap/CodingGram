@@ -15,10 +15,7 @@
       <h1></h1>
       <img src="@/images/css3.jpg">
     </div>
-    <!-- <div class="aside-card-cont">
-      <h1></h1>
-      <img src="@/images/animal2.png">
-    </div> -->
+   
   </div>
 </template>
 

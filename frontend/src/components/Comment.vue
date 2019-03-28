@@ -45,38 +45,7 @@
       <div class="comment-txt-body">
         <span class="comment-body">{{comment.txt}}</span>
       </div>
-      <!-- <div class="replay">
-        <div class="replay-title">
-          <div class="cmt-txt">
-            <span class="comment-user">
-              <img :src="comment.creator.img">
-              {{comment.creator.userName}}
-            </span>
-            <span class="comment-txt-time">17 HOURS AGO</span>
-          </div>
-
-          <div class="cmt-action">
-            <span
-              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
-              class="delelte-btn"
-              title="Edit"
-            >
-              <i class="far fa-edit"></i>
-            </span>
-            <span
-              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
-              @click="deleteComment"
-              class="delelte-btn"
-              title="Delete Comment"
-            >
-              <i class="far fa-trash-alt"></i>
-            </span>
-          </div>
-        </div>
-        <div class="replay-body">
-          OMG your code is amazing
-        </div>
-      </div> -->
+     
     </div>
   </section>
 </template>
