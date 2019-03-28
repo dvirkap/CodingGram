@@ -92,9 +92,10 @@ function update(post) {
 }
 
 // DELETE POST 
+
+
 function removePost(postId) {
     const _id = new ObjectId(postId)
-    console.log('POST TO DELETE ID:', _id);
     return mongoService.connect()
         .then(db => db.collection('posts').deleteOne({ _id }))
 }
