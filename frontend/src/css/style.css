@@ -1407,7 +1407,7 @@ iframe {
 }
 .editor-modal-editor-body-runner{
     box-sizing: border-box;
-
+    border-left: 5px solid white;
     width: 50%;
     height: 100%;
 }
