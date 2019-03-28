@@ -49,7 +49,7 @@ function addPostRoute(app) {
                 if (indexUser === -1) {
                     console.log('added')
                     post.likeBy.push(currUser)
-                    currUser.likedpost.push(post)
+                    // currUser.likedpost.push(post)
                     const updatedPost = await postService.update(post);
                     res.json(updatedPost);
                 } else {

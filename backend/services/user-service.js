@@ -14,20 +14,20 @@ function getById(userId) {
             return post
         })
 }
-//EDIT POST
-function update(user) {
-    const strId = user._id
-    const userId = strId
-    delete user._id
-    return mongoService.connect()
-        .then(db => db.collection('users').updateOne({ _id: new ObjectId(userId) }, { $set: user }))
-        .then(res => {
+// //EDIT POST
+// function update(user) {
+//     const strId = user._id
+//     const userId = strId
+//     delete user._id
+//     return mongoService.connect()
+//         .then(db => db.collection('users').updateOne({ _id: new ObjectId(userId) }, { $set: user }))
+//         .then(res => {
 
 
-            user._id = strId;
-            return user;
-        })
-}
+//             user._id = strId;
+//             return user;
+//         })
+// }
 
 function addUser(newUser) {
     console.log(newUser,'in routes service')
@@ -85,7 +85,7 @@ module.exports = {
     getUsers,
     getById,
     addUser,
-    update
+    // update
 }
 
 
