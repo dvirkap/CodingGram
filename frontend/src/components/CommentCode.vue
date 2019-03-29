@@ -79,7 +79,11 @@
         </div>
       </div>
       <div class="editor-modal-actions">
-        <button @click="addComment" class="editor-save-btn editor-btn">save</button>
+
+        <button v-if="currPost" @click="addComment" class="editor-save-btn editor-btn">save</button>
+        <!-- <button v-if="isNewComment" @click="addComment" class="editor-save-btn editor-btn">save</button> -->
+
+
         <!-- <button @click="closeModal">close</button> -->
         <!-- <button>like</button> -->
       </div>
@@ -161,6 +165,13 @@ export default {
     };
   },
   methods: {
+    // likeComment() {
+    //   var payload = {
+    //     postId: this.post._id,
+    //     comment: this.currComment
+    //   };
+    //   this.$emit("likeComment", payload);
+    // },
     closeModal() {
       this.$emit("closeModal");
     },

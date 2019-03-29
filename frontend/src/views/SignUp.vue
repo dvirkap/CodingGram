@@ -6,24 +6,41 @@
           <div class="header">
             <img src="../images/loginLogi.png" alt>
           </div>
-            <form @submit.prevent="signup">
-
-                <div class="l-part">
-                      <div class="overlap-text">
-                      <input v-model="newUser.userName" type="text" placeholder="Username" class="input-1" required/>
-                        <span uk-icon="user"></span>
-                        </div>
-                        <div class="overlap-text">
-                          <input v-model="newUser.password" type="password" placeholder="Password" class="input-2" required/>
-                          <span uk-icon="lock"></span>
-                        </div>
-                        <div class="overlap-text">
-                          <input v-model="newUser.email" type="email" placeholder="Email" class="input-2" required/>
-                          <span uk-icon="mail"></span>
-                        </div>
-                      <button class="btn-login">Sign Up</button>
-                </div>
-                </form>
+          <form @submit.prevent="signup">
+            <div class="l-part">
+              <div class="overlap-text">
+                <input
+                  v-model="newUser.userName"
+                  type="text"
+                  placeholder="Username"
+                  class="input-1"
+                  required
+                >
+                <span uk-icon="user"></span>
+              </div>
+              <div class="overlap-text">
+                <input
+                  v-model="newUser.password"
+                  type="password"
+                  placeholder="Password"
+                  class="input-2"
+                  required
+                >
+                <span uk-icon="lock"></span>
+              </div>
+              <div class="overlap-text">
+                <input
+                  v-model="newUser.email"
+                  type="email"
+                  placeholder="Email"
+                  class="input-2"
+                  required
+                >
+                <span uk-icon="mail"></span>
+              </div>
+              <button class="btn-login">Sign Up</button>
+            </div>
+          </form>
         </div>
         <div class="sub-content">
           <div class="s-part">
@@ -40,26 +57,25 @@
 
 <script>
 export default {
-  components: {},
   data() {
     return {
       newUser: {
-        userName: '',
-        password: '',
-        email: ''
+        userName: "",
+        password: "",
+        email: ""
       }
     };
   },
   methods: {
-    signup(){
-        this.$store.dispatch('signUp', this.newUser )
-           .then(() => {this.$router.push('/');})
+    signup() {
+      this.$store.dispatch("signUp", this.newUser).then(() => {
+        this.$router.push("/");
+      });
     }
-  },
-
-  created() {}
+  }
 };
 </script>
+
 <style>
 .wrapper-login {
   height: 50%;
@@ -131,7 +147,7 @@ export default {
 
 .s-part {
   text-align: center;
-  font-family: 'Proxima';
+  font-family: "Proxima";
 }
 
 .s-part a {
@@ -141,9 +157,9 @@ export default {
 }
 
 input:focus {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
-.chackbox-signup{
+.chackbox-signup {
   display: flex;
   background-color: #06335e;
 }

@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="login">
     <div class="main-cont wrapper">
@@ -8,14 +6,26 @@
           <div class="header">
             <img src="../images/loginLogi.png" alt>
           </div>
-          <form @submit.prevent="signin" >
+          <form @submit.prevent="signin">
             <div class="l-part">
               <div class="overlap-text">
-                <input type="text" placeholder="Username" class="input-1" required v-model="userCredentials.userName">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  class="input-1"
+                  required
+                  v-model="userCredentials.userName"
+                >
                 <span uk-icon="user"></span>
               </div>
               <div class="overlap-text">
-                <input type="password" placeholder="Password" class="input-2" required v-model="userCredentials.password">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="input-2"
+                  required
+                  v-model="userCredentials.password"
+                >
                 <span uk-icon="lock"></span>
               </div>
               <button class="btn-login">Log in</button>
@@ -25,7 +35,7 @@
         <div class="sub-content">
           <div class="s-part">
             Don't have an account?
-                <router-link to="/signup">Signup</router-link>
+            <router-link to="/signup">Signup</router-link>
           </div>
         </div>
       </div>
@@ -34,33 +44,28 @@
 </template>
 
 
-
 <script>
-import UserService from '@/services/UserService.js'
+import UserService from "@/services/UserService.js";
+
 export default {
-  components: {},
   data() {
     return {
       userCredentials: {
         userName: "",
         password: ""
       }
+    };
+  },
+  methods: {
+    signin() {
+      this.$store.dispatch("login", this.userCredentials);
+      this.$router.push("/");
     }
-    },
-      methods: {
-        signin() {
-          this.$store.dispatch('login', this.userCredentials )
-            console.log(this.userCredentials,'in login page')
-                this.$router.push('/');
-        }
+  },
+};
 
-      },
-
-      created() {}
-    
-  
-}
 </script>
+
 <style>
 .wrapper-login {
   height: 50%;

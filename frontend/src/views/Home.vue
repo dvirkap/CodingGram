@@ -1,53 +1,40 @@
 <template>
-  <!-- <div class="home"> -->
-<div>
-
-
-      <comment-code 
-        v-if="isModal"
-        @closeModal="closeModal"
-        :currPost="currPost"
-        :currComment="currComment"
-         @addComment="addComment"
-        >
-      </comment-code>
-
-
-
+  <div>
+    <comment-code
+      v-if="isModal"
+      @closeModal="closeModal"
+      :currPost="currPost"
+      :currComment="currComment"
+      @addComment="addComment"
+    ></comment-code>
 
     <div class="main-cont wrapper">
+      <user-panel 
+        @Logout="Logout" 
+        :LoggedInUser="LoggedInUser"
+      ></user-panel>
 
-
-    
-
-      <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
         @addReplay="addReplay"
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
-        @deletePost="deletePost"  
+        @deletePost="deletePost"
         @addComment="addComment"
         @deleteComment="deleteComment"
         @addLike="addLike"
         @likeComment="likeComment"
-       
         :LoggedInUser="LoggedInUser"
         :posts="posts"
         class="posts-cont"
       ></post-list>
-
-      <!-- <UserBar></UserBar> -->
     </div>
-</div>
-
+  </div>
 </template>
-
 
 
 <script>
 import PostList from "../components/PostList";
 import CommentCode from "../components/CommentCode";
-
 
 import UserBar from "../components/UserBar.vue";
 import UserPanel from "../components/UserPanel.vue";
@@ -55,18 +42,15 @@ import UserPanel from "../components/UserPanel.vue";
 export default {
   data() {
     return {
-      isModal: false, 
-      currPost: null,    
-      currComment: null, 
-    }
+      isModal: false,
+      currPost: null,
+      currComment: null
+    };
   },
   components: {
     PostList,
-    // UserBar,
     UserPanel,
     CommentCode
-
-
   },
   computed: {
     posts() {
@@ -80,8 +64,8 @@ export default {
     addReplay(newReplay) {
       this.$store.dispatch("addReplay", newReplay);
     },
-    Logout(){
-    this.$store.dispatch("Logout");
+    Logout() {
+      this.$store.dispatch("Logout");
     },
     deleteComment(commentId, postId) {
       var payload = {
@@ -91,18 +75,13 @@ export default {
       this.$store.dispatch("deleteComment", payload);
     },
     addComment(newComment, postId) {
-      
       var payload = {
         newComment,
         postId
       };
       this.$store.dispatch("addComment", payload);
-      this.isModal = false 
+      this.isModal = false;
       this.currPost = null;
-
-
- 
-
     },
     addLike(post) {
       this.$store.dispatch("addLike", post);
@@ -110,28 +89,23 @@ export default {
     deletePost(post) {
       this.$store.dispatch("deletePost", post);
     },
-    closeModal(){
+    closeModal() {
       this.isModal = !this.isModal;
     },
-    addCommentCode(post){
-      this.currPost = post
-      console.log('in homeee',post)
+    addCommentCode(post) {
+      this.currPost = post;
       this.isModal = true;
     },
-    showCommentCode(comment){
-      this.currComment = comment
-      console.log('in homeee',comment)
+    showCommentCode(comment) {
+      this.currComment = comment;
       this.isModal = true;
     },
     likeComment(payload) {
-       this.$store.dispatch("likeComment", payload);
+      this.$store.dispatch("likeComment", payload);
     }
-
   },
   created() {
     this.$store.dispatch("loadPosts");
   }
 };
 </script>
-
-

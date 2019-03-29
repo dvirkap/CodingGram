@@ -29,6 +29,7 @@ function addUserRoute(app) {
     })
     app.post('/logout', (req, res) => {
         req.session.loggedInUser = null;
+        return res
     })
 
     app.get('/user', async (req, res) => {

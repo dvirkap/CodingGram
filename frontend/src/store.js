@@ -18,29 +18,28 @@ export default new Vuex.Store({
     currUser: null,
   },
   mutations: {
-    setLoggedInUser(state,user){
+    setLoggedInUser(state, user) {
       state.currUser = user
     },
-    setLoggoutUser(state){
+    setLoggoutUser(state) {
       state.currUser = null;
     },
-    setPost(state,post){
+    setPost(state, post) {
       state.currPost = post
     },
     deletePost1(state, post) {
       var postDeleted = post
       let postIdx = state.posts.findIndex(post => post._id === postDeleted._id)
       state.posts.splice(postIdx, 1)
-      
+
     },
-    updatePost(state, {post}) {
+    updatePost(state, { post }) {
       state.currPost = post;
       let postIdx = state.posts.findIndex(post => post._id === state.currPost._id)
       state.posts.splice(postIdx, 1, state.currPost)
     },
     addPost(state, { post }) {
       console.log(post);
-
     },
     setPosts(state, payload) {
       state.posts = payload.posts;
@@ -49,7 +48,7 @@ export default new Vuex.Store({
       state.posts = posts
     },
     createComment(state, payload) {
-    
+
       // const comment = payload.post.comments[payload.post.comments.length - 1];
 
       // state.currComment = comment
@@ -70,9 +69,8 @@ export default new Vuex.Store({
       }
     }
   },
-
   getters: {
-    post(state){
+    post(state) {
       return state.currPost;
     },
     postsFiltered(state) {
@@ -90,40 +88,32 @@ export default new Vuex.Store({
   },
   actions: {
     deletePost(context, post) {
-      // console.log(`POST TO BE DELETED:::::`, post);
       PostService.deletePost(post)
-      .then(res => {
-        context.commit({ type: 'deletePost1', post: res })
-        context.dispatch('loadPosts')
-
-
-      })
-      
+        .then(res => {
+          context.commit({ type: 'deletePost1', post: res })
+          context.dispatch('loadPosts')
+        })
     },
-
     addPost(context, post) {
       PostService.updatePost(post)
-      .then(res => {
-        context.dispatch('loadPosts').then(()=>{
-          return Promise.resolve('yes')
+        .then(res => {
+          context.dispatch('loadPosts').then(() => {
+            return Promise.resolve('yes')
+          })
         })
-      })
-
     },
-    LoadPost(context, postId){
-      return PostService.getPostById(postId).then(res=>res)
+    LoadPost(context, postId) {
+      return PostService.getPostById(postId).then(res => res)
     },
-
     loadPosts(context, filter) {
       return PostService.query(filter)
         .then(posts => {
           context.commit({ type: 'setPosts', posts })
-        }).then(()=>{
+        }).then(() => {
           return Promise.resolve('yes')
         })
     },
-
-    addComment(context,payload) {
+    addComment(context, payload) {
       return CommentsService.addComment(payload)
         .then(res => {
           context.commit({ type: 'createComment', post: res })
@@ -131,16 +121,14 @@ export default new Vuex.Store({
         });
     },
     deleteComment(context, payload) {
-      console.log('deleteComment::::::::::psyload:::::::::::', payload);
       return CommentsService.deleteComment(payload)
         .then(res => {
           context.commit({ type: 'deleteComment', payload })
           context.dispatch('loadPosts')
-
         })
     },
     addReplay(context, newReplay) {
-      
+
 
       // return RepliesService.addReply(payload)
       //   .then(res => {
@@ -165,29 +153,24 @@ export default new Vuex.Store({
           context.dispatch('loadPosts')
         })
     },
-    checkLoggedInUser(context){
-      UserService.checkLoggedInUser().then(res=> {
-        context.commit('setLoggedInUser',res)
+    checkLoggedInUser(context) {
+      UserService.checkLoggedInUser().then(res => {
+        context.commit('setLoggedInUser', res)
       })
-      
     },
     login(context, userCredentials) {
-      UserService.login(userCredentials).then(res=> {
-        console.log(res,'in store back then')
-        context.commit('setLoggedInUser',res)
+      UserService.login(userCredentials).then(res => {
+        context.commit('setLoggedInUser', res)
       })
     },
-    signUp(context,newUser){
-      UserService.signup(newUser).then(user=>{
-          context.commit('setLoggedInUser',user)
+    signUp(context, newUser) {
+      UserService.signup(newUser).then(user => {
+        context.commit('setLoggedInUser', user)
       })
     },
-    Logout(context){
+    Logout(context) {
       UserService.logout()
       context.commit('setLoggoutUser')
     }
-
   }
-
-
 })
