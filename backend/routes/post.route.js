@@ -39,6 +39,7 @@ function addPostRoute(app) {
         var post = req.body;
         var currUser = req.session.loggedInUser
 
+        
         if (currUser) {
             if (post.likeBy.length) {
                 var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)

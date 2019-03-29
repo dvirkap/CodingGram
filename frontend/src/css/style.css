@@ -24,6 +24,8 @@
     src: url(../fonts/FontsFree-Net-Proxima-Nova-Sbold.otf)
 }
 
+
+
 html {
     box-sizing: border-box;
    }
@@ -342,6 +344,7 @@ background-color: #ed4956; */
     height: auto;
     display: flex;
     justify-content: space-between;
+
     /* overflow: scroll; */
 }
 
@@ -541,12 +544,16 @@ background-color: #ed4956; */
     position: sticky;
     top: 10px;
     /* background-color: rgba(226, 162, 43, 0.342); */
+
+
     /* width: 35%; */
     /* height: 500px; */
     height: 100vw;
 }
 
 .aside-nav-cont {
+
+
     display: flex;
     flex-direction: column;
     background-color: #494949;
@@ -698,7 +705,8 @@ body.open .screen {
 }
 
 .posts-cont {
-    max-width: 100%;
+    /* max-width: 100%; */
+    width: 100%;
     height: auto;
     margin-left: 300px;
     /* padding-right: 100px; */
@@ -1527,4 +1535,25 @@ color: red
 .html-btn-edit:hover {
     color: white;
     background-color: #141414;
+}
+@media screen and (max-width: 500px) {
+    .posts-cont {
+        box-sizing: border-box;
+        max-width: 98%;
+        height: auto;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .wrapper{
+        width: 100%;
+    }
+    .main-cont {
+        justify-content: space-around;
+
+        /* overflow: scroll; */
+    }
+    .post{
+        box-sizing: border-box;
+
+    }
 }

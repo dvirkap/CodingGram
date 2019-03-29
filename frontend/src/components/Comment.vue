@@ -10,7 +10,7 @@
     <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
     <i v-if="!isLiked && LoggedInUser" class=" fas fa-chevron-down"></i>
 
-<!-- <i v-if="!comment.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove" class="rateBtn fas fa-check"></i>  -->
+<i v-if="!comment.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove" class="rateBtn fas fa-check"></i> 
 <i v-if="comment.isApproved" class="is-approved fas fa-check"></i> 
 
 
