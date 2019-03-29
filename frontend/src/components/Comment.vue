@@ -128,6 +128,7 @@ export default {
     return {
       newReplay: {
         txt: '',
+        createdAt: Date.now(),
         commentId: this.comment._id,
         postId: this.post._id,
         creator: this.LoggedInUser
