@@ -104,7 +104,7 @@ import "codemirror/theme/base16-dark.css";
 
 export default {
   name: "CommentCode",
-  props: ["currPost", "currComment"],
+  props: ["currPost", "currComment","editorTheme"],
   data() {
     return {
       isNewComment: false,
@@ -235,6 +235,12 @@ export default {
       };
     }
     this.codeForPreview();
+  },
+    watch: {
+    'editorTheme': (function(){
+      console.log(this.editorTheme,'in post')
+      this.setTheme(this.editorTheme)
+    })
   }
 };
 </script>

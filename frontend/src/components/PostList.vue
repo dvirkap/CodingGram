@@ -3,6 +3,7 @@
     <ul>
       <li v-for="post in posts" :key="post._id">
         <post-container
+          :editorTheme="editorTheme"
           @addReplay="addReplay"
           @showCommentCode="showCommentCode"
           @deletePost="deletePost"
@@ -26,7 +27,7 @@ import PostContainer from "@/components/PostContainer.vue";
 
 export default {
   name: "PostList",
-  props: ["posts", "LoggedInUser"],
+  props: ["posts", "LoggedInUser","editorTheme"],
   components: {
     PostContainer
   },
@@ -58,8 +59,9 @@ export default {
     likeComment(payload) {
        this.$emit("likeComment", payload);
     }
-
-
+  },
+  created() {
+    console.log('startt!',this.editorTheme)
   },
 };
 </script>

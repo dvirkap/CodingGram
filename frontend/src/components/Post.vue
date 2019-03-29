@@ -97,11 +97,17 @@ import "codemirror/mode/javascript/javascript.js";
 import "codemirror/mode/xml/xml.js";
 import "codemirror/mode/css/css.js";
 import "codemirror/addon/display/autorefresh.js";
+
 import "codemirror/theme/base16-dark.css";
+import "codemirror/theme/eiffel.css";
+import "codemirror/theme/ttcn.css";
+
+
+
 
 export default {
   name: "Post",
-  props: ["post", "LoggedInUser"],
+  props: ["post", "LoggedInUser","editorTheme"],
   data() {
     return {
       HTMLcode: this.post.snippet.html,
@@ -129,7 +135,9 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true
+        autoRefresh: true,
+        autofocus: true,
+
       },
       cmOptionsJS: {
         tabSize: 1,
@@ -138,7 +146,10 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true
+        autoRefresh: true,
+        autofocus: true,
+
+
       }
     };
   },
@@ -193,9 +204,27 @@ export default {
     },
     onCmCodeChange(newCode) {
       console.log("this is new code", newCode);
+    },
+    setTheme(theme){
+      if(theme === 'light'){
+          this.cmOptionsHTML.theme = 'ttcn'
+          this.cmOptionsCSS.theme = 'ttcn'
+          this.cmOptionsJS.theme = 'eiffel'
+      } else {
+          this.cmOptionsHTML.theme = 'base16-dark'
+          this.cmOptionsCSS.theme = 'base16-dark'
+          this.cmOptionsJS.theme = 'base16-dark'
+      }
     }
   },
-  created() {}
+  created() {
+      this.setTheme(this.editorTheme)
+  },
+  watch: {
+    'editorTheme': (function(){
+      this.setTheme(this.editorTheme)
+    })
+  },
 };
 </script>
 <style>

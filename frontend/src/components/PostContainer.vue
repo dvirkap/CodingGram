@@ -1,6 +1,12 @@
 <template>
   <section class="post">
-    <post @deletePost="deletePost" :LoggedInUser="LoggedInUser" :post="post"/>
+    <post
+      :editorTheme="editorTheme"
+      @deletePost="deletePost"
+      :LoggedInUser="LoggedInUser"
+      :post="post"
+    />
+
     <post-bar :LoggedInUser="LoggedInUser" :post="post" @addLike="addLike"/>
     <comments-list
       class="comment-list"
@@ -28,7 +34,7 @@ export default {
     PostBar,
     CommentsList
   },
-  props: ["post", "LoggedInUser"],
+  props: ["post", "LoggedInUser","editorTheme"],
   methods: {
     addReplay(newReplay) {
       this.$emit("addReplay", newReplay);

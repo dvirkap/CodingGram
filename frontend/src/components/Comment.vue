@@ -1,5 +1,24 @@
 <template>
   <section>
+
+<div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
+    <i v-if="!LoggedInUser" class="fas fa-chevron-up"></i>
+    <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn rate-un fas fa-chevron-up"></i>
+    <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-up"></i>
+    {{comment.likeBy.length}}
+    <i v-if="!LoggedInUser" class="fas fa-chevron-down"></i>
+    <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
+    <i v-if="!isLiked && LoggedInUser" class=" fas fa-chevron-down"></i>
+
+<!-- <i v-if="!comment.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove" class="rateBtn fas fa-check"></i>  -->
+<i v-if="comment.isApproved" class="is-approved fas fa-check"></i> 
+
+
+
+
+
+
+</div>
     <div class="comment-container">
       <div class="comment-txt">
         <div class="comment-txt-title">
@@ -11,8 +30,7 @@
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-
-            <span class="delelte-btn" title="like">
+            <!-- <span class="delelte-btn" title="like">
               <i v-if="!LoggedInUser" class="comment-like-b far fa-heart"></i>
               <i
                 v-if="isLiked && LoggedInUser"
@@ -24,8 +42,8 @@
                 @click="likeComment"
                 class="comment-like-btn far fa-heart"
               ></i>
-              <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span>
-            </span>
+              <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span> -->
+            <!-- </span> -->
 
             <span
               v-if="comment.snippet.html"
@@ -33,16 +51,26 @@
               class="delelte-btn"
               title="Show Code"
             >
-              <i class="fas fa-code"></i>
+<i class="fas fa-chevron-left"></i>
+<i class="fas fa-eye"></i>
+<i class="fas fa-chevron-right"></i>
             </span>
-            <span
-              v-if="LoggedInUser && post.creator._id === comment.creator._id"
+
+            <!-- <span
+              v-if="comment.snippet.html"
+              @click="showCommentCode"
               class="delelte-btn"
-              title="Approve"
+              title="Show Code"
             >
-              <i class="far fa-check-square"></i>
-            </span>
-            <span v-if="LoggedInUser" @click="isReplay = !isReplay" class="delelte-btn" title="Replay">
+              <i class="fas fa-code"></i>
+            </span> -->
+
+            <span
+              v-if="LoggedInUser"
+              @click="isReplay = !isReplay"
+              class="delelte-btn"
+              title="Replay"
+            >
               <i class="fas fa-reply"></i>
             </span>
             <span
@@ -80,54 +108,26 @@
         </div>
       </div>
 
-      <!-- <div class="replay">
-        <div class="replay-title">
-          <div class="cmt-txt">
-            <span class="comment-user">
-              <img :src="comment.creator.img">
-              {{comment.creator.userName}}
-            </span>
-            <span class="comment-txt-time">17 HOURS AGO</span>
-          </div>
+      <reply v-for="reply in comment.replies" 
+            :key="reply._id" 
+            :reply="reply"
+            :LoggedInUser="LoggedInUser"
+      ></reply>
 
-          <div class="cmt-action">
-            <span
-              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
-              class="delelte-btn"
-              title="Edit"
-            >
-              <i class="far fa-edit"></i>
-            </span>
-            <span
-              v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
-              @click="deleteComment"
-              class="delelte-btn"
-              title="Delete Comment"
-            >
-              <i class="far fa-trash-alt"></i>
-            </span>
-          </div>
-        </div>
-        <div class="replay-body">
-          sdfasdfasdf
-          sdfasdfasdfsdfasdf
-          sdafsdfsdafsf
-          sdfsdfasdfsdfasdfsdfsfsdfsdf
-          sdafasdfsdfa dsfsdfsdfsdf fds
-        </div>
-      </div>-->
     </div>
   </section>
 </template>
 
 <script>
+import Reply from "./Reply.vue";
+
 export default {
   name: "Comment",
   props: ["comment", "post", "LoggedInUser"],
   data() {
     return {
       newReplay: {
-        txt: '',
+        txt: "",
         createdAt: Date.now(),
         commentId: this.comment._id,
         postId: this.post._id,
@@ -137,10 +137,9 @@ export default {
     };
   },
   methods: {
-    addReplay(){
-
-      this.$emit('addReplay',this.newReplay)
-      this.newReplay = '';
+    addReplay() {
+      this.$emit("addReplay", this.newReplay);
+      this.newReplay = "";
       this.isReplay = false;
     },
     openModal() {
@@ -162,9 +161,14 @@ export default {
         comment: this.comment
       };
       this.$emit("likeComment", payload);
+    },
+    setApprove(){
+      this.comment.isApproved = true;
     }
   },
-  components: {},
+  components: {
+    Reply
+  },
   computed: {
     isLiked() {
       if (this.LoggedInUser && this.comment.likeBy.length) {
@@ -178,8 +182,7 @@ export default {
 </script>
 
 <style>
-.btn-save-replay {
-}
+
 .save-replay {
   height: max-content;
   width: 100%;

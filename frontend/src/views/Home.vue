@@ -1,7 +1,12 @@
 <template>
   <div>
+    <div class="ssss">    
+    <button  @click="setTheme('light')">light</button>
+    <button  @click="setTheme('dark')">dark</button></div>
+
     <comment-code
       v-if="isModal"
+      :editorTheme="editorTheme"
       @closeModal="closeModal"
       :currPost="currPost"
       :currComment="currComment"
@@ -9,12 +14,9 @@
     ></comment-code>
 
     <div class="main-cont wrapper">
-      <user-panel 
-        @Logout="Logout" 
-        :LoggedInUser="LoggedInUser"
-      ></user-panel>
-
+      <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
       <post-list
+        :editorTheme="editorTheme"
         @addReplay="addReplay"
         @showCommentCode="showCommentCode"
         @addCommentCode="addCommentCode"
@@ -42,6 +44,7 @@ import UserPanel from "../components/UserPanel.vue";
 export default {
   data() {
     return {
+      editorTheme: "dark" ,
       isModal: false,
       currPost: null,
       currComment: null
@@ -60,7 +63,11 @@ export default {
       return this.$store.getters.getCurrUser;
     }
   },
+
   methods: {
+    setTheme(theme) {
+      this.editorTheme = theme ;
+    },
     addReplay(newReplay) {
       this.$store.dispatch("addReplay", newReplay);
     },
@@ -105,7 +112,16 @@ export default {
     }
   },
   created() {
+    console.log(this.editorTheme);
     this.$store.dispatch("loadPosts");
   }
 };
 </script>
+<style>
+.ssss{
+  z-index: 1500;
+  position: absolute;
+  right: 0;
+}
+
+</style>

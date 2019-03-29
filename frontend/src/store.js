@@ -131,9 +131,14 @@ export default new Vuex.Store({
 
 
       return RepliesService.addReply(newReplay)
-      //   .then(res => {
-      //     context.commit({ type: 'createReply', reply: res })
-      //   });
+      .then(res => {
+// need to update the store posts array
+
+        context.dispatch('loadPosts')
+      });
+        // .then(res => {
+        //   context.commit({ type: 'createReply', reply: res })
+        // });
     },
     deleteReply(context, payload) {
       return RepliesService.deleteReply(payload)
