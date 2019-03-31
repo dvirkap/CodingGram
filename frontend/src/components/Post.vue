@@ -4,9 +4,11 @@
       <div class="post-title">
         <div class="post-title-info">
           <img :src="post.creator.img">
+          <div class="mobile-bar">
           <p>{{post.creator.userName}}</p>
-        <i v-if="post.isApproved" class="postApprove fas fa-check"></i> 
-
+          <h6 class="post-time-mobile"><span>{{ post.createdAt | moment("from", "now" ) }}</span></h6>
+          </div>
+        <i v-if="post.isApproved" class="postApprove fas fa-check-circle"></i>
         </div>
         <p>{{post.title}}</p>
         <h6 class="post-time"><span>{{ post.createdAt | moment("from", "now" ) }}</span></h6>
@@ -234,9 +236,7 @@ export default {
 .display {
   display: none;
 }
-.postApprove{
-    color: green;
-}
+
 </style>
 
 
