@@ -126,7 +126,8 @@ export default {
         lineNumbers: true,
         line: true,
         readOnly: true,
-        autoRefresh: true
+        autoRefresh: true,
+         autofocus: true,
       },
       cmOptionsCSS: {
         tabSize: 1,

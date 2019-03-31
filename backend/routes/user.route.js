@@ -28,7 +28,7 @@ function addUserRoute(app) {
             })
     })
     app.post('/logout', (req, res) => {
-        req.session.loggedInUser = null;
+        req.session.destroy();
         return res
     })
 

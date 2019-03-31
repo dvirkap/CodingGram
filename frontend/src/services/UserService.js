@@ -45,11 +45,11 @@ return users
 async function login(userCredentials) {
     
     var loggedInUser = await axios.post(`${_URL}/login`, userCredentials)
-    console.log(loggedInUser.data);
+    console.log(loggedInUser.data,'in serviceee');
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser.data))
         // localStorage.setItem('loggedInUser', loggedInUser.data)
-        return  JSON.parse(localStorage.getItem('loggedInUser'))
-    // return loggedInUser.data
+        // return  JSON.parse(localStorage.getItem('loggedInUser'))
+    return loggedInUser.data
 }
 
 // async function signup(newUserCredentials) {

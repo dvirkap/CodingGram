@@ -46,15 +46,15 @@
 
           <span
             v-if="LoggedInUser && LoggedInUser._id == reply.creator._id"
-            @click="deleteComment"
+            @click="deleteReply"
             class="delelte-btn"
-            title="Delete Comment"
+            title="Delete Reply"
           >
             <i class="far fa-trash-alt"></i>
           </span>
         </div>
       </div>
-      <div class="replay-body">{{reply.txt}}</div>
+      <div class="replay-body">{{reply.txt}}{{reply._id}}</div>
     </div>
   </section>
 </template>
@@ -68,7 +68,9 @@ export default {
     openModal() {
       this.$emit("openModal");
     },
-    deleteComment() {
+    deleteReply() {
+      var replyToDelete = this.reply
+      this.$store.dispatch('deleteReply', replyToDelete)
       //   var commentId = this.comment._id;
       //   console.log("commentId:", commentId);
       //   var postId = this.post._id;

@@ -4,6 +4,7 @@ import PostService from './services/PostService.js';
 import UserService from './services/UserService.js';
 import CommentsService from './services/CommentsService.js';
 import RepliesService from './services/RepliesService.js';
+import { log } from 'util';
 
 
 Vue.use(Vuex)
@@ -57,6 +58,23 @@ export default new Vuex.Store({
       let postIdx = state.posts.findIndex(post => post._id === payload.postId)
       let commentIdx = state.posts[postIdx].comments.findIndex(comment => comment._id === payload.commentId)
       state.posts[postIdx].comments.splice(commentIdx, 1)
+    },
+    deleteReply(state, {payload} ) {
+      console.log('PAYLOAD BACK TO STORE. FOR DELETE REPLY:', payload);
+      
+      let postIdx = state.posts.findIndex(post => post._id === payload.postId)
+      console.log(postIdx,'postIdx');
+      
+      let commentIdx = state.posts[postIdx].comments.findIndex(comment => comment._id === payload.commentId)
+      console.log(commentIdx,'commentIdx');
+
+      let replyIdx = state.posts[postIdx].comments[commentIdx].replies.findIndex(reply => reply._id === payload._id)
+      console.log(replyIdx,'replyIdx');
+      console.log(state.posts[postIdx].comments,'state.posts[postIdx].comments beforeee');
+
+      state.posts[postIdx].comments[commentIdx].replies.splice(replyIdx, 1)
+      console.log(state.posts[postIdx].comments,'state.posts[postIdx].comments afterrrr');
+
     },
     addLike(state, payload) {
       let likes = [];
@@ -141,9 +159,12 @@ export default new Vuex.Store({
         // });
     },
     deleteReply(context, payload) {
+      
       return RepliesService.deleteReply(payload)
-        .then(res => {
-          context.commit({ type: 'deleteReply', reply: res })
+      .then(res => {
+        console.log('store after delete reply:', res);
+          context.commit({ type: 'deleteReply', payload })
+          // context.dispatch('loadPosts')
         });
     },
     addLike(context, post) {
@@ -164,9 +185,15 @@ export default new Vuex.Store({
       })
     },
     login(context, userCredentials) {
-      UserService.login(userCredentials).then(res => {
+      return UserService.login(userCredentials)
+      .then(res => {
+        
         context.commit('setLoggedInUser', res)
+        
+        return res
       })
+
+     
     },
     signUp(context, newUser) {
       UserService.signup(newUser).then(user => {
