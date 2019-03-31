@@ -19,6 +19,7 @@ import  './css/style.css'
 
 
 Vue.config.productionTip = false
+Vue.use(require('vue-moment'));
 // Vue.use(VueSweetalert2);
 Vue.use(VueCodemirror, /* { 
   options: { theme: 'base16-dark', ... },

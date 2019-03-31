@@ -32,8 +32,8 @@ export default {
     PostContainer
   },
   methods: {
-    addReplay(newReplay) {
-      this.$emit("addReplay", newReplay);
+    addReplay(newReply) {
+      this.$emit("addReplay", newReply);
     },
     deleteComment(commentId, postId) {
       this.$emit("deleteComment", commentId, postId);

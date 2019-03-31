@@ -68,8 +68,8 @@ export default {
     setTheme(theme) {
       this.editorTheme = theme ;
     },
-    addReplay(newReplay) {
-      this.$store.dispatch("addReplay", newReplay);
+    addReplay(newReply) {
+      this.$store.dispatch("addReplay", newReply);
     },
     Logout() {
       this.$store.dispatch("Logout");

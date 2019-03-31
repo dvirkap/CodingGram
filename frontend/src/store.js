@@ -145,10 +145,10 @@ export default new Vuex.Store({
           context.dispatch('loadPosts')
         })
     },
-    addReplay(context, newReplay) {
+    addReplay(context, newReply) {
 
 
-      return RepliesService.addReply(newReplay)
+      return RepliesService.addReply(newReply)
       .then(res => {
 // need to update the store posts array
 

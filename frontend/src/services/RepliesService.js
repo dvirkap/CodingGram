@@ -16,10 +16,10 @@ const _URL = (process.env.NODE_ENV !== 'development')
     // : 'http://localhost:3000/post/';
 
 
-async function addReply(newReplay) {
+async function addReply(newReply) {
      //The payload: commentId, reply
      
-    var addedReply = await axios.post(`${_URL}/reply`, newReplay)
+    var addedReply = await axios.post(`${_URL}/reply`, newReply)
     return addedReply.data
 }
 async function deleteReply(payload) {

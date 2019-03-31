@@ -55,16 +55,6 @@
 <i class="fas fa-eye"></i>
 <i class="fas fa-chevron-right"></i>
             </span>
-
-            <!-- <span
-              v-if="comment.snippet.html"
-              @click="showCommentCode"
-              class="delelte-btn"
-              title="Show Code"
-            >
-              <i class="fas fa-code"></i>
-            </span> -->
-
             <span
               v-if="LoggedInUser"
               @click="isReplay = !isReplay"
@@ -95,7 +85,7 @@
         <span class="comment-body">{{comment.txt}}</span>
       </div>
 
-      <!-- addd replayyyyy! -->
+      <!-- add reply! -->
 
       <div v-if="isReplay" class="replay">
         <div class="replay-body-input">
@@ -107,7 +97,6 @@
           </div>
         </div>
       </div>
-
       <reply v-for="reply in comment.replies"
             :key="reply._id" 
             :reply="reply"
@@ -127,7 +116,7 @@ export default {
   data() {
     return {
       newReplay: {
-        txt: "",
+        txt: " ",
         createdAt: Date.now(),
         commentId: this.comment._id,
         postId: this.post._id,
@@ -138,9 +127,10 @@ export default {
   },
   methods: {
     addReplay() {
-      this.$emit("addReplay", this.newReplay);
-      this.newReplay = "";
+      var replyCopy = JSON.parse(JSON.stringify( this.newReplay));
+      this.$emit("addReplay", replyCopy);
       this.isReplay = false;
+      this.newReplay.txt = " ";
     },
     openModal() {
       this.$emit("openModal");

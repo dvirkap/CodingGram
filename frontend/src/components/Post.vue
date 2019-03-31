@@ -7,7 +7,7 @@
           <p>{{post.creator.userName}}</p>
         </div>
         <p>{{post.title}}</p>
-        <h6 class="post-time">15 Hours ago</h6>
+        <h6 class="post-time"><span>{{ post.createdAt | moment("from", "now" ) }}</span></h6>
       </div>
 
       <div class="post-img">

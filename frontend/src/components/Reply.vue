@@ -54,7 +54,8 @@
           </span>
         </div>
       </div>
-      <div class="replay-body">{{reply.txt}}{{reply._id}}</div>
+      <div class="replay-body">{{reply.txt}}</div>
+      {{}}
     </div>
   </section>
 </template>
