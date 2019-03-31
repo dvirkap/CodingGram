@@ -1,6 +1,6 @@
 <template>
   <section>
-
+<!-- {{comment}} -->
 <div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
     <i v-if="!LoggedInUser" class="fas fa-chevron-up"></i>
     <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn rate-un fas fa-chevron-up"></i>
@@ -10,7 +10,7 @@
     <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
     <i v-if="!isLiked && LoggedInUser" class=" fas fa-chevron-down"></i>
 
-<i v-if="!comment.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove" class="rateBtn fas fa-check"></i> 
+<i v-if="!post.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove()" class="rateBtn fas fa-check"></i> 
 <i v-if="comment.isApproved" class="is-approved fas fa-check"></i> 
 
 
@@ -30,20 +30,6 @@
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-            <!-- <span class="delelte-btn" title="like">
-              <i v-if="!LoggedInUser" class="comment-like-b far fa-heart"></i>
-              <i
-                v-if="isLiked && LoggedInUser"
-                @click="likeComment"
-                class="comment-like-btn fas fa-heart"
-              ></i>
-              <i
-                v-if="!isLiked && LoggedInUser"
-                @click="likeComment"
-                class="comment-like-btn far fa-heart"
-              ></i>
-              <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span> -->
-            <!-- </span> -->
 
             <span
               v-if="comment.snippet.html"
@@ -137,8 +123,6 @@ export default {
     },
     deleteComment() {
       var commentId = this.comment._id;
-      console.log("commentId:", commentId);
-
       var postId = this.post._id;
       this.$emit("deleteComment", commentId, postId);
     },
@@ -153,7 +137,13 @@ export default {
       this.$emit("likeComment", payload);
     },
     setApprove(){
-      this.comment.isApproved = true;
+      var postToUpdate = (JSON.parse(JSON.stringify(this.post)))
+      postToUpdate.comments.forEach((comment)=>{
+       if(comment._id === this.comment._id){
+          postToUpdate.isApproved = true;
+          comment.isApproved = true;}
+      })
+      this.$emit('approved',postToUpdate)
     }
   },
   components: {

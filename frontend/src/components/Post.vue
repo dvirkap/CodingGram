@@ -5,6 +5,8 @@
         <div class="post-title-info">
           <img :src="post.creator.img">
           <p>{{post.creator.userName}}</p>
+        <i v-if="post.isApproved" class="postApprove fas fa-check"></i> 
+
         </div>
         <p>{{post.title}}</p>
         <h6 class="post-time"><span>{{ post.createdAt | moment("from", "now" ) }}</span></h6>
@@ -231,6 +233,9 @@ export default {
 <style>
 .display {
   display: none;
+}
+.postApprove{
+    color: green;
 }
 </style>
 

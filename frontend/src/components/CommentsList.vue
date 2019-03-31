@@ -6,6 +6,7 @@
         <li v-for="comment in comments" :key="comment._id">
           <Comment
             class="comment-cmp"
+            @approved="approved"
             @addReplay="addReplay"
             @showCommentCode="showCommentCode"
             :LoggedInUser="LoggedInUser"
@@ -66,6 +67,9 @@ export default {
   },
   created() {},
   methods: {
+    approved(postToUpdate){
+      this.$emit('approved',postToUpdate)
+    },
     addReplay(newReply){
       this.$emit('addReplay',newReply)
     },

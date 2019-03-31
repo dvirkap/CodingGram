@@ -754,6 +754,8 @@ body.open .screen {
     display: flex;
     flex-direction: row;
     margin-left: 5px;
+
+    align-items: center;
 }
 
 .post-title p {
