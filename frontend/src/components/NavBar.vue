@@ -21,6 +21,10 @@
     
 
       <div class="navbar-routers-cont">
+        <select class="">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
         <!-- <router-link v-if="LoggenInUser" to="/"><span uk-icon="user"></span> Hello {{LoggenInUser.userName}} </router-link> -->
 
 
@@ -69,5 +73,11 @@ a{
 
   text-decoration: none;
 }
+select{
+    background: #141414;
+
+}
+
+
 
 </style>
