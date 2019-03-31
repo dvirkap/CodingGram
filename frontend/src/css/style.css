@@ -1589,7 +1589,7 @@ iframe {
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
     body {
         background-color: #b6b6b6
     }

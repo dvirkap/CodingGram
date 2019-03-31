@@ -262,7 +262,7 @@ a{
     transform: translate3d(0px, -50%, 0);
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   body {
     padding-left: 0;
   }
