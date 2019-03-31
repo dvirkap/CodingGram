@@ -12,14 +12,16 @@ const axios = Axios.create({
     withCredentials: true
 })
 const _URL = (process.env.NODE_ENV !== 'development')
-    ? '/post/'
-    : 'http://localhost:3000/post/';
+    ? ''
+    : 'http://localhost:3000';
+    // ? '/post/'
+    // : 'http://localhost:3000/post/';
 
 
 async function addComment(payload) {
     const postId = payload.postId
     const newComment = payload.newComment
-    const updatedPost = await axios.put(`${_URL}${postId}/comment`, newComment)
+    const updatedPost = await axios.put(`${_URL}/post/${postId}/comment`, newComment)
     return updatedPost.data
 }
 
@@ -33,7 +35,7 @@ async function deleteComment(payload) {
     var headers = {
         data: commentWithPost
     }
-    const deletedComment = await axios.delete(`${_URL}${payload.postId}/${payload.commentId}`, headers)
+    const deletedComment = await axios.delete(`${_URL}/post/${payload.postId}/${payload.commentId}`, headers)
     return deletedComment
 }
 
@@ -45,6 +47,6 @@ async function likeComment(payload) {
         post,
         comment
     }
-    var like = await axios.put(`http://localhost:3000/comment/like`, postAndComment)
+    var like = await axios.put(`${_URL}/comment/like`, postAndComment)
     return like
 }
