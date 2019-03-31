@@ -23,22 +23,22 @@
 
 
     <li tabindex="0" class="icon-add-post"><router-link to="/edit"><span>New Post</span></router-link></li>
-    <li tabindex="0" class="icon-add-question"> <span>Ask Something</span></li>
-    <li tabindex="0" class="icon-home"><router-link to="/"><span>Home</span></router-link></li>
+    <!-- <li tabindex="0" class="icon-add-question"> <span>Ask Something</span></li> -->
+    <!-- <li tabindex="0" class="icon-home"><router-link to="/"><span>Home</span></router-link></li> -->
     <li v-if="!LoggedInUser" tabindex="0" class="icon-signup"><router-link to="/signup"><span>Sign Up</span></router-link></li>
     <li v-if="LoggedInUser" @click="logout" tabindex="0" class="icon-logout"><span>Logout</span></li>
     <li v-if="!LoggedInUser" tabindex="0" class="icon-login"><router-link to="/login"><span>Login</span></router-link></li>
-    <li v-if="LoggedInUser" tabindex="0" class="icon-settings"><span>Settings</span></li>
+    <!-- <li v-if="LoggedInUser" tabindex="0" class="icon-settings"><span>Settings</span></li> -->
   </ul>
-  <ul>
-           <li tabindex="0" class="icon-explore"><span>Explore</span></li>
+  <!-- <ul> -->
+           <!-- <li tabindex="0" class="icon-explore"><span>Explore</span></li>
       <ul>
         <li>New Posts</li>
         <li>Top Rated</li>
         <li>newb</li>
 
       </ul>
-  </ul>
+  </ul> -->
 
 </nav>
 

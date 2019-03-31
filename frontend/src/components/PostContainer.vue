@@ -10,6 +10,7 @@
     <post-bar :LoggedInUser="LoggedInUser" :post="post" @addLike="addLike"/>
     <comments-list
       class="comment-list"
+      @approved="approved"
       @addReplay="addReplay"
       @showCommentCode="showCommentCode"
       @addComment="addComment"
@@ -34,8 +35,11 @@ export default {
     PostBar,
     CommentsList
   },
-  props: ["post", "LoggedInUser","editorTheme"],
+  props: ["post", "LoggedInUser", "editorTheme"],
   methods: {
+    approved(postToUpdate) {
+      this.$emit("approved", postToUpdate);
+    },
     addReplay(newReplay) {
       this.$emit("addReplay", newReplay);
     },

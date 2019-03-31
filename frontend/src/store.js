@@ -11,6 +11,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    editorTheme: "dark",
     posts: [],
     comments: [],
     currPost: null,
@@ -19,6 +20,11 @@ export default new Vuex.Store({
     currUser: null,
   },
   mutations: {
+    setUserTheme(state, theme) {
+      console.log('mutations', theme)
+
+      state.editorTheme = theme
+    },
     setLoggedInUser(state, user) {
       state.currUser = user
     },
@@ -59,21 +65,21 @@ export default new Vuex.Store({
       let commentIdx = state.posts[postIdx].comments.findIndex(comment => comment._id === payload.commentId)
       state.posts[postIdx].comments.splice(commentIdx, 1)
     },
-    deleteReply(state, {payload} ) {
+    deleteReply(state, { payload }) {
       console.log('PAYLOAD BACK TO STORE. FOR DELETE REPLY:', payload);
-      
+
       let postIdx = state.posts.findIndex(post => post._id === payload.postId)
-      console.log(postIdx,'postIdx');
-      
+      console.log(postIdx, 'postIdx');
+
       let commentIdx = state.posts[postIdx].comments.findIndex(comment => comment._id === payload.commentId)
-      console.log(commentIdx,'commentIdx');
+      console.log(commentIdx, 'commentIdx');
 
       let replyIdx = state.posts[postIdx].comments[commentIdx].replies.findIndex(reply => reply._id === payload._id)
-      console.log(replyIdx,'replyIdx');
-      console.log(state.posts[postIdx].comments,'state.posts[postIdx].comments beforeee');
+      console.log(replyIdx, 'replyIdx');
+      console.log(state.posts[postIdx].comments, 'state.posts[postIdx].comments beforeee');
 
       state.posts[postIdx].comments[commentIdx].replies.splice(replyIdx, 1)
-      console.log(state.posts[postIdx].comments,'state.posts[postIdx].comments afterrrr');
+      console.log(state.posts[postIdx].comments, 'state.posts[postIdx].comments afterrrr');
 
     },
     addLike(state, payload) {
@@ -88,6 +94,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    getTheme(state) {
+      return state.editorTheme;
+    },
     post(state) {
       return state.currPost;
     },
@@ -105,6 +114,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    approvedPost(context, post) {
+      PostService.updatePost(post)
+        .then(res => {
+          context.dispatch('loadPosts')
+          .then(() => {
+            return Promise.resolve('yes')
+          })
+        })
+    },
+    setTheme(context, theme) {
+      context.commit('setUserTheme', theme)
+    },
     deletePost(context, post) {
       PostService.deletePost(post)
         .then(res => {
@@ -149,20 +170,20 @@ export default new Vuex.Store({
 
 
       return RepliesService.addReply(newReplay)
-      .then(res => {
-// need to update the store posts array
+        .then(res => {
+          // need to update the store posts array
 
-        context.dispatch('loadPosts')
-      });
-        // .then(res => {
-        //   context.commit({ type: 'createReply', reply: res })
-        // });
+          context.dispatch('loadPosts')
+        });
+      // .then(res => {
+      //   context.commit({ type: 'createReply', reply: res })
+      // });
     },
     deleteReply(context, payload) {
-      
+
       return RepliesService.deleteReply(payload)
-      .then(res => {
-        console.log('store after delete reply:', res);
+        .then(res => {
+          console.log('store after delete reply:', res);
           context.commit({ type: 'deleteReply', payload })
           // context.dispatch('loadPosts')
         });
@@ -186,14 +207,14 @@ export default new Vuex.Store({
     },
     login(context, userCredentials) {
       return UserService.login(userCredentials)
-      .then(res => {
-        
-        context.commit('setLoggedInUser', res)
-        
-        return res
-      })
+        .then(res => {
 
-     
+          context.commit('setLoggedInUser', res)
+
+          return res
+        })
+
+
     },
     signUp(context, newUser) {
       UserService.signup(newUser).then(user => {
