@@ -29,6 +29,8 @@ function addPostRoute(app) {
     app.post('/post', async (req, res) => {
         var post = req.body;
         var currUser = req.session.loggedInUser
+        console.log('currUser',currUser);
+        
         if (currUser) {
             const addedPost = await postService.add(post, currUser)
             res.json(addedPost)
@@ -167,16 +169,29 @@ function addPostRoute(app) {
     // -------------------------- Replies SECTION ---------------------------
     //ADD REPLY
     app.post('/reply', async (req, res) => {
-        // txt: '',
-        // commentId: this.comment._id,
-        // postId: this.post._id,
-        // creator: this.LoggedInUser
         var reply = req.body;
         console.log(`reply req body:::::::::::`, reply);
-        
         var currUser = req.session.loggedInUser
         var addedReply = await postService.addReply(reply)
         res.json(addedReply)
+    })
+
+    //DELETE REPLY
+    app.put('/post/:postId/:commentId/:replyId', async (req, res) => {
+        if (req.session.loggedInUser.userName) {
+            console.log('req.session.loggedInUser._id:::::::',req.session.loggedInUser._id);
+            console.log('req.body.creator._id:::::::::',req.body.creator._id);
+            console.log('req.body._id:::::::::',req.body._id);
+            var replyToDelete = req.body
+            // const params = req.params
+            var replyCreatorId = req.body.creator._id
+            // var post = await postService.getPostById(params.postId)
+            if (replyCreatorId === req.session.loggedInUser._id) {
+                const deletedReply = await postService.deleteReply(replyToDelete)
+                res.end(`reply ${deletedReply} deleted!`)
+            }
+        }
+
     })
 
 }

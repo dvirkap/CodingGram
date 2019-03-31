@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 export default {
     addReply,
-    deleteReplay
+    deleteReply
 }
 
 const axios = Axios.create({
@@ -20,9 +20,9 @@ async function addReply(newReplay) {
     var addedReply = await axios.post(`http://localhost:3000/reply`, newReplay)
     return addedReply.data
 }
-async function deleteReplay(payload) {
+async function deleteReply(payload) {
      //The payload: commentId, reply
     console.log(payload);
-    const deletedReply = await axios.delete(`${_URL}${payload.commentId}/${payload.replyId}`)
+    const deletedReply = await axios.put(`${_URL}${payload.postId}/${payload.commentId}/${payload.replyId}`, payload)
     return deletedReply
 }

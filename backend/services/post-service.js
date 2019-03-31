@@ -144,7 +144,7 @@ function removeComment(params) {
         .then(db => {
             console.log(params)
             console.log('commentId from back service', params)
-            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: new ObjectId(params.commentId) } } })
+            db.collection('posts').updateOne({ _id: new ObjectId(params.postId) }, { $pull: { comments: { _id: params.commentId } } })
         })
 }
 
@@ -166,18 +166,50 @@ function addReply(reply) {
     var commentId = reply.commentId
     var postId = reply.postId
 
+        // creator: this.LoggedInUser
 
+    var newReply = {
+        _id: UtilService.makeId(12),
+        postId: reply.postId,
+        commentId: reply.commentId,
+        txt: reply.txt,
+        // snippet: {
+        //     lang: reply.snippet.lang,
+        //     html: newComment.snippet.html,
+        //     css: newComment.snippet.css,
+        //     code: newComment.snippet.code
+        // },
+        createdAt: Date.now(),
+        creator: reply.creator
+}
+
+
+return mongoService.connect()
+    // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: { $each: [reply], $position: 0 } } }))
+    .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId), "comments._id": commentId }, { $push: { "comments.$.replies": newReply } }))
+    .then(res => {
+        console.log('result::::::::::::', res);
+
+        var addedReply = res
+        return addedReply;
+    })
+}
+function deleteReply(replyToDelete) {
+    var commentId = replyToDelete.commentId
+    var postId = replyToDelete.postId
+    var replyId = replyToDelete._id
+    console.log('postId', postId);
+    console.log('commentId', commentId);
+    console.log('replyId', replyId);
     
     return mongoService.connect()
-        // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: { $each: [reply], $position: 0 } } }))
-        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) ,  "comments._id": commentId  }, {$push: {"comments.$.replies": reply}} ))
+        .then(db => db.collection('posts').findOneAndUpdate({ _id: new ObjectId(postId), "comments._id": commentId  }, { $pull: { "comments.$.replies":{ _id: replyId} } }))
         .then(res => {
             console.log('result::::::::::::', res);
-            
-            var comment = res
-            comment._id = commentId;
-            return comment;
-})
+
+            var deletedReply = res
+            return deletedReply;
+        })
 }
 
 module.exports = {
@@ -189,7 +221,8 @@ module.exports = {
     removeComment,
     updateComment,
     addReply,
-    addLikeComment
+    addLikeComment,
+    deleteReply
 
 }
 

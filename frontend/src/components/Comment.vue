@@ -108,7 +108,7 @@
         </div>
       </div>
 
-      <reply v-for="reply in comment.replies" 
+      <reply v-for="reply in comment.replies"
             :key="reply._id" 
             :reply="reply"
             :LoggedInUser="LoggedInUser"

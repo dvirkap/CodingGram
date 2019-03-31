@@ -58,12 +58,19 @@ export default {
   },
   methods: {
     signin() {
-      this.$store.dispatch("login", this.userCredentials);
-      this.$router.push("/");
+      this.$store
+        .dispatch("login", this.userCredentials)
+        .then(res => {
+          console.log("bla bla in login page", res);
+          this.$router.push("/");
+        })
     }
-  },
+    // showAlert(){
+    //         // Use sweetalert2
+    //         this.$swal('Hello Vue world!!!');
+    //     }
+  }
 };
-
 </script>
 
 <style>
