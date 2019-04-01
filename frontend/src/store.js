@@ -12,7 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     editorTheme: "dark",
-    posts: [],
+    posts: null,
     comments: [],
     currPost: null,
     currComment: null,
@@ -20,6 +20,32 @@ export default new Vuex.Store({
     currUser: null,
   },
   mutations: {
+    mutCommentLike(state, payload) {
+      state.posts.forEach(post => {
+        if (post._id === payload.postId) {
+          post.comments.forEach(comment => {
+            if (comment._id === payload.comment._id) {
+             var userIdx = comment.likeBy.findIndex(user => user._id === state.currUser._id)
+             if(userIdx === -1) comment.likeBy.push(state.currUser)
+             else comment.likeBy.splice(userIdx,1)
+            }
+          })
+        }
+      });
+    },
+    mutLikePost(state,currPost){
+      state.posts.forEach(post=>{
+        if(post._id === currPost._id){
+          var likeIdx = post.likeBy.findIndex(user=> user._id === state.currUser._id)
+          if(likeIdx === -1) post.likeBy.push(state.currUser)
+          else post.likeBy.splice(likeIdx,1)
+        }
+      })
+    },
+
+
+
+
     setUserTheme(state, theme) {
       console.log('mutations', theme)
 
@@ -118,9 +144,9 @@ export default new Vuex.Store({
       PostService.updatePost(post)
         .then(res => {
           context.dispatch('loadPosts')
-          .then(() => {
-            return Promise.resolve('yes')
-          })
+            .then(() => {
+              return Promise.resolve('yes')
+            })
         })
     },
     setTheme(context, theme) {
@@ -170,8 +196,8 @@ export default new Vuex.Store({
 
 
       return RepliesService.addReply(newReply)
-      .then(res => {
-// need to update the store posts array
+        .then(res => {
+          // need to update the store posts array
 
           context.dispatch('loadPosts')
         });
@@ -188,19 +214,9 @@ export default new Vuex.Store({
           // context.dispatch('loadPosts')
         });
     },
-    addLike(context, post) {
-      return PostService.addLike(post)
-        .then(res => {
-          context.dispatch('loadPosts')
-        })
-    },
-    likeComment(context, payload) {
-      return CommentsService.likeComment(payload)
-        .then(res => {
-          context.dispatch('loadPosts')
-        })
-    },
     checkLoggedInUser(context) {
+      console.log('in')
+
       UserService.checkLoggedInUser().then(res => {
         context.commit('setLoggedInUser', res)
       })
@@ -218,12 +234,46 @@ export default new Vuex.Store({
     },
     signUp(context, newUser) {
       UserService.signup(newUser).then(user => {
+        console.log(user,'userr')
         context.commit('setLoggedInUser', user)
       })
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    addLike(context, post) {
+      context.commit('mutLikePost', post)
+      var currPost = context.state.posts.find(post=> post._id === post._id)
+      var userId = context.state.currUser._id
+      return PostService.addLike(post,userId)
+        .then(res => {
+          context.dispatch('loadPosts')
+        })
     },
     Logout(context) {
       UserService.logout()
       context.commit('setLoggoutUser')
-    }
+      context.dispatch('loadPosts')
+    },
+    likeComment(context, payload) {
+      context.commit('mutCommentLike', payload)
+      var currPost = context.state.posts.find(post=> post._id === payload.postId)
+      var userId = context.state.currUser._id
+      CommentsService.likeComment(currPost,userId)
+        .then(()=>{
+          context.dispatch('loadPosts')
+        })
+    },
   }
 })

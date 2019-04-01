@@ -10,7 +10,7 @@
     ></comment-code>
 
     <div class="main-cont wrapper">
-      <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel>
+      <!-- <user-panel @Logout="Logout" :LoggedInUser="LoggedInUser"></user-panel> -->
       <post-list
         :editorTheme="editorTheme"
         @approved="approved"

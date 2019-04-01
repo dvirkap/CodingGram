@@ -1698,6 +1698,7 @@ iframe {
     }
     .sec-html {
         height: 100%;
+
     }
     .CodeMirror {
         height: 250px;
@@ -1730,5 +1731,31 @@ iframe {
     }
     .post-comment {
         height: 50px;
+    }
+    .editor-modal-main {
+        background-color: #000000ec;
+
+
+    }
+
+    .editor-modal-editor-body {
+    background-color: #3897f0;
+    height: 250px;
+
+    }
+    .editor-modal-cont {
+        width: 98%;
+    }
+    .html-btn {
+        padding-left: 0;
+        padding-right: 0;
+
+    }
+    .edit-add{
+        margin-top: 20px;
+        height: 450px;
+    }
+    .edit-add input {
+        width: 100%;
     }
 }

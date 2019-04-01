@@ -195,7 +195,7 @@ a{
 .menu ul li:focus {
   outline: none;
 }
-@media screen and (max-width: 900px) and (min-width: 400px) {
+@media screen and (max-width: 900px) and (min-width: 501px) {
   body {
     padding-left: 90px;
   }

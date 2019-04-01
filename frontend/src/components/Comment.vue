@@ -1,25 +1,20 @@
 <template>
   <section>
-    <!-- {{comment}} -->
-    <div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
-      <!-- <i v-if="!LoggedInUser" class="fas fa-chevron-up"></i>
-      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn rate-un fas fa-chevron-up"></i>
-      <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-up"></i>
-      {{comment.likeBy.length}}
-      <i v-if="!LoggedInUser" class="fas fa-chevron-down"></i>
-      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
-      <i v-if="!isLiked && LoggedInUser" class="fas fa-chevron-down"></i> -->
 
-<div class="tryCmt">
+    <div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
+
+      <div class="tryCmt">
 
         <i v-if="!LoggedInUser" class="up rate fas fa-caret-up"></i>
-      <i v-if="isLiked && LoggedInUser" @click="likeComment" class=" up rateBtn rate rate-un fas fa-caret-up"></i>
-      <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="up rateBtn rate fas fa-caret-up"></i>
+        <i v-if="isLiked && LoggedInUser" class=" up rateBtn rate rate-un fas fa-caret-up"></i>
+        <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="up rateBtn rate fas fa-caret-up"></i>
         <span class="rateNumber" >{{comment.likeBy.length}}</span>
-      <i v-if="!LoggedInUser" class="down fas fa-caret-down"></i>
-      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="down rateBtn rate fas fa-caret-down"></i>
-      <i v-if="!isLiked && LoggedInUser" class="down rate fas fa-caret-down"></i>
-</div>
+        <i v-if="!LoggedInUser" class="down rate fas fa-caret-down"></i>
+        <i v-if="isLiked && LoggedInUser" @click="likeComment" class="down rateBtn rate fas fa-caret-down"></i>
+        <i v-if="!isLiked && LoggedInUser" class="down rate fas fa-caret-down"></i>
+
+
+      </div>
 
 
 
@@ -27,7 +22,7 @@
 
 
       <i
-        v-if="!post.isApproved && post.creator._id === LoggedInUser._id"
+        v-if="LoggedInUser && !post.isApproved && post.creator._id === LoggedInUser._id"
         @click="setApprove()"
         class="check rateBtn fas fa-check"
       ></i>

@@ -50,8 +50,11 @@ async function updatePost(post) {
     }
 }
 
-async function addLike(post) {
-
-    var editedPost = await axios.put(`${_URL}like`, post)
+async function addLike(post,userId) {
+    var postAndUser = {
+        post,
+        userId
+    }
+    var editedPost = await axios.put(`${_URL}like`, postAndUser)
     return editedPost
 }
