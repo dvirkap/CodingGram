@@ -236,7 +236,7 @@ export default {
 }
 .postApprove{
     color: green;
-}
+  }
 </style>
 
 

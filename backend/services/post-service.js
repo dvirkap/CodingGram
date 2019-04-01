@@ -2,10 +2,7 @@ const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 const UtilService = require('../services/UtilService');
 
-
-
 //GET ALL POSTS
-
 function query(filter) {
 
     if (filter) {
@@ -28,10 +25,7 @@ function query(filter) {
                 .toArray())
     }
 }
-
-
 //GET POST BY ID
-
 function getPostById(postId) {
     return mongoService.connect()
         .then(db => db.collection('posts').findOne({ _id: new ObjectId(postId) }))
@@ -39,7 +33,6 @@ function getPostById(postId) {
             return post
         })
 }
-
 // ADD POST
 function add(post, creator) {
     var currPost = {
@@ -67,7 +60,6 @@ function add(post, creator) {
         ],
         comments: [
         ]
-
     }
     return mongoService.connect()
         .then(db => db.collection('posts').insertOne(currPost))
@@ -76,7 +68,6 @@ function add(post, creator) {
             return post
         })
 }
-
 //EDIT POST
 function update(post) {
     const strId = post._id
@@ -85,15 +76,11 @@ function update(post) {
     return mongoService.connect()
         .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $set: post }))
         .then(res => {
-
             post._id = strId;
             return post;
         })
 }
-
 // DELETE POST 
-
-
 function removePost(postId) {
     const _id = new ObjectId(postId)
     return mongoService.connect()
@@ -135,7 +122,6 @@ function updateComment(id, newComment, currUser) {
             post._id = postId;
             return post;
         })
-
 }
 
 // DELETE COMMENT
@@ -162,11 +148,8 @@ function addLikeComment(post) {
 
 //ADD NEW REPLY
 function addReply(reply) {
-    // var post = getPostById(reply.postId)
     var commentId = reply.commentId
     var postId = reply.postId
-
-        // creator: this.LoggedInUser
 
     var newReply = {
         _id: UtilService.makeId(12),
@@ -181,18 +164,17 @@ function addReply(reply) {
         // },
         createdAt: Date.now(),
         creator: reply.creator
-}
+    }
 
 
-return mongoService.connect()
-    // .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId) }, { $push: { comments: { $each: [reply], $position: 0 } } }))
-    .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId), "comments._id": commentId }, { $push: { "comments.$.replies": newReply } }))
-    .then(res => {
-        console.log('result::::::::::::', res);
+    return mongoService.connect()
+        .then(db => db.collection('posts').updateOne({ _id: new ObjectId(postId), "comments._id": commentId }, { $push: { "comments.$.replies": newReply } }))
+        .then(res => {
+            console.log('result::::::::::::', res);
 
-        var addedReply = res
-        return addedReply;
-    })
+            var addedReply = res
+            return addedReply;
+        })
 }
 function deleteReply(replyToDelete) {
     var commentId = replyToDelete.commentId
@@ -201,9 +183,9 @@ function deleteReply(replyToDelete) {
     console.log('postId', postId);
     console.log('commentId', commentId);
     console.log('replyId', replyId);
-    
+
     return mongoService.connect()
-        .then(db => db.collection('posts').findOneAndUpdate({ _id: new ObjectId(postId), "comments._id": commentId  }, { $pull: { "comments.$.replies":{ _id: replyId} } }))
+        .then(db => db.collection('posts').findOneAndUpdate({ _id: new ObjectId(postId), "comments._id": commentId }, { $pull: { "comments.$.replies": { _id: replyId } } }))
         .then(res => {
             console.log('result::::::::::::', res);
 
