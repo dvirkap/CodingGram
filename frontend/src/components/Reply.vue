@@ -30,7 +30,6 @@
         </div>
       </div>
       <div class="replay-body">{{reply.txt}}</div>
-
     </div>
   </section>
 </template>

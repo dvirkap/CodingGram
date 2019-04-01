@@ -236,7 +236,6 @@ export default {
 .display {
   display: none;
 }
-
 </style>
 
 
