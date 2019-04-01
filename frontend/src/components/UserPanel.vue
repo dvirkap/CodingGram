@@ -1,7 +1,12 @@
 <template>
 
   <nav class="menu" tabindex="0">
-	<div class="smartphone-menu-trigger"></div>
+	<div class="smartphone-menu-trigger">
+<i class="fas fa-bars"></i>
+          <!-- <img src="../images/logoIcon.png" alt> -->
+
+
+  </div>
   <header class="avatar">
     <!-- <img :src="comment.creator.img"> -->
 <!-- {{LoggedInUser}} -->
@@ -266,17 +271,28 @@ a{
     box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
     transform: translate3d(-230px, 0, 0);
     transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+    z-index: 20;
   }
   .menu .smartphone-menu-trigger {
     width: 40px;
     height: 40px;
     position: absolute;
     left: 100%;
-    background: #5bc995;
+    
+        background-color: #f7f7f7;
+        border: 1px solid #dbdbdb;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+        color: #494949;
+
   }
   .menu .smartphone-menu-trigger:before,
   .menu .smartphone-menu-trigger:after {
-    content: '';
+    /* content: ''; */
     width: 50%;
     height: 2px;
     background: #fff;

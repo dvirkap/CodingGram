@@ -1,25 +1,39 @@
 <template>
   <section>
-<!-- {{comment}} -->
-<div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
-    <i v-if="!LoggedInUser" class="fas fa-chevron-up"></i>
-    <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn rate-un fas fa-chevron-up"></i>
-    <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-up"></i>
-    {{comment.likeBy.length}}
-    <i v-if="!LoggedInUser" class="fas fa-chevron-down"></i>
-    <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
-    <i v-if="!isLiked && LoggedInUser" class=" fas fa-chevron-down"></i>
+    <!-- {{comment}} -->
+    <div :class="{'cmt-rate': true, 'cmt-approve': comment.isApproved}">
+      <!-- <i v-if="!LoggedInUser" class="fas fa-chevron-up"></i>
+      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn rate-un fas fa-chevron-up"></i>
+      <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-up"></i>
+      {{comment.likeBy.length}}
+      <i v-if="!LoggedInUser" class="fas fa-chevron-down"></i>
+      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="rateBtn fas fa-chevron-down"></i>
+      <i v-if="!isLiked && LoggedInUser" class="fas fa-chevron-down"></i> -->
 
-<i v-if="!post.isApproved && post.creator._id === LoggedInUser._id" @click="setApprove()" class="rateBtn fas fa-check"></i> 
-<i v-if="comment.isApproved" class="is-approved fas fa-check"></i> 
+<div class="tryCmt">
 
-
-
-
-
-
+        <i v-if="!LoggedInUser" class="up rate fas fa-caret-up"></i>
+      <i v-if="isLiked && LoggedInUser" @click="likeComment" class=" up rateBtn rate rate-un fas fa-caret-up"></i>
+      <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="up rateBtn rate fas fa-caret-up"></i>
+        <span class="rateNumber" >{{comment.likeBy.length}}</span>
+      <i v-if="!LoggedInUser" class="down fas fa-caret-down"></i>
+      <i v-if="isLiked && LoggedInUser" @click="likeComment" class="down rateBtn rate fas fa-caret-down"></i>
+      <i v-if="!isLiked && LoggedInUser" class="down rate fas fa-caret-down"></i>
 </div>
-    <div class="comment-container">
+
+
+
+
+
+
+      <i
+        v-if="!post.isApproved && post.creator._id === LoggedInUser._id"
+        @click="setApprove()"
+        class="check rateBtn fas fa-check"
+      ></i>
+      <i v-if="comment.isApproved" class="check is-approved fas fa-check"></i>
+    </div>
+    <div class="comment-container" >
       <div class="comment-txt">
         <div class="comment-txt-title">
           <div class="cmt-txt">
@@ -30,16 +44,15 @@
             <span class="comment-txt-time">17 HOURS AGO</span>
           </div>
           <div class="cmt-action">
-
             <span
               v-if="comment.snippet.html"
               @click="showCommentCode"
               class="delelte-btn"
               title="Show Code"
             >
-<i class="fas fa-chevron-left"></i>
-<i class="fas fa-eye"></i>
-<i class="fas fa-chevron-right"></i>
+              <i class="fas fa-chevron-left"></i>
+              <i class="fas fa-eye"></i>
+              <i class="fas fa-chevron-right"></i>
             </span>
             <span
               v-if="LoggedInUser"
@@ -48,13 +61,6 @@
               title="Replay"
             >
               <i class="fas fa-reply"></i>
-            </span>
-            <span
-              v-if="LoggedInUser && LoggedInUser._id === comment.creator._id"
-              class="delelte-btn"
-              title="Edit"
-            >
-              <i class="far fa-edit"></i>
             </span>
             <span
               v-if="LoggedInUser && LoggedInUser._id == comment.creator._id"
@@ -83,12 +89,12 @@
           </div>
         </div>
       </div>
-      <reply v-for="reply in comment.replies"
-            :key="reply._id" 
-            :reply="reply"
-            :LoggedInUser="LoggedInUser"
+      <reply
+        v-for="reply in comment.replies"
+        :key="reply._id"
+        :reply="reply"
+        :LoggedInUser="LoggedInUser"
       ></reply>
-
     </div>
   </section>
 </template>
@@ -113,7 +119,7 @@ export default {
   },
   methods: {
     addReplay() {
-      var replyCopy = JSON.parse(JSON.stringify( this.newReplay));
+      var replyCopy = JSON.parse(JSON.stringify(this.newReplay));
       this.$emit("addReplay", replyCopy);
       this.isReplay = false;
       this.newReplay.txt = " ";
@@ -136,14 +142,15 @@ export default {
       };
       this.$emit("likeComment", payload);
     },
-    setApprove(){
-      var postToUpdate = (JSON.parse(JSON.stringify(this.post)))
-      postToUpdate.comments.forEach((comment)=>{
-       if(comment._id === this.comment._id){
+    setApprove() {
+      var postToUpdate = JSON.parse(JSON.stringify(this.post));
+      postToUpdate.comments.forEach(comment => {
+        if (comment._id === this.comment._id) {
           postToUpdate.isApproved = true;
-          comment.isApproved = true;}
-      })
-      this.$emit('approved',postToUpdate)
+          comment.isApproved = true;
+        }
+      });
+      this.$emit("approved", postToUpdate);
     }
   },
   components: {
@@ -162,7 +169,6 @@ export default {
 </script>
 
 <style>
-
 .save-replay {
   height: max-content;
   width: 100%;

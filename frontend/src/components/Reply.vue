@@ -11,34 +11,9 @@
         </div>
 
         <div class="cmt-action">
-          <!-- <span class="delelte-btn" title="like">  -->
-          <!-- <i v-if="!LoggedInUser" class="comment-like-b far fa-heart"></i> -->
-          <!-- <i v-if="isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn fas fa-heart"></i> -->
-          <!-- <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn far fa-heart"></i> -->
-          <!--  <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span>
-          </span>-->
 
-          <!-- <span
-              v-if="comment.snippet.html"
-              @click="showCommentCode"
-              class="delelte-btn"
-              title="Show Code"
-            >
-              <i class="fas fa-code"></i>
-          </span>-->
 
-          <!-- <span class="delelte-btn" title="like">  -->
-          <!-- <i v-if="!LoggedInUser" class="comment-like-b far fa-heart"></i> -->
-          <!-- <i v-if="isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn fas fa-heart"></i> -->
-          <!-- <i v-if="!isLiked && LoggedInUser" @click="likeComment" class="comment-like-btn far fa-heart"></i> -->
-          <!--  <span v-if="comment.likeBy.length">{{comment.likeBy.length}}</span>
-          </span>-->
-<!-- 
-          <span class="delelte-btn" title="Show Code">
-            <i class="fas fa-code"></i>
-          </span>
-
-          <span class="delelte-btn" title="Show Code">
+          <!-- <span class="delelte-btn" title="Show Code">
             <i class="fas fa-chevron-left"></i>
             <i class="fas fa-eye"></i>
             <i class="fas fa-chevron-right"></i>

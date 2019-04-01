@@ -1,11 +1,11 @@
 <template>
   <div class="navbar">
     <div class="navbar-cont navWrapper">
-      <div class="navbar-logo-cont">
+      <div  class="navbar-logo-cont">
         <router-link to="/">
           <img class="navbar-logo" src="../images/logoIcon.png" alt>
         </router-link>
-        <div class="navbar-logo-txt">
+        <div v-if="!searchTab" class="navbar-logo-txt">
           <router-link to="/">
             <span>CodingGram</span>
           </router-link>
@@ -17,9 +17,22 @@
           v-model="filterByTxt"
           @keyup="setFilter()"
           type="text"
-          placeholder="What are you looking for?..."
-        >
+          placeholder="What are you looking for?...">
       </div>
+
+      <div v-if="searchTab" class="navbar-search-cont-mobile-input">
+        <input
+          v-model="filterByTxt"
+          @keyup="setFilter()"
+          type="text"
+          placeholder="Search Something...">
+      </div>
+
+
+      <div class="navbar-search-cont-mobile">
+        <button @click="searchTab = !searchTab"><i class="fas fa-search"></i></button>
+      </div>
+
 
       <div class="navbar-routers-cont">
         <h1>Editor theme:</h1>
@@ -39,6 +52,7 @@ export default {
   components: {},
   data() {
     return {
+      searchTab: false,
       filterByTxt: ""
     };
   },

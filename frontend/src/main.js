@@ -16,6 +16,7 @@ import 'codemirror/lib/codemirror.css'
 // uikit/dist/js/uikit-icons.min.js
 import  './css/reset.css'
 import  './css/style.css'
+import './registerServiceWorker'
 
 
 Vue.config.productionTip = false
