@@ -234,7 +234,6 @@ export default new Vuex.Store({
     },
     signUp(context, newUser) {
       UserService.signup(newUser).then(user => {
-        console.log(user,'userr')
         context.commit('setLoggedInUser', user)
       })
     },

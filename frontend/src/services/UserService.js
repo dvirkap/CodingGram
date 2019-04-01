@@ -59,9 +59,9 @@ async function login(userCredentials) {
 // }
 
 function signup(newUserCredentials) {
-    console.log(newUserCredentials,'in store service')
     return axios.post(`${_URL}/signup`, newUserCredentials).then(res=> {
         localStorage.setItem('loggedInUser', JSON.stringify(res.data))
+        return res.data
     })
 }
 
