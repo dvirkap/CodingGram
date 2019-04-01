@@ -20,6 +20,8 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f7f7f7
+
 }
 
 .wrapper {
@@ -28,18 +30,8 @@ body {
     transition: .3s;
 }
 
-body {
-    background-color: #f7f7f7
-}
 
-.navbar {
-    width: 100%;
-    height: 50px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #dbdbdb;
-    display: flex;
-    align-items: center;
-}
+
 
 .navbar-cont {
     /* background-color: #f33131; */
@@ -556,19 +548,8 @@ background-color: #ed4956; */
     color: green;
 }
 
-.post-editor-body {
-    width: 100%;
-    height: 400px;
-}
 
-.sec-html {
-    /* background-color: #edf038; */
-    width: 100%;
-    /* height: 100%; */
-    height: 400px;
-    max-height: 400px;
 
-}
 
 .sec-css {
     /* background-color: #f03850; */
@@ -586,12 +567,6 @@ background-color: #ed4956; */
     max-height: 400px;
 
 
-}
-
-.post-runner {
-    /* background-color: #120d53; */
-    width: 100%;
-    height: 100%;
 }
 
 .post-like {
@@ -618,24 +593,6 @@ background-color: #ed4956; */
     margin-right: 30px;
 }
 
-
-
-.post-comment {
-    width: 100%;
-    height: 4%;
-    display: flex;
-    justify-content: center;
-    font-family: 'Proxima';
-    color: #494949;
-}
-
-.prepre {
-    width: 100%;
-    height: 400px;
-
-
-}
-
 .post-comment-input {
     align-self: center;
     width: 90%;
@@ -643,12 +600,6 @@ background-color: #ed4956; */
     border-top: 1px solid #dbdbdb;
 }
 
-.hashtag {
-    background: rgb(48, 48, 48);
-    border-radius: 10%;
-    padding: 5px;
-    color: #f2f2f2;
-}
 
 .upload-cont {
     border-radius: 5px;
@@ -700,11 +651,7 @@ select {
     padding: 5px;
 }
 
-.CodeMirror {
-    /* height: 100%; */
-    height: 400px;
-    
-}
+
 
 input {
     width: 100%;
