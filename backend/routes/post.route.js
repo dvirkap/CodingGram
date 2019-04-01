@@ -38,29 +38,15 @@ function addPostRoute(app) {
     })
     // like/unlike POST
     app.put('/post/like', async (req, res) => {
-        var post = req.body;
+        var post = req.body.post;
         var currUser = req.session.loggedInUser
+        var userId = req.body.userId
 
-        if (currUser) {
-            if (post.likeBy.length) {
-                var indexUser = post.likeBy.findIndex(user => user._id === currUser._id)
-                if (indexUser === -1) {
-                    post.likeBy.push(currUser)
-                    // currUser.likedpost.push(post)
-                    const updatedPost = await postService.update(post);
-                    res.json(updatedPost);
-                } else {
-                    post.likeBy.splice(indexUser, 1)
-                    const updatedPost = await postService.update(post);
-                    res.json(updatedPost);
-                };
-            } else {
-                post.likeBy.push(currUser)
+            if(currUser){
+                if(currUser._id === userId){
                 const updatedPost = await postService.update(post);
-                res.json(updatedPost);
-            };
-        } else {
-        }
+                    res.json(updatedPost);}
+            }      
     })
 
     // UPDATE POST
@@ -119,50 +105,14 @@ function addPostRoute(app) {
     })
 
     app.put('/comment/like', async (req, res) => {
-        var post = req.body.post;
+        var post = req.body.currPost;
         var currUser = req.session.loggedInUser
-        var comment = req.body.comment
-
-
-
-
-        if (currUser) {
-            if (comment.likeBy.length) {
-                var indexUser = comment.likeBy.findIndex(user => user._id === currUser._id)
-                if (indexUser === -1) {
-
-                    console.log('added')
-                    comment.likeBy.push(currUser)
-                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
-                    post.comments.splice(currCommentIdx, 1, comment)
-                    const updatedPost = await postService.update(post);
-                    res.json(updatedPost);
-                } else {
-                    console.log('removeed')
-                    var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
-                    var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment, 1)
-                    var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
-
-                    post.comments.splice(currCommentIdx, 1, updatedComment)
-                    const updatedPost = await postService.update(post);
-                    res.json(updatedPost);
-
-                    // var currUserLikeIdxOnComment = comment.findIndex(user => user._id === currUser._id)
-                    // var updatedComment = comment.likeBy.splice(currUserLikeIdxOnComment, 1)
-                    // var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
-
-                    // post.comments.splice(currCommentIdx, 1, updatedComment)
-
-                };
-            } else {
-                comment.likeBy.push(currUser)
-                var currCommentIdx = post.comments.findIndex(cmt => cmt._id === comment._id)
-                post.comments.splice(currCommentIdx, 1, comment)
+        var userId = req.body.userId
+            if(currUser){
+                if(currUser._id === userId){
                 const updatedPost = await postService.update(post);
-                res.json(updatedPost);
-            };
-        } else {
-        }
+                    res.json(updatedPost);}
+            }
     })
 
     // -------------------------- Replies SECTION ---------------------------

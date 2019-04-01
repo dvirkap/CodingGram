@@ -195,7 +195,7 @@ a{
 .menu ul li:focus {
   outline: none;
 }
-@media screen and (max-width: 900px) and (min-width: 400px) {
+@media screen and (max-width: 900px) and (min-width: 501px) {
   body {
     padding-left: 90px;
   }
@@ -262,7 +262,7 @@ a{
     transform: translate3d(0px, -50%, 0);
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   body {
     padding-left: 0;
   }

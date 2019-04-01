@@ -39,14 +39,11 @@ async function deleteComment(payload) {
     return deletedComment
 }
 
-async function likeComment(payload) {
-    console.log('PAYLOAD:::::', payload);
-    var comment = payload.comment
-    var post = await PostService.getPostById(payload.postId)
-    var postAndComment = {
-        post,
-        comment
+async function likeComment(currPost,userId) {
+    var postAndUser = {
+        currPost,
+        userId
     }
-    var like = await axios.put(`${_URL}/comment/like`, postAndComment)
+    var like = await axios.put(`${_URL}/comment/like`, postAndUser)
     return like
 }
