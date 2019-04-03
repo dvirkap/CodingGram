@@ -1,6 +1,6 @@
 <template>
   <div class="edit">
-    <div class="main-cont wrapper">
+    <div class="main-cont-edit wrapper">
       <div class="edit-add">
         <div class="edit-input">
           <div class="edit-input-title">
