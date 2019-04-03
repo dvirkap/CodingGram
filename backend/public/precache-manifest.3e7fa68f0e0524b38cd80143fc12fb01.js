@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/js/about.cac35559.js"
   },
   {
-    "revision": "0a1e83a4c5343532dda8",
-    "url": "/js/app.e2964345.js"
+    "revision": "c9a7aab8c61c76018ddb",
+    "url": "/js/app.5639f900.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
@@ -24,32 +24,32 @@ self.__precacheManifest = [
     "url": "/fonts/fa-regular-400.73e57f33.eot"
   },
   {
-    "revision": "e7f6278a491548d72e9f3af1208c683b",
-    "url": "/img/home.e7f6278a.svg"
-  },
-  {
-    "revision": "8eeaa7b71d9bf21d4efbc6384e553cf9",
-    "url": "/index.html"
-  },
-  {
-    "revision": "4912c8ef900750f9482f509ab4d281ae",
-    "url": "/img/magnifier.4912c8ef.svg"
-  },
-  {
     "revision": "f47251359beab2c97298c7f05e620ba6",
     "url": "/img/new-message.f4725135.svg"
   },
   {
-    "revision": "c20d3f4048eed00ab5aeca98d69c19ef",
-    "url": "/img/login.c20d3f40.svg"
+    "revision": "d612a47a321b05a537ebc403f5d6bddc",
+    "url": "/index.html"
+  },
+  {
+    "revision": "7599ecd0c99d05133229e0c4822b3086",
+    "url": "/fonts/fa-regular-400.7599ecd0.ttf"
+  },
+  {
+    "revision": "e7f6278a491548d72e9f3af1208c683b",
+    "url": "/img/home.e7f6278a.svg"
   },
   {
     "revision": "1174846a4af86f4b5c70dc6a8b903261",
     "url": "/img/log-out.1174846a.svg"
   },
   {
-    "revision": "04172751cdaf025cbbb6ecf534325fad",
-    "url": "/img/html-coding.04172751.svg"
+    "revision": "4912c8ef900750f9482f509ab4d281ae",
+    "url": "/img/magnifier.4912c8ef.svg"
+  },
+  {
+    "revision": "c20d3f4048eed00ab5aeca98d69c19ef",
+    "url": "/img/login.c20d3f40.svg"
   },
   {
     "revision": "535e92c65ddaff1a55f11df10c680c75",
@@ -60,16 +60,16 @@ self.__precacheManifest = [
     "url": "/img/html5.c26fcd13.jpg"
   },
   {
+    "revision": "04172751cdaf025cbbb6ecf534325fad",
+    "url": "/img/html-coding.04172751.svg"
+  },
+  {
     "revision": "ecafd67cb64dc8f4d064abcf680dd924",
     "url": "/fonts/fa-solid-900.ecafd67c.woff"
   },
   {
     "revision": "7c3f5d6ee9bd4907dab2d5f854223965",
     "url": "/img/codingAcademy.7c3f5d6e.jpg"
-  },
-  {
-    "revision": "a8271f112ee7c5a931f8833897b118e7",
-    "url": "/img/help.a8271f11.svg"
   },
   {
     "revision": "e474ff3afacf902ab8f4dd43344f4f30",
@@ -88,64 +88,60 @@ self.__precacheManifest = [
     "url": "/img/css3.0966a3d8.jpg"
   },
   {
-    "revision": "0a1e83a4c5343532dda8",
-    "url": "/css/app.35743e10.css"
-  },
-  {
-    "revision": "c6e6643b688fe307651aa9374343d194",
-    "url": "/fonts/fa-regular-400.c6e6643b.woff"
-  },
-  {
-    "revision": "26fdf2ddc0e845cc454b72c97cdc705c",
-    "url": "/fonts/fa-solid-900.26fdf2dd.ttf"
+    "revision": "a8271f112ee7c5a931f8833897b118e7",
+    "url": "/img/help.a8271f11.svg"
   },
   {
     "revision": "cb45ce038f8d6ccf24a4307993230f8b",
     "url": "/fonts/fa-solid-900.cb45ce03.eot"
   },
   {
-    "revision": "fb4ea3247aace8c1c8bcf904772a91c7",
-    "url": "/fonts/fa-solid-900.fb4ea324.woff2"
+    "revision": "c6e6643b688fe307651aa9374343d194",
+    "url": "/fonts/fa-regular-400.c6e6643b.woff"
   },
   {
     "revision": "78246d8cfdb43e34092a8127f0dc05ac",
     "url": "/img/add-user.78246d8c.svg"
   },
   {
+    "revision": "fb4ea3247aace8c1c8bcf904772a91c7",
+    "url": "/fonts/fa-solid-900.fb4ea324.woff2"
+  },
+  {
+    "revision": "26fdf2ddc0e845cc454b72c97cdc705c",
+    "url": "/fonts/fa-solid-900.26fdf2dd.ttf"
+  },
+  {
     "revision": "d325c74976d581480f391d444b7216b9",
     "url": "/fonts/ProximaNovaRegular.d325c749.ttf"
   },
   {
-    "revision": "34e0db45ef15f5a058149de318ca0641",
-    "url": "/fonts/fa-regular-400.34e0db45.woff2"
-  },
-  {
-    "revision": "7599ecd0c99d05133229e0c4822b3086",
-    "url": "/fonts/fa-regular-400.7599ecd0.ttf"
+    "revision": "aae6e0c9d1f05b7913615c232b114718",
+    "url": "/fonts/FontsFree-Net-Proxima-Nova-A-W01-Extrabold.aae6e0c9.ttf"
   },
   {
     "revision": "8742c0293a67556fbb57133b56bb076e",
     "url": "/fonts/fa-brands-400.8742c029.ttf"
   },
   {
-    "revision": "28c2e91df5676f8a615bd3d519f0757b",
-    "url": "/fonts/fa-brands-400.28c2e91d.eot"
-  },
-  {
     "revision": "24a77b8baa5b34fb50814225fae0272d",
     "url": "/fonts/fa-brands-400.24a77b8b.woff2"
+  },
+  {
+    "revision": "34e0db45ef15f5a058149de318ca0641",
+    "url": "/fonts/fa-regular-400.34e0db45.woff2"
   },
   {
     "revision": "175ef492f87a05e2ce45cb701d62c450",
     "url": "/fonts/fa-brands-400.175ef492.woff"
   },
   {
-    "revision": "f14eee643541cf03a10f26c944cc29f5",
-    "url": "/fonts/FontsFree-Net-Proxima-Nova-Sbold.f14eee64.otf"
+    "revision": "28c2e91df5676f8a615bd3d519f0757b",
+    "url": "/fonts/fa-brands-400.28c2e91d.eot"
   },
   {
-    "revision": "aae6e0c9d1f05b7913615c232b114718",
-    "url": "/fonts/FontsFree-Net-Proxima-Nova-A-W01-Extrabold.aae6e0c9.ttf"
+    "revision": "f14eee643541cf03a10f26c944cc29f5",
+    "url": "/fonts/FontsFree-Net-Proxima-Nova-Sbold.f14eee64.otf"
   },
   {
     "revision": "a03b963129a73bb4423b1f5dbd9e9fc6",
@@ -162,5 +158,9 @@ self.__precacheManifest = [
   {
     "revision": "f5914759246b8a0be9d5",
     "url": "/css/chunk-vendors.65baebaa.css"
+  },
+  {
+    "revision": "c9a7aab8c61c76018ddb",
+    "url": "/css/app.35743e10.css"
   }
 ];
