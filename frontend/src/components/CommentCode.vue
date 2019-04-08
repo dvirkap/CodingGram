@@ -101,6 +101,8 @@ import "codemirror/addon/edit/closetag.js";
 
 // theme css
 import "codemirror/theme/base16-dark.css";
+import "codemirror/theme/eiffel.css";
+import "codemirror/theme/ttcn.css";
 
 export default {
   name: "CommentCode",
@@ -126,7 +128,7 @@ export default {
       cmOptionsHTML: {
         tabSize: 1,
         mode: "xml",
-        theme: "base16-dark",
+        theme: "ttcn",
         lineNumbers: true,
         line: true,
         autoRefresh: true,
@@ -136,7 +138,7 @@ export default {
       cmOptionsCSS: {
         tabSize: 1,
         mode: "css",
-        theme: "base16-dark",
+        theme: "ttcn",
         lineNumbers: true,
         line: true,
         autofocus: true,
@@ -146,32 +148,16 @@ export default {
       cmOptionsJS: {
         tabSize: 1,
         mode: "javascript",
-        theme: "base16-dark",
+        theme: "eiffel",
         lineNumbers: true,
         line: true,
         autofocus: true,
         autoRefresh: true,
         autoCloseBrackets: true
       }
-      //  newComment: {
-      //   txt: '',
-      //   snippet: {
-      //     lang: "js",
-      //     html: this.currPost.snippet.html,
-      //     css: this.currPost.snippet.css,
-      //     code: this.currPost.snippet.code
-      //   }
-      // },
     };
   },
   methods: {
-    // likeComment() {
-    //   var payload = {
-    //     postId: this.post._id,
-    //     comment: this.currComment
-    //   };
-    //   this.$emit("likeComment", payload);
-    // },
     closeModal() {
       this.$emit("closeModal");
     },

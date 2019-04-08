@@ -7,7 +7,7 @@
             <img :src="reply.creator.img">
             {{reply.creator.userName}}
           </span>
-          <span class="comment-txt-time">17 HOURS AGO</span>
+          <span class="comment-txt-time">{{ reply.createdAt | moment("from", "now" ) }}</span>
         </div>
 
         <div class="cmt-action">

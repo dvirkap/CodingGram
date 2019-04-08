@@ -75,6 +75,9 @@ import "codemirror/addon/edit/closetag.js";
 
 // theme css
 import "codemirror/theme/base16-dark.css";
+import "codemirror/theme/eiffel.css";
+import "codemirror/theme/ttcn.css";
+
 
 
 
@@ -99,7 +102,7 @@ export default {
       cmOptionsHTML: {
         tabSize: 1,
         mode: "xml",
-        theme: "base16-dark",
+        theme: "ttcn",
         lineNumbers: true,
         line: true,
         autoRefresh: true,
@@ -109,7 +112,7 @@ export default {
       cmOptionsCSS: {
         tabSize: 1,
         mode: "css",
-        theme: "base16-dark",
+        theme: "ttcn",
         lineNumbers: true,
         line: true,
         autofocus: true,
@@ -119,14 +122,12 @@ export default {
       cmOptionsJS: {
         tabSize: 1,
         mode: "javascript",
-        theme: "base16-dark",
+        theme: "eiffel",
         lineNumbers: true,
         line: true,
         autofocus: true,
         autoRefresh: true,
         autoCloseBrackets: true
-
-        // showHint: true,
       }
     };
   },
