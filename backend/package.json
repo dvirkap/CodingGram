@@ -16,6 +16,8 @@
     "curl": "^0.1.4",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongodb": "^3.1.1"
+    "mongodb": "^3.1.1",
+    "save": "^2.3.3",
+    "socket.io": "^2.2.0"
   }
 }

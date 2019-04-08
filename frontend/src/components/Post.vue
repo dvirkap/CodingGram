@@ -112,6 +112,16 @@ import "codemirror/theme/ttcn.css";
 export default {
   name: "Post",
   props: ["post", "LoggedInUser","editorTheme"],
+
+sockets: {
+        connect: function () {
+            console.log('socket connected')
+        },
+        customEmit: function (data) {
+            console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+        }
+},
+
   data() {
     return {
       HTMLcode: this.post.snippet.html,
@@ -159,6 +169,12 @@ export default {
     };
   },
   methods: {
+    //  clickButton: function () {
+    //         // $socket is socket.io-client instance
+    //         console.log(this.$socket.emit('emit_method', this.post));
+            
+            
+        // },
     deletePost() {
       this.$emit("deletePost", this.post);
     },
